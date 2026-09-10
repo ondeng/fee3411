@@ -1,0 +1,158 @@
+/* ============================================================
+   FEE3411 — Material theme, dressed in the course's own palette.
+   Colours are the ones defined in tex/preamble.tex, so the site and
+   the PDFs read as one set of material:
+     fnavy  #1F3864   structure, key ideas
+     faccent #2E5E4E  worked examples
+     fflag  #9C4221   pitfalls
+   ============================================================ */
+
+:root {
+  --fee-navy:   #1F3864;
+  --fee-accent: #2E5E4E;
+  --fee-flag:   #9C4221;
+
+  --md-primary-fg-color:        #1F3864;
+  --md-primary-fg-color--light: #2E4F86;
+  --md-primary-fg-color--dark:  #16294A;
+  --md-accent-fg-color:         #2E5E4E;
+}
+
+/* Dark scheme: lift the three hues so they hold contrast on a dark ground. */
+[data-md-color-scheme="slate"] {
+  --fee-navy:   #8CADDC;
+  --fee-accent: #72B99A;
+  --fee-flag:   #DE8D63;
+
+  --md-primary-fg-color:        #16294A;
+  --md-accent-fg-color:         #72B99A;
+  --md-typeset-a-color:         #8CADDC;
+}
+
+/* ---- reading measure and rhythm -------------------------------------- */
+.md-typeset {
+  font-size: .78rem;
+  line-height: 1.72;
+}
+.md-typeset h1 {
+  color: var(--fee-navy);
+  font-weight: 600;
+  text-wrap: balance;
+}
+.md-typeset h2 {
+  color: var(--fee-navy);
+  margin-top: 2.6em;
+  padding-bottom: .3em;
+  border-bottom: 2px solid var(--fee-navy);
+  text-wrap: balance;
+}
+.md-typeset h3 { margin-top: 2em; text-wrap: balance; }
+
+/* ---- admonitions carry the course colours ---------------------------- */
+/* Key idea */
+.md-typeset .admonition.info,
+.md-typeset details.info { border-color: var(--fee-navy); }
+.md-typeset .info > .admonition-title,
+.md-typeset .info > summary {
+  background-color: color-mix(in srgb, var(--fee-navy) 10%, transparent);
+}
+.md-typeset .info > .admonition-title::before,
+.md-typeset .info > summary::before { background-color: var(--fee-navy); }
+
+/* Worked example */
+.md-typeset .admonition.example,
+.md-typeset details.example { border-color: var(--fee-accent); }
+.md-typeset .example > .admonition-title,
+.md-typeset .example > summary {
+  background-color: color-mix(in srgb, var(--fee-accent) 10%, transparent);
+}
+.md-typeset .example > .admonition-title::before,
+.md-typeset .example > summary::before { background-color: var(--fee-accent); }
+
+/* Common pitfall */
+.md-typeset .admonition.warning,
+.md-typeset details.warning { border-color: var(--fee-flag); }
+.md-typeset .warning > .admonition-title,
+.md-typeset .warning > summary {
+  background-color: color-mix(in srgb, var(--fee-flag) 10%, transparent);
+}
+.md-typeset .warning > .admonition-title::before,
+.md-typeset .warning > summary::before { background-color: var(--fee-flag); }
+
+/* Outcomes / Reading: quieter, they are framing not content */
+.md-typeset .admonition.abstract { border-color: var(--fee-navy); }
+.md-typeset .abstract > .admonition-title::before { background-color: var(--fee-navy); }
+.md-typeset .admonition.quote { border-color: var(--md-default-fg-color--light); }
+
+/* ---- figures ---------------------------------------------------------
+   Diagrams are black line art. On a dark ground they would disappear, and
+   inverting them would wreck the coloured pgfplots curves — so they keep a
+   light plate in both themes.                                            */
+.md-typeset figure {
+  margin: 2em auto;
+  max-width: 100%;
+}
+.md-typeset figure img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  background: #fff;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 4px;
+  padding: 1em .7em;
+}
+/* two-panel figures: one plate per panel, stacked (better on a phone) */
+.md-typeset figure img + img { margin-top: 1em; }
+
+.md-typeset figcaption {
+  margin: .8em auto 0;
+  max-width: 46rem;
+  font-size: .72rem;
+  line-height: 1.55;
+  text-align: left;
+  color: var(--md-default-fg-color--light);
+}
+.md-typeset .fig-label {
+  font-weight: 700;
+  color: var(--fee-navy);
+}
+
+/* ---- maths ------------------------------------------------------------ */
+/* Long displayed equations scroll in their own box rather than pushing the
+   page sideways on a phone. */
+.md-typeset div.arithmatex {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: .2em 0;
+}
+/* A genuinely long *inline* expression cannot wrap; let it scroll in place
+   rather than widen the page. */
+.md-typeset span.arithmatex {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: middle;
+}
+mjx-container[display] { max-width: 100%; }
+
+/* ---- tables ----------------------------------------------------------- */
+.md-typeset table:not([class]) {
+  font-size: .68rem;
+  border: none;
+}
+.md-typeset table:not([class]) th {
+  background: color-mix(in srgb, var(--fee-navy) 8%, transparent);
+  color: var(--md-default-fg-color);
+}
+
+/* ---- the PDF button --------------------------------------------------- */
+.md-typeset .md-button {
+  font-size: .68rem;
+  padding: .4em .9em;
+}
+
+/* ---- print: let students print a week cleanly ------------------------- */
+@media print {
+  .md-typeset figure img { border: none; padding: 0; }
+}

@@ -1,0 +1,95 @@
+site_name: FEE3411 Control Systems A
+site_description: >-
+  Lecture notes, tutorials and assignments for FEE3411 Control Systems A,
+  Department of Electrical and Information Engineering, University of Nairobi.
+site_author: Oscar Ondeng
+
+# EDIT THIS after you create the repo: https://<username>.github.io/<repo>/
+site_url: https://example.github.io/fee3411/
+repo_url: ""
+
+theme:
+  name: material
+  language: en
+  icon:
+    logo: material/sine-wave
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.instant          # fast page loads on slow connections
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.tooltips
+
+markdown_extensions:
+  - abbr
+  - attr_list
+  - md_in_html
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.blocks.admonition
+  - pymdownx.blocks.caption
+  - pymdownx.blocks.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+plugins:
+  - search
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js
+
+extra:
+  social:
+    - icon: material/school
+      link: https://www.uonbi.ac.ke/
+      name: University of Nairobi
+
+copyright: >-
+  Lecture material © Oscar Ondeng, University of Nairobi.
+  Figures are original redrawings; sources are attributed in each caption.
+
+# Add one line per week as its notes are published.
+nav:
+  - Home: index.md
+  - Lecture notes:
+      - "Week 1 — Introduction and components": notes/week-01.md
+      - "Week 2 — Mathematical modelling": notes/week-02.md
+      - "Week 3 — Transfer functions and the s-plane": notes/week-03.md
+  - Tutorials: tutorials.md
+  - Assignments: assignments.md
+  - Software and reading: resources.md

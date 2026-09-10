@@ -1,0 +1,91 @@
+% ============================================================
+% FEE3411 Control Systems A -- shared preamble
+% Used by both the lecture notes (article) and the slides (beamer).
+% ============================================================
+\usepackage[T1]{fontenc}
+% lmodern gives cleaner PDF fonts but is absent from minimal TeX installs.
+% Load it only if present, so this preamble builds anywhere.
+\IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,positioning,calc,decorations.markings,shapes.geometric}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+
+% ---- Course colours -------------------------------------------------
+\definecolor{fnavy}{HTML}{1F3864}
+\definecolor{faccent}{HTML}{2E5E4E}
+\definecolor{fflag}{HTML}{9C4221}
+
+% ---- Block-diagram style --------------------------------------------
+\tikzset{
+  block/.style   = {draw, thick, rectangle, minimum height=2.6em,
+                    minimum width=3.2em, align=center},
+  sumnode/.style = {draw, thick, circle, inner sep=0pt, minimum size=1.6em},
+  pickoff/.style = {fill, circle, inner sep=0pt, minimum size=3pt},
+  sig/.style     = {-{Latex[length=2mm]}, thick},
+}
+
+% ---- Summing-junction signs -----------------------------------------
+% \sumsign{<node>}{<angle>}{<+ or ->} places a sign just outside the circle.
+\newcommand{\sumsign}[3]{\node[font=\small] at ($(#1)+(#2:0.5)$) {$#3$};}
+
+% ---- Boxed environments ---------------------------------------------
+\newtcolorbox{keyidea}[1][]{colback=fnavy!5,colframe=fnavy,
+  fonttitle=\bfseries,title=Key idea,#1}
+\newtcolorbox{workedex}[1][]{colback=faccent!5,colframe=faccent,
+  fonttitle=\bfseries,title=Worked example,#1}
+\newtcolorbox{pitfall}[1][]{colback=fflag!5,colframe=fflag,
+  fonttitle=\bfseries,title=Common pitfall,#1}
+
+% ---- Shorthands ------------------------------------------------------
+\newcommand{\Lap}{\mathcal{L}}
+\newcommand{\jw}{\mathrm{j}\omega}
+\newcommand{\wn}{\omega_{n}}
+\newcommand{\zt}{\zeta}
+\newcommand{\TF}[1]{#1(s)}
+
+% ---- Week title machinery -------------------------------------------
+\usepackage{fancyhdr}
+\newcommand{\thecoursecode}{FEE3411}
+\newcommand{\thecoursename}{Control Systems A}
+\newcommand{\wknum}{}
+\newcommand{\wktopic}{}
+\newcommand{\weeknumber}[1]{\renewcommand{\wknum}{#1}}
+\newcommand{\weektopic}[1]{\renewcommand{\wktopic}{#1}}
+\newcommand{\weektitle}{%
+  \thispagestyle{plain}%
+  \begin{center}
+    {\large\sffamily\bfseries\color{fnavy}\thecoursecode: \thecoursename}\\[2pt]
+    {\Huge\sffamily\bfseries Week \wknum}\\[4pt]
+    {\LARGE\sffamily\color{fnavy}\wktopic}\\[6pt]
+    \rule{\textwidth}{1.2pt}
+  \end{center}\vspace{4pt}%
+  \pagestyle{fancy}\fancyhf{}%
+  \fancyhead[L]{\footnotesize\color{gray}\thecoursecode\ Week \wknum\ --- \wktopic}%
+  \fancyhead[R]{\footnotesize\color{gray}\thepage}%
+  \renewcommand{\headrulewidth}{0.4pt}%
+}
+
+% ---- Outcomes and reading boxes -------------------------------------
+\newenvironment{outcomes}
+  {\begin{tcolorbox}[colback=white,colframe=fnavy!60,
+      fonttitle=\bfseries,title=By the end of this week you should be able to]
+   \begin{itemize}[leftmargin=*]}
+  {\end{itemize}\end{tcolorbox}}
+
+\newtcolorbox{readingbox}{colback=gray!5,colframe=gray!50,
+  fonttitle=\bfseries,title=Reading}
+
+% enumitem must NOT be loaded under beamer: it overwrites beamer's itemize
+% templates and the bullet markers silently disappear. The notes (article) get
+% it; the slides (beamer) use beamer's own list machinery instead.
+\makeatletter
+\@ifclassloaded{beamer}{}{\usepackage{enumitem}}
+\makeatother
