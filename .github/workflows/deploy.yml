@@ -1,0 +1,84 @@
+name: Build and deploy course site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:        # lets you rebuild by hand from the Actions tab
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # ---- LaTeX toolchain ------------------------------------------------
+      # Targeted packages, not texlive-full: full is ~5 GB and slow. If a
+      # future week needs a package that is missing, the build fails with
+      # "File xyz.sty not found" -- add its Debian package here.
+      #   siunitx        -> texlive-science
+      #   circuitikz     -> texlive-pictures
+      #   pgfplots       -> texlive-pictures
+      #   tcolorbox      -> texlive-latex-extra
+      #   preview.sty    -> preview-latex-style
+      - name: Install TeX Live and dvisvgm
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            texlive-latex-base texlive-latex-recommended texlive-latex-extra \
+            texlive-pictures texlive-science texlive-fonts-recommended \
+            preview-latex-style lmodern dvisvgm
+
+      # ---- pandoc ---------------------------------------------------------
+      # Must be pandoc 3: the converter relies on unknown LaTeX environments
+      # becoming fenced divs, which pandoc 2 does not do. Pinned rather than
+      # apt'd so a runner image change cannot silently move it.
+      - name: Install pandoc
+        env:
+          PANDOC_VERSION: "3.1.11"
+        run: |
+          curl -fsSL -o /tmp/pandoc.deb \
+            "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-amd64.deb"
+          sudo dpkg -i /tmp/pandoc.deb
+          pandoc --version | head -1
+          pandoc --version | head -1 | grep -qE 'pandoc 3\.' || {
+            echo "::error::pandoc 3 is required"; exit 1; }
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt beautifulsoup4
+
+      # ---- convert the LaTeX notes, then build the site -------------------
+      - name: Build notes from LaTeX
+        run: |
+          chmod +x web/build_site.sh
+          web/build_site.sh
+
+      - name: Build site
+        run: mkdocs build --strict -d site_build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site_build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
