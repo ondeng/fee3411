@@ -5,7 +5,7 @@ site_description: >-
 site_author: Oscar Ondeng
 
 # EDIT THIS after you create the repo: https://<username>.github.io/<repo>/
-site_url: https://example.github.io/fee3411/
+site_url: https://ondeng.github.io/FEE3411/
 repo_url: ""
 
 theme:
