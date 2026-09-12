@@ -37,6 +37,8 @@ echo "Syncing sources into Publication/src/"
 # --- LaTeX the site is BUILT from -----------------------------------------
 copy "$PROJ/Notes" '*.tex'  "$SRC/Notes"
 copy "$PROJ/tex"   '*.tex'  "$SRC/tex"
+copy "$PROJ/Tutorials"   '*.tex'  "$SRC/Tutorials"
+copy "$PROJ/Assignments" '*.tex'  "$SRC/Assignments"
 
 # --- PDFs offered as downloads --------------------------------------------
 copy "$PROJ/Notes"     '*.pdf' "$SRC/Notes"
