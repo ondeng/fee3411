@@ -72,9 +72,14 @@ s = re.sub(r'\[\s*breakable\s*\]', '[]', s)
 p.with_name('figs.tex').write_text(
     s.replace(r'\begin{document}', setup + r'\begin{document}', 1))
 PY
-  ( cd "$W" && pdflatex -interaction=nonstopmode figs.tex >/dev/null 2>&1 \
-      && dvisvgm --pdf --page=1- --font-format=woff --exact-bbox \
-           --optimize=all --output="fig%2p.svg" figs.pdf >/dev/null 2>&1 )
+  (
+    cd "$W"
+    pdflatex -interaction=nonstopmode -file-line-error figs.tex >/dev/null 2>&1 \
+      || { echo "  ! pdflatex (figs) failed:"; tail -60 figs.log; exit 1; }
+    dvisvgm --pdf --page=1- --font-format=woff --exact-bbox \
+        --optimize=all --output="fig%2p.svg" figs.pdf \
+      || { echo "  ! dvisvgm failed (see output above)"; exit 1; }
+  )
 
   SVGDIR="$DOCS/notes/svg/$STEM"
   rm -rf "$SVGDIR"; mkdir -p "$SVGDIR"
