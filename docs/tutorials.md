@@ -5,14 +5,15 @@ title: Tutorials
 # Tutorial sheets
 
 One sheet per week, worked in the tutorial hour. **Attempt the questions before
-the tutorial.** The solutions are published here too — they are far more use to
-you after you have been stuck than before.
+the tutorial.** Where solutions are included, they sit inline on the same
+page under a closed **Solution** panel for each question — click one open
+when you are ready to check yourself, not before.
 
-| Week | Topic | Questions | Solutions |
-|---|---|---|---|
-| 1 | Mathematical toolkit: Laplace, partial fractions, the s-plane | [Questions](pdf/week-01-tutorial-questions.pdf) | [Solutions](pdf/week-01-tutorial-solutions.pdf) |
-| 2 | Electromechanical modelling; linear approximation | [Questions](pdf/week-02-tutorial-questions.pdf) | [Solutions](pdf/week-02-tutorial-solutions.pdf) |
-| 3 | Transfer functions; inverse Laplace; poles, zeros and response shape | [Questions](pdf/week-03-tutorial-questions.pdf) | [Solutions](pdf/week-03-tutorial-solutions.pdf) |
+| Week | Topic | Sheet |
+|---|---|---|
+| 1 | Mathematical toolkit: Laplace, partial fractions, the s-plane | [Open](tutorials/tutorial-01.md) |
+| 2 | Electromechanical modelling; linear approximation | [Open](tutorials/tutorial-02.md) |
+| 3 | Transfer functions; inverse Laplace; poles, zeros and response shape | [Open](tutorials/tutorial-03.md) |
 
 /// warning | Weeks 8, 10 and 11 are sketching practice
 Those tutorials are hand-drawing sessions — root locus, Bode, Nyquist. Bring

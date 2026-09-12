@@ -134,13 +134,22 @@ def fix_siunitx(body):
 # --------------------------------------------------------------------------
 # 3. LaTeX -> pandoc-friendly LaTeX
 # --------------------------------------------------------------------------
-BOX_ENVS = ['keyidea', 'workedex', 'pitfall', 'readingbox', 'outcomes']
+BOX_ENVS = ['keyidea', 'workedex', 'pitfall', 'readingbox', 'outcomes', 'solution']
 DEFAULT_TITLES = {
     'keyidea': 'Key idea',
     'workedex': 'Worked example',
     'pitfall': 'Common pitfall',
     'readingbox': 'Reading',
     'outcomes': 'By the end of this week you should be able to',
+    # Tutorials only. solbox (the tcolorbox) never appears literally in a
+    # document body -- \begin{solution} is the call-site name, defined in
+    # the tutorial's own preamble as \ifsolutions\begin{solbox}...\fi. That
+    # \ifsolutions test is invisible to us (we read raw source, never expand
+    # LaTeX macros), so whether a solution appears on the web is decided
+    # separately, upstream, by literally deleting \begin{solution}...
+    # \end{solution} blocks from the text before this ever runs -- see
+    # build_site.sh's build_doc().
+    'solution': 'Solution',
 }
 
 def preprocess(src, labels, n_figs, number_sections=False, svg_prefix='svg'):

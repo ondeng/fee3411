@@ -83,13 +83,20 @@ copyright: >-
   Lecture material © Oscar Ondeng, University of Nairobi.
   Figures are original redrawings; sources are attributed in each caption.
 
-# Add one line per week as its notes are published.
+# Add one line per week/tutorial/assignment as each is published; keep in
+# sync with the WEEKS/TUTORIALS/ASSIGNMENTS arrays in web/build_site.sh.
 nav:
   - Home: index.md
   - Lecture notes:
       - "Week 1 — Introduction and components": notes/week-01.md
       - "Week 2 — Mathematical modelling": notes/week-02.md
       - "Week 3 — Transfer functions and the s-plane": notes/week-03.md
-  - Tutorials: tutorials.md
-  - Assignments: assignments.md
+  - Tutorials:
+      - Overview: tutorials.md
+      - "Tutorial 1 — Mathematical toolkit": tutorials/tutorial-01.md
+      - "Tutorial 2 — Electromechanical modelling": tutorials/tutorial-02.md
+      - "Tutorial 3 — Transfer functions": tutorials/tutorial-03.md
+  - Assignments:
+      - Overview: assignments.md
+      - "Assignment 1 — Components, devices and modelling": assignments/assignment-01.md
   - Software and reading: resources.md

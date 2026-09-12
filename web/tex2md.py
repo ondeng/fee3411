@@ -56,7 +56,16 @@ def to_markdown(body):
         ['pandoc', '-f', 'latex', '-t',
          'markdown+tex_math_dollars+pipe_tables'
          '-simple_tables-multiline_tables-grid_tables-raw_tex-smart',
-         '--wrap=none'],
+         '--wrap=none',
+         # A figure pandoc can't express in plain Markdown (more than one
+         # image) is emitted as a raw <figure> HTML block instead, and
+         # inside raw HTML pandoc renders math with its OWN default method,
+         # not tex_math_dollars -- which by default means flattening it to
+         # plain italic text, permanently, before Python-Markdown/arithmatex
+         # ever see it. --mathjax makes that fallback render math as
+         # \(...\) instead, which MathJax then typesets like everywhere
+         # else on the page.
+         '--mathjax'],
         input=doc, capture_output=True, text=True)
     if p.returncode != 0:
         sys.stderr.write(p.stderr[:3000]); sys.exit(1)
@@ -83,8 +92,17 @@ def boxes_to_admonitions(md, box_titles):
             # "/// info | Title" is not recognised and renders as literal text.
             # The generic block with an explicit `type:` option is required.
             title = title.replace('---', '\u2014').replace('--', '\u2013')
-            out.append('/// admonition | %s' % title)
-            out.append('    type: %s' % ADMONITION[env])
+            if env == 'solution':
+                # Collapsible and closed by default (pymdownx.blocks.details)
+                # -- click to reveal, rather than an always-open admonition.
+                # This is the actual "toggle" for a tutorial's solutions,
+                # once that tutorial is approved to have them at all (see
+                # build_doc()'s STRIP for the coarser publish-time switch).
+                out.append('/// details | %s' % title)
+                out.append('    type: note')
+            else:
+                out.append('/// admonition | %s' % title)
+                out.append('    type: %s' % ADMONITION[env])
             out.append('')
             stack.append(env)
             continue
@@ -210,9 +228,19 @@ def normalize_blocks(md):
     * ``: caption`` table captions -> a bold "Table N." paragraph.
 
     Multi-image figures already arrive as raw <figure> HTML, which passes
-    through untouched; figure numbering below covers both shapes in document
-    order so the numbers still match the PDF.
+    through mostly untouched; figure numbering below covers both shapes in
+    document order so the numbers still match the PDF.
+
+    One thing does need fixing in that raw HTML: its <img src="..."> is a
+    literal, unprocessed relative path. Markdown-syntax images get rewritten
+    by MkDocs to account for use_directory_urls (this .md file's own
+    directory vs. the page's final .../week-NN/ URL); raw embedded HTML
+    never goes through that rewriter, so the same relative path that is
+    correct for a normal image resolves one directory too deep here and
+    404s. Patched by prefixing with "../" to match where MkDocs would have
+    sent it.
     """
+    md = re.sub(r'(<img src=")(?!\.\./|https?://|/)', r'\1../', md)
     lines = md.split('\n')
     out, pending_id = [], None
 
@@ -287,8 +315,9 @@ def main():
     ap.add_argument('--aux', required=True)
     ap.add_argument('--svg-prefix', required=True)
     ap.add_argument('--nfigs', type=int, required=True)
-    ap.add_argument('--week', required=True)
+    ap.add_argument('--week', default='')
     ap.add_argument('--topic', required=True)
+    ap.add_argument('--kind', default='Week')
     ap.add_argument('--pdf', default='')
     ap.add_argument('--out', required=True)
     a = ap.parse_args()
@@ -309,15 +338,21 @@ def main():
     md = re.sub(r'\\\n', '<br>\n', md)      # hard line breaks
     md = re.sub(r'\n{3,}', '\n\n', md).strip()
 
+    if a.kind and a.week:
+        heading = f'{a.kind} {a.week} — {a.topic}'
+    elif a.kind:
+        heading = f'{a.kind} — {a.topic}'
+    else:
+        heading = a.topic
     head = [f'---',
-            f'title: "Week {a.week} — {a.topic}"',
+            f'title: "{heading}"',
             f'---',
             '',
-            f'# Week {a.week} — {a.topic}',
+            f'# {heading}',
             '']
-    if a.pdf:
-        head += [f'[:material-file-pdf-box: Download these notes as PDF]({a.pdf})'
-                 '{ .md-button }', '', '']
+    # PDF download button intentionally omitted -- pages are the primary
+    # format now (2026-09). --pdf is still accepted/plumbed through in case
+    # it's wanted again later; it's just not rendered into a button.
 
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     Path(a.out).write_text('\n'.join(head) + md + '\n')

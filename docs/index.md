@@ -15,29 +15,31 @@ prerequisite.
 /// info | How to use this site
 Each week's notes are one page. Read the **outcomes** box first, work through the
 body, then try the self-checks under *Before the tutorial* before the tutorial
-hour — that hour is much more useful to you if you arrive having already got
+hour -- that hour is much more useful to you if you arrive having already got
 stuck on something.
-
-Every page has a **PDF** button if you would rather print it or read offline.
 ///
 
 ## Lecture notes
 
-| Week | Topic | |
-|---|---|---|
-| 1 | Introduction and control system components | [Notes](notes/week-01.md) |
-| 2 | Mathematical modelling of physical systems | [Notes](notes/week-02.md) |
-| 3 | Transfer functions and the s-plane | [Notes](notes/week-03.md) |
-| 4 | Block diagrams and signal flow graphs | *to come* |
-| 5 | Transient response of first- and second-order systems | *to come* |
-| 6 | Standard inputs and steady-state errors · **CAT 1** | *to come* |
-| 7 | Stability and Routh–Hurwitz | *to come* |
-| 8 | Root locus | *to come* |
-| 9 | System design and simulation; intro to frequency response | *to come* |
-| 10 | Bode plots | *to come* |
-| 11 | Polar plots and the Nyquist criterion | *to come* |
-| 12 | Nyquist stability, relative stability and Nichols · **CAT 2** | *to come* |
-| 13 | Revision | *to come* |
+| Week | Topic | Notes | Extra |
+|---|---|---|---|
+| 1 | Introduction and control system components | [Notes](notes/week-01.md) | |
+| 2 | Mathematical modelling of physical systems | [Notes](notes/week-02.md) | |
+| 3 | Transfer functions and the s-plane | [Notes](notes/week-03.md) | |
+| 4 | Block diagrams and signal flow graphs | *to come* | |
+| 5 | Transient response of first- and second-order systems | *to come* | |
+| 6 | Standard inputs and steady-state errors · **CAT 1** | *to come* | |
+| 7 | Stability and Routh–Hurwitz | *to come* | |
+| 8 | Root locus | *to come* | |
+| 9 | System design and simulation; intro to frequency response | *to come* | |
+| 10 | Bode plots | *to come* | |
+| 11 | Polar plots and the Nyquist criterion | *to come* | |
+| 12 | Nyquist stability, relative stability and Nichols · **CAT 2** | *to come* | |
+| 13 | Revision | *to come* | |
+
+The **Extra** column links any supplementary material for that week (a deeper
+derivation, extra worked examples) once there is any -- see
+`web/build_site.sh`'s `SUPPLEMENTARY` array to add one.
 
 Teaching runs Weeks 1–12. Week 13 is revision; Weeks 14–15 are examinations.
 
