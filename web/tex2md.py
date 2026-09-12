@@ -51,6 +51,18 @@ def to_markdown(body):
            '\\newcommand{\\wn}{\\omega_{n}}\n'
            '\\newcommand{\\zt}{\\zeta}\n'
            '\\newcommand{\\TF}[1]{#1(s)}\n'
+           # Tutorials'/Assignments' own tagging commands (course-specific
+           # colour dropped -- pandoc doesn't know \\color{faccent} etc., and
+           # emphasis alone reads fine on the page). Any command pandoc
+           # doesn't recognise is silently DROPPED, argument and all -- this
+           # is how a whole assignment lost every "[N marks]" tag before
+           # these were added. \\qmarks skips \\ifnum's singular/plural (not
+           # something pandoc's LaTeX reader evaluates); "marks" for 1 is a
+           # cosmetic wart, not a missing mark allocation.
+           '\\newcommand{\\inhour}{\\textit{[in the hour]}}\n'
+           '\\newcommand{\\athome}{\\textit{[homework]}}\n'
+           '\\newcommand{\\qmarks}[1]{\\textbf{[#1 marks]}}\n'
+           '\\newcommand{\\mk}[1]{\\textbf{(#1)}}\n'
            '\\begin{document}\n' + body + '\n\\end{document}')
     p = subprocess.run(
         ['pandoc', '-f', 'latex', '-t',

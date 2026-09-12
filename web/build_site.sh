@@ -51,12 +51,25 @@ mkdir -p "$DOCS/pdf" build
 #            rendering flag, an actual text deletion, applied once and read
 #            by both the real LaTeX compile below and tex2md.py. This is how
 #            an unapproved tutorial's solutions stay off the page (and how an
-#            assignment's marking scheme always does) -- not \ifsolutions /
-#            \ifscheme, which key off \jobname and are invisible to us since
-#            we never expand LaTeX macros, only ever read raw source text.
+#            assignment's marking scheme always does).
+#   JOBNAME  extra string appended to the compile's -jobname (default: none).
+#            \ifsolutions / \ifscheme in the Tutorials/Assignments sources
+#            key off \jobname containing "solutions" / "marking" -- a
+#            SEPARATE gate from STRIP that lives inside the real LaTeX
+#            compile, not our text-deletion pass, and matters only when STRIP
+#            does NOT already delete that content: a \NewEnviron-captured
+#            body (\begin{solution}...\end{solution}) is only ever typeset --
+#            so its figures are only ever shipped out for preview -- when its
+#            own \if is true. STRIP'd content is physically gone before
+#            pdflatex ever runs, so its jobname doesn't matter; kept-in
+#            content (a tutorial with solutions "yes") DOES need a jobname
+#            containing "solutions", or the compile silently discards it (and
+#            preview ships zero pages if that was the doc's only figure) even
+#            though STRIP correctly left the text alone. Pass e.g.
+#            "-solutions" here for any doc where solution content is kept.
 # ----------------------------------------------------------------------------
 build_doc () {
-  local SRCDIR="$1" STEM="$2" KIND="$3" NUM="$4" TOPIC="$5" OUT="$6" SVGDIR="$7" STRIP="${8:-}"
+  local SRCDIR="$1" STEM="$2" KIND="$3" NUM="$4" TOPIC="$5" OUT="$6" SVGDIR="$7" STRIP="${8:-}" JOBNAME="${9:-}"
   local TEX="$SRC/$SRCDIR/$STEM.tex"
   [ -f "$TEX" ] || { echo "skip $STEM (no source)"; return 0; }
   echo "=== $STEM ==========================================================="
@@ -64,19 +77,84 @@ build_doc () {
   local W="build/$STEM"; mkdir -p "$W"
   cp "$TEX" "$W/doc.tex"
 
-  if [ -n "$STRIP" ]; then
-    STRIP="$STRIP" python3 - "$W/doc.tex" <<'PY'
+  STRIP="$STRIP" python3 - "$W/doc.tex" <<'PY'
 import os, re, sys, pathlib
 p = pathlib.Path(sys.argv[1]); s = p.read_text()
-for env in os.environ['STRIP'].split():
+strip_envs = set(os.environ.get('STRIP', '').split())
+for env in strip_envs:
     s = re.sub(r'\\begin\{%s\}.*?\\end\{%s\}' % (env, env), '', s, flags=re.S)
+
+# \ifsolutions / \ifscheme ... [\else ...] \fi (both the \NewEnviron-embedded
+# form with no \else, and the bare banners with one) key off \jobname at
+# real-compile time -- fine for the real LaTeX compile (see JOBNAME below),
+# but pandoc has no idea what \ifsolutions means: with raw_tex off it just
+# drops the \if/\else/\fi control words and keeps BOTH branches' text,
+# producing a garbled double banner ("QUESTIONS AND SOLUTIONS ... QUESTION
+# SHEET" run together on one line). Resolve every occurrence here to plain
+# text, using the same "is this content being kept" state STRIP already
+# encodes, so there is only one place that decides it.
+#
+# A flat regex can't do this safely: \ifnum...\else...\fi (from \qmarks'
+# pluraliser, "[3 marks]") can sit between one \ifsolutions and the \else
+# meant for a LATER, unrelated \ifsolutions, so a non-greedy match pairs the
+# wrong \else/\fi with it and eats everything in between -- including, once,
+# \begin{document} itself. This walks the token stream instead, tracking
+# \if.../\fi nesting depth so a nested conditional's own \else/\fi is never
+# mistaken for the outer one's.
+IF_ENVS = {'solutions': ('solution',), 'scheme': ('scheme', 'markernotes')}
+TOKEN = re.compile(r'\\(if[a-zA-Z]*|else|fi)\b')
+
+def resolve_if(s, ifname, keep):
+    tag = '\\if' + ifname
+    out = []
+    i = 0
+    while True:
+        j = s.find(tag, i)
+        if j == -1:
+            out.append(s[i:])
+            return ''.join(out)
+        # \newif\ifsolutions is the DECLARATION, not an invocation -- it has
+        # no \fi of its own, so leave it untouched and keep scanning.
+        if s[max(0, j - 6):j] == '\\newif':
+            out.append(s[i:j + len(tag)])
+            i = j + len(tag)
+            continue
+        out.append(s[i:j])
+        pos = j + len(tag)
+        depth, k, else_span, fi_start, fi_end = 1, pos, None, None, None
+        while depth > 0:
+            m = TOKEN.search(s, k)
+            if not m:
+                raise ValueError('unbalanced %s in %s' % (tag, p))
+            tok = m.group(1)
+            if tok == 'fi':
+                depth -= 1
+                if depth == 0:
+                    fi_start, fi_end = m.start(), m.end()
+            elif tok == 'else':
+                if depth == 1 and else_span is None:
+                    else_span = (m.start(), m.end())
+            else:  # any \ifsomething, including nested \ifsolutions/\ifscheme
+                depth += 1
+            k = m.end()
+        if else_span:
+            true_branch, false_branch = s[pos:else_span[0]], s[else_span[1]:fi_start]
+        else:
+            true_branch, false_branch = s[pos:fi_start], ''
+        out.append(true_branch if keep else false_branch)
+        i = fi_end
+
+for ifname, envs in IF_ENVS.items():
+    keep = not any(e in strip_envs for e in envs)
+    s = resolve_if(s, ifname, keep)
+
 p.write_text(s)
 PY
-  fi
 
   # 1. compile once, for the .aux -- the authoritative numbering ------------
-  ( cd "$W" && pdflatex -interaction=nonstopmode -file-line-error doc.tex >/dev/null 2>&1 \
-      || { echo "  ! pdflatex failed; see $W/doc.log"; exit 1; } )
+  ( cd "$W" && pdflatex -interaction=nonstopmode -file-line-error \
+        -jobname="doc$JOBNAME" doc.tex >/dev/null 2>&1 \
+      || { echo "  ! pdflatex failed; see $W/doc$JOBNAME.log"; exit 1; } )
 
   # 2. one page per tikzpicture -> one SVG each -----------------------------
   python3 - "$W/doc.tex" <<'PY'
@@ -102,24 +180,38 @@ p.with_name('figs.tex').write_text(
 PY
   (
     cd "$W"
-    pdflatex -interaction=nonstopmode -file-line-error figs.tex >/dev/null 2>&1 \
-      || { echo "  ! pdflatex (figs) failed:"; tail -60 figs.log; exit 1; }
-    dvisvgm --pdf --page=1- --font-format=woff --exact-bbox \
-        --optimize=all --output="fig%2p.svg" figs.pdf \
-      || { echo "  ! dvisvgm failed (see output above)"; exit 1; }
+    pdflatex -interaction=nonstopmode -file-line-error \
+        -jobname="figs$JOBNAME" figs.tex >/dev/null 2>&1 \
+      || { echo "  ! pdflatex (figs) failed:"; tail -60 "figs$JOBNAME.log"; exit 1; }
+    if [ ! -f "figs$JOBNAME.pdf" ]; then
+      # A doc with zero tikzpicture/circuitikz anywhere in it (nothing for
+      # preview to ship out) is a valid, figure-less document, not a
+      # failure -- pdfTeX exits 0 and simply writes no PDF ("No pages of
+      # output." in the log). Only treat a missing PDF as an error when the
+      # log doesn't confirm that's what happened.
+      grep -q "No pages of output" "figs$JOBNAME.log" \
+        || { echo "  ! figs$JOBNAME.pdf missing and not a zero-figure doc:"; tail -60 "figs$JOBNAME.log"; exit 1; }
+    else
+      dvisvgm --pdf --page=1- --font-format=woff --exact-bbox \
+          --optimize=all --output="fig%2p.svg" "figs$JOBNAME.pdf" \
+        || { echo "  ! dvisvgm failed (see output above)"; exit 1; }
+    fi
   )
 
   rm -rf "$SVGDIR"; mkdir -p "$SVGDIR"
   mv "$W"/fig*.svg "$SVGDIR"/ 2>/dev/null || true
   local NFIGS
-  NFIGS=$(ls -1 "$SVGDIR"/fig*.svg 2>/dev/null | wc -l | tr -d ' ')
+  # find, not "ls fig*.svg | wc -l": with pipefail, ls exits nonzero on a
+  # glob that matches nothing (a genuinely figure-less doc) and kills the
+  # whole build; find prints nothing and still exits 0.
+  NFIGS=$(find "$SVGDIR" -maxdepth 1 -name 'fig*.svg' 2>/dev/null | wc -l | tr -d ' ')
   echo "  $NFIGS figures"
 
   # 3. LaTeX -> Markdown, from the SAME (possibly stripped) copy -----------
   #    that was just compiled -- never re-read the untouched original, or a
   #    stripped-vs-unstripped mismatch would throw off the figure count.
   python3 "$HERE/tex2md.py" \
-      --tex "$W/doc.tex" --aux "$W/doc.aux" \
+      --tex "$W/doc.tex" --aux "$W/doc$JOBNAME.aux" \
       --svg-prefix "svg/$STEM" --nfigs "$NFIGS" \
       --kind "$KIND" --week "$NUM" --topic "$TOPIC" \
       --out "$OUT"
@@ -152,9 +244,11 @@ TUTORIALS=(
 mkdir -p "$DOCS/tutorials/svg"
 for entry in "${TUTORIALS[@]}"; do
   IFS='|' read -r STEM WK TOPIC SOLS <<< "$entry"
-  STRIP=""; [ "$SOLS" = "yes" ] || STRIP="solution"
+  STRIP=""; JOBNAME=""
+  if [ "$SOLS" = "yes" ]; then JOBNAME="-solutions"; else STRIP="solution"; fi
   build_doc Tutorials "$STEM" Tutorial "$WK" "$TOPIC" \
-      "$DOCS/tutorials/tutorial-$(printf %02d "$WK").md" "$DOCS/tutorials/svg/$STEM" "$STRIP"
+      "$DOCS/tutorials/tutorial-$(printf %02d "$WK").md" "$DOCS/tutorials/svg/$STEM" \
+      "$STRIP" "$JOBNAME"
 done
 
 # Assignment list:  <stem>|<assignment no>|<topic>
