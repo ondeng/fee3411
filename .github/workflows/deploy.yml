@@ -29,13 +29,18 @@ jobs:
       #   pgfplots       -> texlive-pictures
       #   tcolorbox      -> texlive-latex-extra
       #   preview.sty    -> preview-latex-style
+      #
+      # mupdf-tools (mutool) -- dvisvgm's --pdf mode needs either Ghostscript
+      # < 10.01.0 or mutool. Ubuntu ships a newer Ghostscript than the apt
+      # dvisvgm supports talking to directly, so mutool is the PDF backend
+      # dvisvgm actually uses here.
       - name: Install TeX Live and dvisvgm
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends \
             texlive-latex-base texlive-latex-recommended texlive-latex-extra \
             texlive-pictures texlive-science texlive-fonts-recommended \
-            preview-latex-style lmodern dvisvgm
+            preview-latex-style lmodern dvisvgm mupdf-tools
 
       # ---- pandoc ---------------------------------------------------------
       # Must be pandoc 3: the converter relies on unknown LaTeX environments
