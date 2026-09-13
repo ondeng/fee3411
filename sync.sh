@@ -41,14 +41,18 @@ copy "$PROJ/Tutorials"   '*.tex'  "$SRC/Tutorials"
 copy "$PROJ/Assignments" '*.tex'  "$SRC/Assignments"
 
 # --- PDFs offered as downloads --------------------------------------------
-copy "$PROJ/Notes"     '*.pdf' "$SRC/Notes"
-copy "$PROJ/Tutorials" '*.pdf' "$SRC/Tutorials"
-copy "$PROJ/Slides"    '*.pdf' "$SRC/Slides"
+copy "$PROJ/Notes"  '*.pdf' "$SRC/Notes"
+copy "$PROJ/Slides" '*.pdf' "$SRC/Slides"
 
-# Assignments: question papers only. Marking schemes are deliberately NOT
-# synced — they are the one thing whose publication has an obvious cost, since
-# a scheme gives away the mark allocation of an assessment you may re-use.
-# Change the pattern to '*.pdf' if you want them public too.
+# Tutorials and Assignments: question papers only. Solutions/marking schemes
+# are deliberately NOT synced -- they are the one thing whose publication has
+# an obvious cost, since a scheme gives away the mark allocation (and a
+# solutions PDF gives away the answers) of material you may re-use. This
+# mirrors the STRIP/JOBNAME handling in web/build_site.sh, which keeps the
+# *.tex sources' solution content out of the rendered pages -- but this line
+# is what keeps the compiled PDF itself off the repo, since build_site.sh
+# only ever copies whatever PDFs it finds under src/.
+copy "$PROJ/Tutorials"   '*-questions.pdf' "$SRC/Tutorials"
 copy "$PROJ/Assignments" '*-questions.pdf' "$SRC/Assignments"
 
 # --- notebook -------------------------------------------------------------

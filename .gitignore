@@ -14,8 +14,11 @@ Attendance/
 src/Books/
 src/Attendance/
 
-# Marking schemes: not synced by default (see the note in sync.sh).
+# Marking schemes and tutorial solutions: not synced by default (see the note
+# in sync.sh). Backstop only -- sync.sh should never produce these under src/,
+# but if it (or a manual copy) ever does, this keeps them from being staged.
 *marking-scheme*
+*-solutions.pdf
 
 # Internal planning documents.
 FEE3411_Course_Spec.md
