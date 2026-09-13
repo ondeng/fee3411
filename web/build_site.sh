@@ -180,6 +180,38 @@ setup = (r"\usepackage[active,tightpage]{preview}" "\n"
 s = re.sub(r'\[\s*breakable\s*,\s*', '[', s)
 s = re.sub(r',\s*breakable\s*(?=[,\]])', '', s)
 s = re.sub(r'\[\s*breakable\s*\]', '[]', s)
+
+# On some tcolorbox releases (confirmed on TeX Live 2026's; not on the
+# version this was first tested against), EVERY tcolorbox -- not just a
+# breakable one -- draws its frame using an internal tikzpicture. With
+# \PreviewEnvironment{tikzpicture} active, that frame ships as its own
+# page, one per box, with no warning: dvisvgm renders extra SVGs and
+# tex2md.py's figure-count assertion is what actually catches the drift
+# ("N pictures in the source but M SVGs were rendered"). Unlike
+# `breakable`, this isn't option-dependent -- it's how the box draws
+# itself at all -- so the fix is to remove the box wrapper outright for
+# this pass, keeping whatever is inside untouched. That's safe here:
+# figs.tex only needs a REAL figure that happens to be nested inside one
+# of these (a tutorial's solution can hold a diagram); the box's own
+# text/frame is irrelevant to this pass, and the real compile (doc.tex,
+# used for the rendered page and its numbering) never sees this change.
+# outcomes is the one exception: \newenvironment{outcomes}{\begin{tcolorbox}
+# [...]\begin{itemize}...}{\end{itemize}\end{tcolorbox}} hides an itemize
+# inside the box -- the source only ever has bare \item lines, no itemize of
+# their own, since the macro supplies it. Deleting \begin{outcomes}/\end{}
+# outright, like the others below, would leave those \item lines outside any
+# list ("Lonely \item" -- a real LaTeX error, not just a warning, confirmed
+# by testing this exact case). Substituting a plain itemize keeps them valid
+# without going anywhere near tcolorbox.
+s = re.sub(r'\\begin\{outcomes\}(?:\[(?:[^\[\]]|\[[^\]]*\])*\])?\s*', r'\\begin{itemize}', s)
+s = re.sub(r'\\end\{outcomes\}', r'\\end{itemize}', s)
+
+BOX_ENVS = ['keyidea', 'workedex', 'pitfall', 'readingbox',
+            'solution', 'scheme', 'markernotes']
+for env in BOX_ENVS:
+    s = re.sub(r'\\begin\{%s\}(?:\[(?:[^\[\]]|\[[^\]]*\])*\])?\s*' % env, '', s)
+    s = re.sub(r'\\end\{%s\}' % env, '', s)
+
 p.with_name('figs.tex').write_text(
     s.replace(r'\begin{document}', setup + r'\begin{document}', 1))
 PY
