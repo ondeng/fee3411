@@ -20,56 +20,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # ---- LaTeX toolchain ------------------------------------------------
-      # Targeted packages, not texlive-full: full is ~5 GB and slow. If a
-      # future week needs a package that is missing, the build fails with
-      # "File xyz.sty not found" -- add its Debian package here.
-      #   siunitx        -> texlive-science
-      #   circuitikz     -> texlive-pictures
-      #   pgfplots       -> texlive-pictures
-      #   tcolorbox      -> texlive-latex-extra
-      #   preview.sty    -> preview-latex-style
-      #
-      # mupdf-tools (mutool) -- dvisvgm's --pdf mode needs either Ghostscript
-      # < 10.01.0 or mutool. Ubuntu ships a newer Ghostscript than the apt
-      # dvisvgm supports talking to directly, so mutool is the PDF backend
-      # dvisvgm actually uses here.
-      - name: Install TeX Live and dvisvgm
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends \
-            texlive-latex-base texlive-latex-recommended texlive-latex-extra \
-            texlive-pictures texlive-science texlive-fonts-recommended \
-            preview-latex-style lmodern dvisvgm mupdf-tools
-
-      # ---- pandoc ---------------------------------------------------------
-      # Must be pandoc 3: the converter relies on unknown LaTeX environments
-      # becoming fenced divs, which pandoc 2 does not do. Pinned rather than
-      # apt'd so a runner image change cannot silently move it.
-      - name: Install pandoc
-        env:
-          PANDOC_VERSION: "3.1.11"
-        run: |
-          curl -fsSL -o /tmp/pandoc.deb \
-            "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-amd64.deb"
-          sudo dpkg -i /tmp/pandoc.deb
-          pandoc --version | head -1
-          pandoc --version | head -1 | grep -qE 'pandoc 3\.' || {
-            echo "::error::pandoc 3 is required"; exit 1; }
-
+      # docs/ is pre-built locally (./sync.sh && web/build_site.sh, from the
+      # LaTeX sources in ../Notes, ../Tutorials etc., which are NOT part of
+      # this repo) and committed as plain Markdown + SVG. CI's only job is to
+      # turn that into a static site -- no LaTeX/pandoc toolchain needed here
+      # any more. If a page looks stale after a content edit, the fix is to
+      # rebuild locally and commit docs/ again, not to change this workflow.
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: pip
 
       - name: Install Python dependencies
-        run: pip install -r requirements.txt beautifulsoup4
-
-      # ---- convert the LaTeX notes, then build the site -------------------
-      - name: Build notes from LaTeX
-        run: |
-          chmod +x web/build_site.sh
-          web/build_site.sh
+        run: pip install -r requirements.txt
 
       - name: Build site
         run: mkdocs build --strict -d site_build

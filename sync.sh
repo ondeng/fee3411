@@ -9,6 +9,10 @@
 # copies anything back. src/ is generated — treat it as read-only and edit the
 # originals in ../Notes, ../tex and so on.
 #
+# src/ is gitignored -- it never reaches the public repo, only the Markdown
+# web/build_site.sh generates from it does. Run this, then build_site.sh,
+# then commit docs/ (see the note at the top of .gitignore).
+#
 # The copy is also the publish gate: only what you sync goes public. A
 # half-written Week 5 in ../Notes stays private until you sync it.
 # ============================================================================
