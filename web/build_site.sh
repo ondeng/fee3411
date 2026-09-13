@@ -74,7 +74,12 @@ build_doc () {
   [ -f "$TEX" ] || { echo "skip $STEM (no source)"; return 0; }
   echo "=== $STEM ==========================================================="
 
-  local W="build/$STEM"; mkdir -p "$W"
+  # Always start from a clean $W. A run that fails partway through (a missing
+  # LaTeX package, say) can leave old fig*.svg sitting here; since dvisvgm
+  # only overwrites filenames it reuses, a rerun that produces fewer pictures
+  # than that stale run did would otherwise carry the extras forward into
+  # NFIGS and desync from the actual count in doc.tex.
+  local W="build/$STEM"; rm -rf "$W"; mkdir -p "$W"
   cp "$TEX" "$W/doc.tex"
 
   STRIP="$STRIP" python3 - "$W/doc.tex" <<'PY'
