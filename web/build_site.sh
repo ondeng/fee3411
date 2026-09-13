@@ -288,14 +288,9 @@ for entry in "${SUPPLEMENTARY[@]}"; do
       "$DOCS/supplementary/$STEM.md" "$DOCS/supplementary/svg/$STEM"
 done
 
-# PDFs for the download buttons -- currently unused (no page links to these),
-# kept so a button can come back later without rebuilding this step. Only
-# what ./sync.sh copied into src/ can appear here -- Books/ and Attendance/
-# never reach this folder.
-for f in "$SRC"/Notes/*.pdf "$SRC"/Tutorials/*.pdf \
-         "$SRC"/Assignments/*.pdf "$SRC"/Slides/*.pdf; do
-  [ -e "$f" ] && cp "$f" "$DOCS/pdf/" || true
-done
+# The notebook is the only download resources.md actually links to.
+# PDFs are deliberately not synced/copied any more -- see the note in
+# sync.sh -- so there is nothing else to put in docs/pdf/.
 [ -f "$SRC/FEE3411_MATLAB_to_Python_Reference.ipynb" ] && \
   cp "$SRC/FEE3411_MATLAB_to_Python_Reference.ipynb" "$DOCS/pdf/" || true
 echo "=== $(ls -1 "$DOCS/pdf" | wc -l | tr -d ' ') files in $DOCS/pdf"
