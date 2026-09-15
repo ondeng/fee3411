@@ -13,5 +13,4 @@ Four assignments, each issued two weeks before it is due, and each worth 2.5%.
 | Assignment 3 | Week 7 | Week 9 | Routh–Hurwitz and root locus | *to come* |
 | Assignment 4 | Week 9 | Week 11 | Gain adjustment, Simulink, frequency response | *to come* |
 
-Assignment 4 is a simulation exercise, set deliberately as homework rather than
-a contact hour — see [Software](resources.md) for free ways to run it.
+
