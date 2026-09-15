@@ -325,11 +325,13 @@ for entry in "${SUPPLEMENTARY[@]}"; do
       "$DOCS/supplementary/$STEM.md" "$DOCS/supplementary/svg/$STEM"
 done
 
-# The notebook is the only download resources.md actually links to.
-# PDFs are deliberately not synced/copied any more -- see the note in
-# sync.sh -- so there is nothing else to put in docs/pdf/.
+# The notebook and the syllabus are the only downloads anything actually
+# links to (the notebook from resources.md, the syllabus from the nav).
+# Other PDFs are deliberately not synced/copied -- see the note in sync.sh.
 [ -f "$SRC/FEE3411_MATLAB_to_Python_Reference.ipynb" ] && \
   cp "$SRC/FEE3411_MATLAB_to_Python_Reference.ipynb" "$DOCS/pdf/" || true
+[ -f "$SRC/fee3411-syllabus.pdf" ] && \
+  cp "$SRC/fee3411-syllabus.pdf" "$DOCS/pdf/" || true
 echo "=== $(ls -1 "$DOCS/pdf" | wc -l | tr -d ' ') files in $DOCS/pdf"
 
 echo

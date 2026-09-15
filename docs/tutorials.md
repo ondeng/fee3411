@@ -4,10 +4,6 @@ title: Tutorials
 
 # Tutorial sheets
 
-One sheet per week, worked in the tutorial hour. **Attempt the questions before
-the tutorial.** Where solutions are included, they sit inline on the same
-page under a closed **Solution** panel for each question — click one open
-when you are ready to check yourself, not before.
 
 | Week | Topic | Sheet |
 |---|---|---|

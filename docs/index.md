@@ -43,16 +43,17 @@ Teaching runs Weeks 1–12. Week 13 is revision; Weeks 14–15 are examinations.
 
 ## Assessment
 
-Continuous assessment **30%**, main examination **70%**. Fixed by the syllabus.
+Continuous assessment **30%**, main examination **70%**. Fixed by the
+[syllabus](pdf/fee3411-syllabus.pdf).
 
 | Component | When | Weight | Covers |
 |---|---|---|---|
-| Assignment 1 | Issued Wk 1, due Wk 3 | 1.5% | Components and devices; modelling |
-| Assignment 2 | Issued Wk 4, due Wk 6 | 1.5% | Transfer functions, block diagrams, SFG, Mason |
-| **CAT 1** | Week 6, tutorial hour | **12%** | Weeks 1–5 |
-| Assignment 3 | Issued Wk 7, due Wk 9 | 1.5% | Routh–Hurwitz and root locus |
-| Assignment 4 (simulation) | Issued Wk 9, due Wk 11 | 1.5% | Gain adjustment, Simulink, frequency response |
-| **CAT 2** | Week 12, tutorial hour | **12%** | Weeks 6–11 |
+| Assignment 1 | Issued Wk 1, due Wk 3 | 2.5% | Components and devices; modelling |
+| Assignment 2 | Issued Wk 4, due Wk 6 | 2.5% | Transfer functions, block diagrams, SFG, Mason |
+| **CAT 1** | Week 6, tutorial hour | **10%** | Weeks 1–5 |
+| Assignment 3 | Issued Wk 7, due Wk 9 | 2.5% | Routh–Hurwitz and root locus |
+| Assignment 4 (simulation) | Issued Wk 9, due Wk 11 | 2.5% | Gain adjustment, Simulink, frequency response |
+| **CAT 2** | Week 12, tutorial hour | **10%** | Weeks 6–11 |
 
 
 ## What you should be able to do by the end

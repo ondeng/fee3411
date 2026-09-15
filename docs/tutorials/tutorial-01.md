@@ -31,22 +31,22 @@ Questions marked **\[in the hour\]** are the ones we work through together, if t
 | $e^{-at}\sin\omega t$ | $\omega/[(s+a)^{2}+\omega^{2}]$ |
 | $e^{-at}\cos\omega t$ | $(s+a)/[(s+a)^{2}+\omega^{2}]$  |
 
-///
-
 **Properties**<br>
 
-|  |  |
-|:---|:---|
-| Linearity | $\mathcal{L}\{af+bg\}=aF+bG$ |
-| Differentiation | $\mathcal{L}\{\dot f\}=sF(s)-f(0^{-})$ |
-|  | $\mathcal{L}\{\ddot f\}=s^{2}F(s)-s f(0^{-})-\dot f(0^{-})$ |
-| Integration | $\mathcal{L}\left\{\int_{0}^{t}\!f\right\}=F(s)/s$ |
-| Frequency shift | $\mathcal{L}\{e^{-at}f(t)\}=F(s+a)$ |
-| Time shift | $\mathcal{L}\{f(t-T)u(t-T)\}=e^{-sT}F(s)$ |
-| Initial value | $f(0^{+})=\lim_{s\to\infty}sF(s)$ |
-| Final value | $f(\infty)=\lim_{s\to 0}sF(s)$ |
-|  | *only if all poles of $sF(s)$* |
-|  | *have negative real parts* |
+|                 |                                                             |
+|:----------------|:------------------------------------------------------------|
+| Linearity       | $\mathcal{L}\{af+bg\}=aF+bG$                                |
+| Differentiation | $\mathcal{L}\{\dot f\}=sF(s)-f(0^{-})$                      |
+|                 | $\mathcal{L}\{\ddot f\}=s^{2}F(s)-s f(0^{-})-\dot f(0^{-})$ |
+| Integration     | $\mathcal{L}\left\{\int_{0}^{t}\!f\right\}=F(s)/s$          |
+| Frequency shift | $\mathcal{L}\{e^{-at}f(t)\}=F(s+a)$                         |
+| Time shift      | $\mathcal{L}\{f(t-T)u(t-T)\}=e^{-sT}F(s)$                   |
+| Initial value   | $f(0^{+})=\lim_{s\to\infty}sF(s)$                           |
+| Final value     | $f(\infty)=\lim_{s\to 0}sF(s)$                              |
+|                 | *only if all poles of $sF(s)$*                              |
+|                 | *have negative real parts*                                  |
+
+///
 
 ## Question 1 — Standard test signals *\[in the hour\]* { #question-1-standard-test-signals-in-the-hour }
 

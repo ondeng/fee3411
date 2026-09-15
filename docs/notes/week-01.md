@@ -8,17 +8,17 @@ title: "Week 1 — Introduction and Control System Components"
 /// admonition | By the end of this week you should be able to
     type: abstract
 
-- Name the six parts of a feedback control system — plant, actuator, sensor, controller, reference and disturbance — on a block diagram of a real system, and say what signal each one carries.
+-   Name the six parts of a feedback control system — plant, actuator, sensor, controller, reference and disturbance — on a block diagram of a real system, and say what signal each one carries.
 
-- Classify a given system as open-loop or closed-loop, and justify the classification from what the system does, not from how it is drawn.
+-   Classify a given system as open-loop or closed-loop, and justify the classification from what the system does, not from how it is drawn.
 
-- Show quantitatively, on the cruise-control example, why feedback reduces steady-state error and why it reduces sensitivity to an unknown plant parameter.
+-   Show quantitatively, on the cruise-control example, why feedback reduces steady-state error and why it reduces sensitivity to an unknown plant parameter.
 
-- Define a servomechanism and identify one in a schematic.
+-   Define a servomechanism and identify one in a schematic.
 
-- Describe the working principle of the standard control components: potentiometer and synchro error detectors, d.c. and a.c. servomotors, stepper motors, tachogenerators, hydraulic pumps, motors, valves and cylinders, and pneumatic bellows, flapper valves, relays and actuators.
+-   Describe the working principle of the standard control components: potentiometer and synchro error detectors, d.c. and a.c. servomotors, stepper motors, tachogenerators, hydraulic pumps, motors, valves and cylinders, and pneumatic bellows, flapper valves, relays and actuators.
 
-- Recognise the transfer function $K/[s(\tau s+1)]$ as the shape shared by almost every positional actuator you will meet, and say where the integrator comes from.
+-   Recognise the transfer function $K/[s(\tau s+1)]$ as the shape shared by almost every positional actuator you will meet, and say where the integrator comes from.
 
 ///
 
@@ -42,15 +42,15 @@ What do rockets, aircraft, cars, robots, power grids, electric drives, manufactu
 
 Some concrete instances of “behave in a desired way”:
 
-- hold a car at a set speed, or keep it inside a lane;
+-   hold a car at a set speed, or keep it inside a lane;
 
-- hold a room at a set temperature;
+-   hold a room at a set temperature;
 
-- make the position or velocity of a motor follow a prescribed pattern;
+-   make the position or velocity of a motor follow a prescribed pattern;
 
-- hold the frequency of a power grid at 50 Hz;
+-   hold the frequency of a power grid at 50 Hz;
 
-- make a rocket follow a desired trajectory.
+-   make a rocket follow a desired trajectory.
 
 Each of these has the same skeleton. There is a physical thing whose behaviour we care about. It has variables we can *measure* (outputs) and variables that *drive* it (inputs). Some of the inputs we can set; the rest happen to us.
 
@@ -65,18 +65,18 @@ A control problem exists whenever you can measure something, you can push on som
 
 The terms below are used in exactly this sense for the rest of FEE3411 and for FEE3412. Learn them this week; after this they are assumed.
 
-| **Term** | **Meaning** |
-|:---|:---|
-| Plant (or process) | The system whose output is to be controlled. Its inputs are the control signal and the disturbance; its output is the controlled variable. |
-| Controlled variable (output) | The variable we want to behave in a desired way, e.g. vehicle speed, antenna angle, tank level. |
-| Reference (command, set point, desired output) | The value we want the controlled variable to take. |
-| Control input | An input we *can* manipulate: throttle angle, armature voltage, valve opening. |
-| Disturbance input | An input that affects the plant but which we *cannot* manipulate: road gradient, wind load, a change in load torque. |
-| Actuator | The device that converts the controller’s (usually low-power) command into the physical quantity that acts on the plant: engine, motor, hydraulic ram. |
-| Sensor (output transducer) | The device that measures the controlled variable and converts it into the form the controller uses. |
-| Measurement (sensor) noise | The difference between what the sensor reports and what is actually there. No sensor is exact. |
-| Controller | The device that computes the control input from the reference and the measurement. |
-| Error | Reference minus controlled variable. Strictly, this name is only exact when the input and output transducers both have unit gain — see the pitfall in §[2](#sec:oc). |
+| **Term**                                       | **Meaning**                                                                                                                                                          |
+|:-----------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Plant (or process)                             | The system whose output is to be controlled. Its inputs are the control signal and the disturbance; its output is the controlled variable.                           |
+| Controlled variable (output)                   | The variable we want to behave in a desired way, e.g. vehicle speed, antenna angle, tank level.                                                                      |
+| Reference (command, set point, desired output) | The value we want the controlled variable to take.                                                                                                                   |
+| Control input                                  | An input we *can* manipulate: throttle angle, armature voltage, valve opening.                                                                                       |
+| Disturbance input                              | An input that affects the plant but which we *cannot* manipulate: road gradient, wind load, a change in load torque.                                                 |
+| Actuator                                       | The device that converts the controller’s (usually low-power) command into the physical quantity that acts on the plant: engine, motor, hydraulic ram.               |
+| Sensor (output transducer)                     | The device that measures the controlled variable and converts it into the form the controller uses.                                                                  |
+| Measurement (sensor) noise                     | The difference between what the sensor reports and what is actually there. No sensor is exact.                                                                       |
+| Controller                                     | The device that computes the control input from the reference and the measurement.                                                                                   |
+| Error                                          | Reference minus controlled variable. Strictly, this name is only exact when the input and output transducers both have unit gain — see the pitfall in §[2](#sec:oc). |
 
 /// admonition | Common pitfall
     type: warning
@@ -99,7 +99,7 @@ A model of the plant is used to work out, in advance, what control input ought t
 
 The output is measured, fed back, and compared with the reference. The control input is then computed from the difference, in a direction that drives the output towards the reference.
 
-<figure id="fig:openclosed" data-latex-placement="htbp">
+<figure id="fig:openclosed">
 <img src="../svg/week-01-notes/fig01.svg" />
 <img src="../svg/week-01-notes/fig02.svg" />
 <figcaption><strong>Figure 1.</strong> The two configurations. In (a) a disturbance <span class="math inline">\(d\)</span> passes straight through to the output and is never corrected. In (b) its effect appears in the measurement, hence in the error <span class="math inline">\(e\)</span>, and the controller acts on it. The price is the sensor, its cost, and its noise <span class="math inline">\(n\)</span>. Cf. Nise Fig. 1.6, p. 8.</figcaption>
@@ -118,10 +118,10 @@ Nise’s example is a toaster: its output is the colour of the toast, but it mea
 
 This example carries most of the intellectual content of the week. It is worth following every line.
 
-<figure id="fig:car" data-latex-placement="htbp">
-<img src="../svg/week-01-notes/fig03.svg" />
-<figcaption><strong>Figure 2.</strong> Forces on a vehicle on a road of slope <span class="math inline">\(\theta\)</span>. Cf. Khalil Fig. 1-1, p. 3.</figcaption>
-</figure>
+![](svg/week-01-notes/fig03.svg){#fig:car}
+/// caption
+**Figure 2.** Forces on a vehicle on a road of slope $\theta$. Cf. Khalil Fig. 1-1, p. 3.
+///
 
 /// admonition | Worked example 2.1 — open- versus closed-loop cruise control
     type: example
@@ -150,21 +150,17 @@ $$m\dot\upsilon = \hat b \upsilon_{des}-b\upsilon-W
 
 <a id="eq:ol"></a>
 
-$$\begin{equation}
-  \upsilon_{des}-\upsilon_{ss}
+$$\upsilon_{des}-\upsilon_{ss}
   =\left(\frac{b-\hat b}{b}\right)\upsilon_{des}+\frac{1}{b}W .
-  \tag{1}
-\end{equation}$$
+  \tag{1}$$
 
 **Closed-loop design.** Measure $\upsilon$ with a speedometer and set 
 
 <a id="eq:cl-law"></a>
 
-$$\begin{equation}
-  u=\underbrace{\frac{\hat b\,\upsilon_{des}}{a}}_{\text{feedforward}}
+$$u=\underbrace{\frac{\hat b\,\upsilon_{des}}{a}}_{\text{feedforward}}
    +\underbrace{K(\upsilon_{des}-\upsilon)}_{\text{feedback}} .
-  \tag{2}
-\end{equation}$$
+  \tag{2}$$
 
  Substituting into the true model, 
 
@@ -175,20 +171,18 @@ $$m\dot\upsilon=\hat b\upsilon_{des}+aK(\upsilon_{des}-\upsilon)-b\upsilon-W
 
 <a id="eq:cl"></a>
 
-$$\begin{equation}
-  \upsilon_{des}-\upsilon_{ss}
+$$\upsilon_{des}-\upsilon_{ss}
   =\left(\frac{b-\hat b}{b+aK}\right)\upsilon_{des}+\frac{1}{b+aK}W .
-  \tag{3}
-\end{equation}$$
+  \tag{3}$$
 
 **What it means.** Compare [(1)](#eq:ol) and [(3)](#eq:cl). They are the same expression with $b$ replaced by $b+aK$ in *both* denominators. Making the feedback gain $K$ large therefore shrinks *both* error terms at once: the term caused by not knowing $b$, and the term caused by the disturbance $W$. One knob buys robustness to parameter error and rejection of disturbance together. That is what feedback is for.
 
 ///
 
-<figure id="fig:cruise" data-latex-placement="htbp">
-<img src="../svg/week-01-notes/fig04.svg" />
-<figcaption><strong>Figure 3.</strong> The cruise-control loop of Worked example 2.1, showing the four basic components: plant, actuator, sensor, controller. Cf. Khalil Fig. 1-2, p. 5.</figcaption>
-</figure>
+![](svg/week-01-notes/fig04.svg){#fig:cruise}
+/// caption
+**Figure 3.** The cruise-control loop of Worked example 2.1, showing the four basic components: plant, actuator, sensor, controller. Cf. Khalil Fig. 1-2, p. 5.
+///
 
 #### 2.2. Why not simply make *K* enormous?
 
@@ -217,14 +211,14 @@ In Figure [1](#fig:openclosed)(b) the signal leaving the first summing junction
 
 Khalil (p. 6) lists six requirements. They are worth copying out, because they are essentially the syllabus of this unit and FEE3412.
 
-| **Requirement** | **Where it is dealt with** |
-|:---|:---|
-| The system must be **stable**: a well-behaved input must give a well-behaved output. | Weeks 7 (Routh–Hurwitz), 8 (root locus), 11–12 (Nyquist). |
-| The output must **track** the reference with zero or small **steady-state error**. | Week 6 (static error constants, system type). |
-| The **transient response** must be acceptable. | Weeks 5 (specifications), 8–9 (shaping it by gain). |
-| The effect of **disturbance** and **measurement noise** should be small. | Background reading only in FEE3411 (Khalil §4-4 to §4-8; Nise §7.5, §7.7). Examinable in FEE3412. |
-| The design must be **robust** to model uncertainty. | Introduced through gain and phase margins, Weeks 10 and 12. Treated properly in FEE3412. |
-| The design must respect **constraints** on the control input. | Background only here; FEE3412. |
+| **Requirement**                                                                      | **Where it is dealt with**                                                                        |
+|:-------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|
+| The system must be **stable**: a well-behaved input must give a well-behaved output. | Weeks 7 (Routh–Hurwitz), 8 (root locus), 11–12 (Nyquist).                                         |
+| The output must **track** the reference with zero or small **steady-state error**.   | Week 6 (static error constants, system type).                                                     |
+| The **transient response** must be acceptable.                                       | Weeks 5 (specifications), 8–9 (shaping it by gain).                                               |
+| The effect of **disturbance** and **measurement noise** should be small.             | Background reading only in FEE3411 (Khalil §4-4 to §4-8; Nise §7.5, §7.7). Examinable in FEE3412. |
+| The design must be **robust** to model uncertainty.                                  | Introduced through gain and phase margins, Weeks 10 and 12. Treated properly in FEE3412.          |
+| The design must respect **constraints** on the control input.                        | Background only here; FEE3412.                                                                    |
 
 /// admonition | Key idea
     type: info
@@ -237,11 +231,11 @@ Stability, steady-state accuracy and transient response are the three things FEE
 
 Every method in this unit needs a mathematical model of the plant. Models come from (Khalil, p. 6):
 
-- **first principles** — Kirchhoff’s laws, Newton’s laws, energy balances. This is Week 2.
+-   **first principles** — Kirchhoff’s laws, Newton’s laws, energy balances. This is Week 2.
 
-- **identification experiments** — apply known inputs, measure the outputs, fit a model to the data. Outside this syllabus, but note that fitting a second-order model to a measured step response, which you do in the Week 5 tutorial, is identification in miniature.
+-   **identification experiments** — apply known inputs, measure the outputs, fit a model to the data. Outside this syllabus, but note that fitting a second-order model to a measured step response, which you do in the Week 5 tutorial, is identification in miniature.
 
-- **both** — derive the structure from physics, then measure the parameters.
+-   **both** — derive the structure from physics, then measure the parameters.
 
 A model that captures everything is too complicated to design with. A model that captures too little gives a design that fails on the real plant. Choosing what to leave out is the hardest judgement in the subject and it requires understanding the physics, not just the algebra.
 
@@ -249,10 +243,10 @@ A model that captures everything is too complicated to design with. A model that
 
 Nise (§1.5, p. 15, Fig. 1.11) sets out six steps. They are reproduced in Figure [4](#fig:design) with the week of this unit that covers each. Use it as a map: when a topic feels disconnected, find it here.
 
-<figure id="fig:design" data-latex-placement="htbp">
-<img src="../svg/week-01-notes/fig05.svg" />
-<figcaption><strong>Figure 4.</strong> The design process; cf. Nise Fig. 1.11, p. 15, annotated with the week of FEE3411 in which each step is taught. Steps 1 and 2 are this week.</figcaption>
-</figure>
+![](svg/week-01-notes/fig05.svg){#fig:design}
+/// caption
+**Figure 4.** The design process; cf. Nise Fig. 1.11, p. 15, annotated with the week of FEE3411 in which each step is taught. Steps 1 and 2 are this week.
+///
 
 ### 4. The servomechanism { #sec:servo }
 
@@ -269,25 +263,23 @@ Figure [5](#fig:servo) shows the standard laboratory form. A pair of potentiome
 
 <a id="eq:pot"></a>
 
-$$\begin{equation}
-  v_e = K_p\,(r-c),
-  \tag{4}
-\end{equation}$$
+$$v_e = K_p\,(r-c),
+  \tag{4}$$
 
  where $r$ and $c$ are the reference and output shaft angles in radians and $K_p$ is the potentiometer sensitivity in V rad^−1^. The subtraction is done by the wiring, not by a circuit: this is the physical realisation of the summing junction drawn as $\otimes$ in Figure [1](#fig:openclosed). The error voltage is amplified by $K_a$ and drives the armature of a d.c. motor, which turns the load through a gear train of ratio $n$ in the direction that reduces the error.
 
-<figure id="fig:servo" data-latex-placement="htbp">
-<img src="../svg/week-01-notes/fig06.svg" />
-<figcaption><strong>Figure 5.</strong> Position servomechanism with a potentiometer-pair error detector. The two wipers are the summing junction: the voltage between them is <span class="math inline">\(K_p(r-c)\)</span>. Cf. Nagrath &amp; Gopal (2nd ed.) §5.4, p. 137, whose Fig. 5.6 (p. 138) is this schematic with its block diagram; we derive that block diagram in Week 4 and its response in Week 5.</figcaption>
-</figure>
+![](svg/week-01-notes/fig06.svg){#fig:servo}
+/// caption
+**Figure 5.** Position servomechanism with a potentiometer-pair error detector. The two wipers are the summing junction: the voltage between them is $K_p(r-c)$. Cf. Nagrath & Gopal (2nd ed.) §5.4, p. 137, whose Fig. 5.6 (p. 138) is this schematic with its block diagram; we derive that block diagram in Week 4 and its response in Week 5.
+///
 
 ###### Regulator or tracking system?
 
 Two duties are worth distinguishing, because they lead to different specifications:
 
-- a **regulator** holds the output at a constant reference in the face of disturbances — speed governor, voltage regulator, temperature control;
+-   a **regulator** holds the output at a constant reference in the face of disturbances — speed governor, voltage regulator, temperature control;
 
-- a **tracking (follow-up) system** makes the output follow a reference that is itself changing — a radar dish following an aircraft, a machine-tool axis following a profile.
+-   a **tracking (follow-up) system** makes the output follow a reference that is itself changing — a radar dish following an aircraft, a machine-tool axis following a profile.
 
 The same hardware often does both. The distinction matters in Week 6, where the steady-state error depends on whether the reference is a step, a ramp or a parabola.
 
@@ -299,25 +291,25 @@ This half of the notes is a *survey*. The syllabus outcome is ELO 1, “describ
 
 ## Summary { #summary }
 
-- A control system makes a variable behave in a desired way without continuous human intervention. Its parts are plant, actuator, sensor, controller; its signals are reference, control input, disturbance, controlled output and measurement noise.
+-   A control system makes a variable behave in a desired way without continuous human intervention. Its parts are plant, actuator, sensor, controller; its signals are reference, control input, disturbance, controlled output and measurement noise.
 
-- Open-loop control applies a precomputed input and measures nothing; closed-loop control measures the output and corrects. Only closed-loop control can reject a disturbance.
+-   Open-loop control applies a precomputed input and measures nothing; closed-loop control measures the output and corrects. Only closed-loop control can reject a disturbance.
 
-- In the cruise-control example, feedback with gain $K$ replaces $b$ by $b+aK$ in the steady-state error, reducing both the parameter-error term and the disturbance term. See [(1)](#eq:ol) and [(3)](#eq:cl).
+-   In the cruise-control example, feedback with gain $K$ replaces $b$ by $b+aK$ in the steady-state error, reducing both the parameter-error term and the disturbance term. See [(1)](#eq:ol) and [(3)](#eq:cl).
 
-- Gain cannot be raised without limit: actuators saturate, transient response degrades, and the loop may become unstable.
+-   Gain cannot be raised without limit: actuators saturate, transient response degrades, and the loop may become unstable.
 
-- A servomechanism is a feedback system whose controlled variable is mechanical position or a derivative of it.
+-   A servomechanism is a feedback system whose controlled variable is mechanical position or a derivative of it.
 
-- Error detectors: potentiometer pair (d.c., gain $K_p$, sliding contact) and synchro pair (a.c., gain $K_s$, no sliding contact, suppressed-carrier output).
+-   Error detectors: potentiometer pair (d.c., gain $K_p$, sliding contact) and synchro pair (a.c., gain $K_s$, no sliding contact, suppressed-carrier output).
 
-- Actuators: d.c. servomotor (armature or field control), two-phase a.c. servomotor (high rotor resistance for a negatively sloped, near-linear torque–speed curve), stepper motor (digital, step angle $360^\circ/nT$, usable open loop but can skip steps), hydraulic pump–motor and valve-plus-cylinder, pneumatic diaphragm actuator.
+-   Actuators: d.c. servomotor (armature or field control), two-phase a.c. servomotor (high rotor resistance for a negatively sloped, near-linear torque–speed curve), stepper motor (digital, step angle $360^\circ/nT$, usable open loop but can skip steps), hydraulic pump–motor and valve-plus-cylinder, pneumatic diaphragm actuator.
 
-- Sensors: tachogenerator, $v_t=K_t\dot\theta$, used both as the sensor of a speed loop and as rate feedback to add damping to a position loop.
+-   Sensors: tachogenerator, $v_t=K_t\dot\theta$, used both as the sensor of a speed loop and as rate feedback to add damping to a position loop.
 
-- Hydraulics give high power density and stiffness; pneumatics are safe and cheap but slow because air is compressible.
+-   Hydraulics give high power density and stiffness; pneumatics are safe and cheap but slow because air is compressible.
 
-- Positional actuators almost universally have the form $K/[s(\tau s+1)]$; error detectors and sensors are usually pure gains.
+-   Positional actuators almost universally have the form $K/[s(\tau s+1)]$; error detectors and sensors are usually pure gains.
 
 ## Before the tutorial { #before-the-tutorial }
 

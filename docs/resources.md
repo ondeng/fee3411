@@ -7,27 +7,23 @@ title: Software and reading
 ## Software
 
 You need a tool that will plot step responses, root loci, Bode and Nyquist
-plots, and — for Assignment 4 — run a block-diagram simulation. **You do not
-need to buy anything.**
+plots, and run block-diagram simulations.
 
-/// info | In order of preference
+/// admonition | Some alternatives
+type: info
 1. **MATLAB Online (Basic)** — free tier, runs in a browser, includes the
-   Control System Toolbox and **Simulink Online**. This covers everything in
-   the unit including the Week 9 / Assignment 4 simulation work.
-2. **Python with `python-control`** — free, installs anywhere, and the
-   [MATLAB-to-Python reference](pdf/FEE3411_MATLAB_to_Python_Reference.ipynb)
+   Control System Toolbox and **Simulink Online**.
+2. **Octave** - open source and with commands and syntax like MATLAB.
+3. **Python with `python-control`** — free, installs anywhere.
    in this course maps the commands across.
-3. **Scilab with Xcos** — free, and Xcos substitutes for Simulink.
+4. **Scilab with Xcos** — free, and Xcos substitutes for Simulink.
 ///
 
-Sketch by hand *first*, then check against the computer. The sketching is what
-is examined, and it is what tells you whether the computer's answer is
-plausible.
 
-## Set texts
 
-You are not expected to buy these. The notes are self-contained; these give you
-a second explanation and a much larger problem bank.
+## Reference texts
+
+These give you a second explanation and a much larger problem bank.
 
 - **Khalil, H. K. — *Control Systems: An Introduction*.** Primary. Chapters 1–6
   map onto Weeks 1–12.

@@ -19,6 +19,11 @@
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 PROJ="$(cd "$HERE/../Edited" && pwd)"
+FEE_ROOT="$(cd "$HERE/.." && pwd)"   # one level up from Publication/ itself --
+                                      # NOT the same as PROJ. Administrative
+                                      # documents that live at the course root
+                                      # rather than inside Edited/ (currently
+                                      # just the syllabus) are found here.
 SRC="$HERE/src"
 
 if [ ! -d "$PROJ/Notes" ]; then
@@ -55,6 +60,15 @@ copy "$PROJ/Assignments" '*.tex'  "$SRC/Assignments"
 if [ -f "$PROJ/FEE3411_MATLAB_to_Python_Reference.ipynb" ]; then
   cp -p "$PROJ/FEE3411_MATLAB_to_Python_Reference.ipynb" "$SRC/"
   echo "  MATLAB-to-Python notebook          1 file(s)"
+fi
+
+# --- syllabus (linked from the nav) ----------------------------------------
+# Lives at the course root, not inside Edited/ -- see FEE_ROOT above. Renamed
+# on the way in: the site's other PDFs are all lowercase-hyphenated, and a
+# literal space in a nav-linked filename is asking for a broken link.
+if [ -f "$FEE_ROOT/FEE3411 Syllabus.pdf" ]; then
+  cp -p "$FEE_ROOT/FEE3411 Syllabus.pdf" "$SRC/fee3411-syllabus.pdf"
+  echo "  Syllabus                           1 file(s)"
 fi
 
 # --- never, ever ----------------------------------------------------------

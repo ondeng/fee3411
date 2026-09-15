@@ -8,7 +8,7 @@ title: "Assignment 1 — Components, Devices and Modelling"
 /// admonition | Reading
     type: quote
 
-**Issued** Week 1. **Due** after 2 weeks. **Weight** 1.5% of the unit. **Total** 40 marks.
+**Issued** Week 1. **Due** after 2 weeks. **Weight** 2.5% of the unit. **Total** 40 marks.
 
 **Covers** Week 1 (control system components and devices) and Week 2 (mathematical modelling of physical systems). Questions 3 and 4 use material from the Week 2 lecture and tutorial, so attempt them after that week.
 

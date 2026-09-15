@@ -86,6 +86,7 @@ copyright: >-
 # sync with the WEEKS/TUTORIALS/ASSIGNMENTS arrays in web/build_site.sh.
 nav:
   - Home: index.md
+  - Syllabus: pdf/fee3411-syllabus.pdf
   - Lecture notes:
       - "Week 1 — Introduction and components": notes/week-01.md
       # - "Week 2 — Mathematical modelling": notes/week-02.md

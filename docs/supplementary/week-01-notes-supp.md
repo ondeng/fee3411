@@ -13,13 +13,13 @@ title: "Control System Components"
 /// admonition | By the end of this week you should be able to
     type: abstract
 
-- Derive the governing equation of these representative components — error detectors, actuators, sensors, and hydraulic and pneumatic power elements — from a physical law, rather than quoting it.
+-   Derive the governing equation of these representative components — error detectors, actuators, sensors, and hydraulic and pneumatic power elements — from a physical law, rather than quoting it.
 
-- Recognise the transfer function $K/[s(\tau s+1)]$ wherever it appears (d.c. and a.c. servomotors, hydraulic pump–motor and cylinder), and say in each case *why* the free integrator is there.
+-   Recognise the transfer function $K/[s(\tau s+1)]$ wherever it appears (d.c. and a.c. servomotors, hydraulic pump–motor and cylinder), and say in each case *why* the free integrator is there.
 
-- Explain three recurring reasons a manufacturer builds a component the way it does: high rotor resistance in an a.c. servomotor, a spring in a pneumatic actuator but not a hydraulic one, and rate feedback added purely to change damping.
+-   Explain three recurring reasons a manufacturer builds a component the way it does: high rotor resistance in an a.c. servomotor, a spring in a pneumatic actuator but not a hydraulic one, and rate feedback added purely to change damping.
 
-- Quantify, rather than merely state, the approximations behind a model — a linearisation error, a neglected leakage term — and know when each stops being safe to make.
+-   Quantify, rather than merely state, the approximations behind a model — a linearisation error, a neglected leakage term — and know when each stops being safe to make.
 
 ///
 
@@ -33,10 +33,8 @@ Two identical potentiometers are fed from the same d.c. supply. One is turned b
 
 <a id="eq:pot"></a>
 
-$$\begin{equation}
-  v_{e}=K_{p}\,(r-c),\qquad [K_{p}]=\mathrm{V}\,\mathrm{rad}^{-1}.
-  \tag{1}
-\end{equation}$$
+$$v_{e}=K_{p}\,(r-c),\qquad [K_{p}]=\mathrm{V}\,\mathrm{rad}^{-1}.
+  \tag{1}$$
 
 The subtraction is done by the wiring, not by a circuit: connect the two wipers to the two inputs of the amplifier and the difference appears of its own accord. Equation [(1)](#eq:pot) is a **pure gain** — no derivative, no time constant, no dynamics of any kind — which is why the potentiometer pair is the easiest error detector to model.
 
@@ -68,10 +66,8 @@ Let $\psi$ measure position around the stator bore, and let the rotor coil axis 
 
 <a id="eq:airgap"></a>
 
-$$\begin{equation}
-  B(\psi,t)=B_{m}(t)\,\cos(\psi-\theta),
-  \tag{2}
-\end{equation}$$
+$$B(\psi,t)=B_{m}(t)\,\cos(\psi-\theta),
+  \tag{2}$$
 
 which is maximum where the bore faces the rotor coil axis ($\psi=\theta$), zero a quarter-turn away, and reversed on the far side. The time variation $B_{m}(t)$ follows the rotor current: the flux *pulsates* in time along a *fixed* direction. It does not rotate. That distinction matters, and we come back to it.
 
@@ -79,17 +75,15 @@ Now put a stator coil in the bore with its own axis at angle $\psi_{s}$. A full-
 
 <a id="eq:fluxlink"></a>
 
-$$\begin{equation}
-  \Phi_{s}\;\propto\;\int_{\psi_{s}-\pi/2}^{\psi_{s}+\pi/2}
+$$\Phi_{s}\;\propto\;\int_{\psi_{s}-\pi/2}^{\psi_{s}+\pi/2}
      B_{m}(t)\cos(\psi-\theta)\,\mathrm{d}\psi
    = B_{m}(t)\Big[\sin(\psi-\theta)\Big]_{\psi_{s}-\pi/2}^{\psi_{s}+\pi/2}
    = 2B_{m}(t)\,\cos(\psi_{s}-\theta).
-  \tag{3}
-\end{equation}$$
+  \tag{3}$$
 
 There is the cosine. It is not an assumption and not an approximation: it is what you get when you integrate a sinusoidally distributed field over a half-turn window. Move the window and the enclosed net flux traces out a cosine.
 
-<figure id="fig:cosine" data-latex-placement="H">
+<figure id="fig:cosine">
 <p><img src="../svg/week-01-notes-supp/fig01.svg" alt="image" /> <img src="../svg/week-01-notes-supp/fig02.svg" alt="image" /></p>
 <figcaption><strong>Figure 1.</strong> Where the cosine in <a href="#eq:fluxlink">(3)</a> comes from. The rotor drives a flux density that varies sinusoidally around the bore, <a href="#eq:airgap">(2)</a>. The stator coil links whatever lies between its two sides — the shaded window in (b). Flux entering the coil (blue) counts positively and flux leaving it (orange) counts negatively, so the net linkage is the <em>signed</em> area, <span class="math inline">\(2B_{m}\cos(\psi_{s}-\theta)\)</span>. Slide the window around the bore and that signed area traces out a cosine.</figcaption>
 </figure>
@@ -105,17 +99,15 @@ $$v(t)\;\approx\;N_{r}\frac{\mathrm{d}\Phi}{\mathrm{d}t},
 
 <a id="eq:onecoil"></a>
 
-$$\begin{equation}
-  \boxed{\;e_{s}(t)=\frac{N_{s}}{N_{r}}\cos(\psi_{s}-\theta)\;v(t)
+$$\boxed{\;e_{s}(t)=\frac{N_{s}}{N_{r}}\cos(\psi_{s}-\theta)\;v(t)
         =K V_{r}\cos(\psi_{s}-\theta)\sin\omega_{c}t\;}
-  \tag{4}
-\end{equation}$$
+  \tag{4}$$
 
 for a rotor excitation $v(t)=V_{r}\sin\omega_{c}t$, with $K=N_{s}/N_{r}$ the effective turns ratio. Two things are worth noticing before moving on:
 
-- The *time* behaviour, $\sin\omega_{c}t$, is fixed by the supply and is the same in every coil. The coils are in time phase with one another.
+-   The *time* behaviour, $\sin\omega_{c}t$, is fixed by the supply and is the same in every coil. The coils are in time phase with one another.
 
-- The *amplitude*, $KV_{r}\cos(\psi_{s}-\theta)$, is the only place the shaft angle appears. All the information is in the amplitudes.
+-   The *amplitude*, $KV_{r}\cos(\psi_{s}-\theta)$, is the only place the shaft angle appears. All the information is in the amplitudes.
 
 /// admonition | Key idea
     type: info
@@ -130,39 +122,39 @@ The stator carries three identical Y-connected coils with their axes $120^\circ$
 
 <a id="eq:v1"></a>
 
-$$\begin{align}
+$$\begin{aligned}
   v_{s_{1}n}&=KV_{r}\sin\omega_{c}t\,\cos(\theta+120^\circ), \tag{5}\<br>
   v_{s_{2}n}&=KV_{r}\sin\omega_{c}t\,\cos\theta,             \tag{6}\<br>
   v_{s_{3}n}&=KV_{r}\sin\omega_{c}t\,\cos(\theta+240^\circ). \tag{7}
-\end{align}$$
+\end{aligned}$$
 
 (The last one may look odd: $\psi_{3}=+120^\circ$ gives $\cos(\theta-120^\circ)$, and $\cos(\theta-120^\circ)=\cos(\theta+240^\circ)$ because cosine repeats every $360^\circ$. Nagrath writes it the second way; it is the same voltage.)
 
-<figure id="fig:transmitter" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig03.svg" />
-<figcaption><strong>Figure 2.</strong> The synchro transmitter. (a) Mechanically, three coil axes <span class="math inline">\(120^\circ\)</span> apart and a rotor at angle <span class="math inline">\(\theta\)</span>, measured from the <span class="math inline">\(S_{2}\)</span> axis. (b) Electrically, three Y-connected secondaries and one rotating primary <span class="math inline">\(R_{1}\)</span>–<span class="math inline">\(R_{2}\)</span> fed through slip rings. Cf. Nagrath &amp; Gopal Figs. 4.10–4.11, pp. 92–93. Note that only three wires leave the stator: the neutral <span class="math inline">\(n\)</span> is internal and is not brought out.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig03.svg){#fig:transmitter}
+/// caption
+**Figure 2.** The synchro transmitter. (a) Mechanically, three coil axes $120^\circ$ apart and a rotor at angle $\theta$, measured from the $S_{2}$ axis. (b) Electrically, three Y-connected secondaries and one rotating primary $R_{1}$–$R_{2}$ fed through slip rings. Cf. Nagrath & Gopal Figs. 4.10–4.11, pp. 92–93. Note that only three wires leave the stator: the neutral $n$ is internal and is not brought out.
+///
 
 ###### What is actually measurable.
 
 The neutral $n$ is buried inside the machine. Only three wires leave it, so the voltages you can measure are the three *line-to-line* voltages, and these are differences of [(5)](#eq:v1)–[(7)](#eq:v3). Take the first, and use the identity $\cos A-\cos B=-2\sin\frac{A+B}{2}\sin\frac{A-B}{2}$: 
 
-$$\begin{align*}
+$$\begin{aligned}
   v_{s_{1}s_{2}}&=v_{s_{1}n}-v_{s_{2}n}
    =KV_{r}\sin\omega_{c}t\big[\cos(\theta+120^\circ)-\cos\theta\big]\<br>
   &=KV_{r}\sin\omega_{c}t\big[-2\sin(\theta+60^\circ)\sin 60^\circ\big]
    =-\sqrt{3}\,KV_{r}\sin(\theta+60^\circ)\sin\omega_{c}t,
-\end{align*}$$
+\end{aligned}$$
 
  and since $-\sin x=\sin(x+180^\circ)$, this is the form Nagrath quotes. Doing the same for the other two pairs:
 
 <a id="eq:v2"></a>
 
-$$\begin{align}
+$$\begin{aligned}
   v_{s_{1}s_{2}}&=\sqrt{3}\,KV_{r}\sin(\theta+240^\circ)\sin\omega_{c}t, \tag{8}\<br>
   v_{s_{2}s_{3}}&=\sqrt{3}\,KV_{r}\sin(\theta+120^\circ)\sin\omega_{c}t, \tag{9}\<br>
   v_{s_{3}s_{1}}&=\sqrt{3}\,KV_{r}\sin\theta\,\sin\omega_{c}t.           \tag{10}
-\end{align}$$
+\end{aligned}$$
 
 Two checks are worth making on [(5)](#eq:v1)–[(7)](#eq:v3) before going on.
 
@@ -175,10 +167,10 @@ $$\cos(\theta+120^\circ)+\cos\theta+\cos(\theta+240^\circ)=0
 
 **Check 2: the electrical zero.** Put $\theta=0$. Then $S_{2}$ carries its maximum voltage (its axis faces the rotor squarely) and, from [(10)](#eq:l3), the line voltage $v_{s_{3}s_{1}}$ is exactly zero. This position is the **electrical zero** of the transmitter, and it is the reference against which shaft angle is quoted. It is easy to find in practice: turn the shaft until $v_{s_{3}s_{1}}$ nulls.
 
-<figure id="fig:linev" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig04.svg" />
-<figcaption><strong>Figure 3.</strong> The three line voltages of <a href="#eq:l1">(8)</a>–<a href="#eq:l3">(10)</a> as the transmitter shaft turns. No two shaft angles in a full revolution give the same set of three amplitudes-with-signs, so the three wires carry an unambiguous code for <span class="math inline">\(\theta\)</span>. This is why a synchro can also be used on its own as a position <em>transmitter</em>, not only inside an error detector.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig04.svg){#fig:linev}
+/// caption
+**Figure 3.** The three line voltages of [(8)](#eq:l1)–[(10)](#eq:l3) as the transmitter shaft turns. No two shaft angles in a full revolution give the same set of three amplitudes-with-signs, so the three wires carry an unambiguous code for $\theta$. This is why a synchro can also be used on its own as a position *transmitter*, not only inside an error detector.
+///
 
 ##### Step 3 — rebuilding the flux in the second machine { #sss:rebuild }
 
@@ -197,12 +189,10 @@ $$\sum_{k}\cos(\theta-\psi_{k})\cos\psi_{k}
 
 <a id="eq:v3"></a>
 
-$$\begin{equation}
-  \mathbf{F}_{\text{total}}
+$$\mathbf{F}_{\text{total}}
   =\sum_{k}\cos(\theta-\psi_{k})\,\hat{u}(\psi_{k})
   =\frac{3}{2}\,\hat{u}(\theta).
-  \tag{11}
-\end{equation}$$
+  \tag{11}$$
 
 /// admonition | Key idea
     type: info
@@ -211,10 +201,10 @@ Equation [(11)](#eq:mmf) is the synchro. Three stationary coils, carrying curre
 
 ///
 
-<figure id="fig:mmf" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig05.svg" />
-<figcaption><strong>Figure 4.</strong> Equation <a href="#eq:mmf">(11)</a> drawn, for <span class="math inline">\(\theta=50^\circ\)</span>. In (a), <span class="math inline">\(F_{1}=\cos170^\circ\)</span> is negative, so it points <em>opposite</em> to the <span class="math inline">\(S_{1}\)</span> axis. Adding the three head to tail in (b) gives a resultant of length <span class="math inline">\(\tfrac{3}{2}\)</span> lying exactly along <span class="math inline">\(\theta\)</span>. Repeat the construction for any other <span class="math inline">\(\theta\)</span> and the same two facts hold — that constancy of length and fidelity of direction is what makes the device useful.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig05.svg){#fig:mmf}
+/// caption
+**Figure 4.** Equation [(11)](#eq:mmf) drawn, for $\theta=50^\circ$. In (a), $F_{1}=\cos170^\circ$ is negative, so it points *opposite* to the $S_{1}$ axis. Adding the three head to tail in (b) gives a resultant of length $\tfrac{3}{2}$ lying exactly along $\theta$. Repeat the construction for any other $\theta$ and the same two facts hold — that constancy of length and fidelity of direction is what makes the device useful.
+///
 
 /// admonition | Common pitfall
     type: warning
@@ -227,9 +217,9 @@ The resultant in [(11)](#eq:mmf) is a *stationary* field whose magnitude pulsate
 
 The control transformer differs from the transmitter in two respects, both deliberate.
 
-- **Its rotor is cylindrical**, giving a uniform air gap. The rotor of the transmitter is dumb-bell shaped, which is fine because nothing is connected to it but the supply. The control transformer rotor, however, feeds an amplifier, and if the air gap changed as the shaft turned then so would the rotor’s output impedance — and with it the gain of the amplifier stage. A uniform gap keeps the source impedance seen by the amplifier constant at every shaft angle.
+-   **Its rotor is cylindrical**, giving a uniform air gap. The rotor of the transmitter is dumb-bell shaped, which is fine because nothing is connected to it but the supply. The control transformer rotor, however, feeds an amplifier, and if the air gap changed as the shaft turned then so would the rotor’s output impedance — and with it the gain of the amplifier stage. A uniform gap keeps the source impedance seen by the amplifier constant at every shaft angle.
 
-- **Its stator has a higher impedance per phase**, so it draws less current from the transmitter. That allows several control transformers to be driven from one transmitter — one shaft angle distributed to several loops.
+-   **Its stator has a higher impedance per phase**, so it draws less current from the transmitter. That allows several control transformers to be driven from one transmitter — one shaft angle distributed to several loops.
 
 ##### Step 4 — the output voltage, and the $90^\circ$ offset { #sss:output }
 
@@ -237,41 +227,35 @@ Inside the control transformer there is now a pulsating flux lying along the dir
 
 <a id="eq:l1"></a>
 
-$$\begin{equation}
-  e(t)=K'V_{r}\cos\phi\,\sin\omega_{c}t.
-  \tag{12}
-\end{equation}$$
+$$e(t)=K'V_{r}\cos\phi\,\sin\omega_{c}t.
+  \tag{12}$$
 
 All that remains is to express $\phi$ in terms of the two shaft angles we care about. Let $\theta$ be the transmitter shaft angle from *its* electrical zero, and $\alpha$ the control transformer shaft angle from *its* zero, both measured in the same sense. The flux inside the control transformer lies at $\theta$ from its $S_{2}$ axis. The control transformer’s rotor is mounted so that at $\alpha=0$ it sits at $90^\circ$ to that axis, and turning its shaft by $\alpha$ carries it to $90^\circ+\alpha$. The angle between rotor and flux is therefore
 
 <a id="eq:l2"></a>
 
-$$\begin{equation}
-  \phi=(90^\circ+\alpha)-\theta=90^\circ-(\theta-\alpha),
-  \tag{13}
-\end{equation}$$
+$$\phi=(90^\circ+\alpha)-\theta=90^\circ-(\theta-\alpha),
+  \tag{13}$$
 
 and substituting [(13)](#eq:phi) into [(12)](#eq:ct), with $\cos(90^\circ-x)=\sin x$:
 
 <a id="eq:l3"></a>
 
-$$\begin{equation}
-  \boxed{\;e(t)=K'V_{r}\,\sin(\theta-\alpha)\,\sin\omega_{c}t\;}
-  \tag{14}
-\end{equation}$$
+$$\boxed{\;e(t)=K'V_{r}\,\sin(\theta-\alpha)\,\sin\omega_{c}t\;}
+  \tag{14}$$
 
-<figure id="fig:pair" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig06.svg" />
-<figcaption><strong>Figure 5.</strong> The geometry behind <a href="#eq:phi">(13)</a>, drawn for <span class="math inline">\(\theta=25^\circ\)</span> and <span class="math inline">\(\alpha=15^\circ\)</span>, so <span class="math inline">\(\phi=80^\circ\)</span>. The transmitter’s rotor angle is reproduced as the direction of the flux inside the control transformer; the control transformer’s own rotor is mounted a further <span class="math inline">\(90^\circ\)</span> round. Cf. Nagrath &amp; Gopal Fig. 4.12, p. 94.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig06.svg){#fig:pair}
+/// caption
+**Figure 5.** The geometry behind [(13)](#eq:phi), drawn for $\theta=25^\circ$ and $\alpha=15^\circ$, so $\phi=80^\circ$. The transmitter’s rotor angle is reproduced as the direction of the flux inside the control transformer; the control transformer’s own rotor is mounted a further $90^\circ$ round. Cf. Nagrath & Gopal Fig. 4.12, p. 94.
+///
 
 ###### Why mount the rotor at $90^\circ$?
 
 It looks like an odd choice until you ask what an error detector must do. Two properties are wanted, and $\phi=90^\circ$ delivers both at once.
 
-- **It must read zero when the error is zero.** A summing junction that outputs something when $r=c$ is not a summing junction. From [(12)](#eq:ct), $\cos\phi=0$ exactly at $\phi=90^\circ$, so the offset puts the null where the shafts agree.
+-   **It must read zero when the error is zero.** A summing junction that outputs something when $r=c$ is not a summing junction. From [(12)](#eq:ct), $\cos\phi=0$ exactly at $\phi=90^\circ$, so the offset puts the null where the shafts agree.
 
-- **It must be most sensitive there.** Differentiating [(12)](#eq:ct), the change in output per unit change in angle is $|\mathrm{d}e/\mathrm{d}\phi|\propto|\sin\phi|$, which is *largest* at $\phi=90^\circ$. The null and the point of maximum slope coincide.
+-   **It must be most sensitive there.** Differentiating [(12)](#eq:ct), the change in output per unit change in angle is $|\mathrm{d}e/\mathrm{d}\phi|\propto|\sin\phi|$, which is *largest* at $\phi=90^\circ$. The null and the point of maximum slope coincide.
 
 Had the rotor been aligned with the flux instead, at $\phi=0$, the output would sit at its maximum, the slope would be zero, and small shaft errors would produce almost no change in output — and no sign information at all, since $\cos$ is even. The device would be useless as an error detector. A sensor for a feedback loop should always be arranged to work about a null, and this is a clean example of why.
 
@@ -281,26 +265,24 @@ Equation [(14)](#eq:synchro) is exact, but $\sin(\theta-\alpha)$ is not a gain.
 
 <a id="eq:mmf"></a>
 
-$$\begin{equation}
-  e(t)\;\approx\;K_{s}\,(\theta-\alpha)\,\sin\omega_{c}t,
+$$e(t)\;\approx\;K_{s}\,(\theta-\alpha)\,\sin\omega_{c}t,
   \qquad K_{s}=K'V_{r},\qquad [K_{s}]=\mathrm{V}\,\mathrm{rad}^{-1},
-  \tag{15}
-\end{equation}$$
+  \tag{15}$$
 
 where $K_{s}$ is the **sensitivity of the error detector**. Now the pair is a pure gain from shaft-angle difference to signal amplitude — exactly the $\otimes$ of the block diagram, followed by a constant.
 
-<figure id="fig:sine" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig07.svg" />
-<figcaption><strong>Figure 6.</strong> The exact characteristic <a href="#eq:synchro">(14)</a> against the linear model <a href="#eq:linear">(15)</a>. Inside the shaded band the two are indistinguishable at the accuracy of any real measurement; a servo drives the error into that band and keeps it there, so the linear model is not a compromise so much as a description of where the device actually lives.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig07.svg){#fig:sine}
+/// caption
+**Figure 6.** The exact characteristic [(14)](#eq:synchro) against the linear model [(15)](#eq:linear). Inside the shaded band the two are indistinguishable at the accuracy of any real measurement; a servo drives the error into that band and keeps it there, so the linear model is not a compromise so much as a description of where the device actually lives.
+///
 
 ###### How small is small?
 
 The relative error of $\sin x\approx x$ is worth knowing as a number rather than a feeling:
 
 | $\theta-\alpha$ | $5^\circ$ | $10^\circ$ | $14^\circ$ | $15^\circ$ | $20^\circ$ | $30^\circ$ |
-|:---|:--:|:--:|:--:|:--:|:--:|:--:|
-| error in $e$ | 0.13% | 0.51% | 1.0% | 1.15% | 2.1% | 4.7% |
+|:----------------|:---------:|:----------:|:----------:|:----------:|:----------:|:----------:|
+| error in $e$    |   0.13%   |   0.51%    |    1.0%    |   1.15%    |    2.1%    |    4.7%    |
 
 So the linear model is good to about 1% out to $\pm14^\circ$ and to about 5% out to $\pm30^\circ$. In a position servo, whose whole purpose is to hold $\theta-\alpha$ near zero, the steady-state error is a small fraction of a degree and the approximation is far better than any other in the loop.
 
@@ -351,14 +333,14 @@ $$e(t)=\underbrace{K_{s}\big[\theta(t)-\alpha(t)\big]}_{\text{modulating signal,
 
  This is **suppressed-carrier modulation**, and it has two properties that matter for reading an oscilloscope and for designing the rest of the loop.
 
-- **No error, no signal.** When $\theta=\alpha$ the output is identically zero — the carrier itself is absent. Compare ordinary amplitude modulation, in which the carrier is still there at full strength when the modulating signal is zero. Here the carrier is *suppressed*, hence the name.
+-   **No error, no signal.** When $\theta=\alpha$ the output is identically zero — the carrier itself is absent. Compare ordinary amplitude modulation, in which the carrier is still there at full strength when the modulating signal is zero. Here the carrier is *suppressed*, hence the name.
 
-- **The sign lives in the phase.** When $\theta-\alpha$ changes sign, the amplitude factor changes sign, and multiplying $\sin\omega_{c}t$ by a negative number is the same as shifting it by $180^\circ$. The envelope of $e(t)$ is $|\,K_{s}(\theta-\alpha)|$ and carries no sign; the sign is carried entirely by whether $e(t)$ is in phase or antiphase with the supply.
+-   **The sign lives in the phase.** When $\theta-\alpha$ changes sign, the amplitude factor changes sign, and multiplying $\sin\omega_{c}t$ by a negative number is the same as shifting it by $180^\circ$. The envelope of $e(t)$ is $|\,K_{s}(\theta-\alpha)|$ and carries no sign; the sign is carried entirely by whether $e(t)$ is in phase or antiphase with the supply.
 
-<figure id="fig:carrier" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig08.svg" />
-<figcaption><strong>Figure 7.</strong> Suppressed-carrier modulation at the output of the synchro pair. Cf. Nagrath &amp; Gopal Fig. 4.13, p. 95. Where the shaft difference passes through zero (dashed lines) the output vanishes and then comes back <em>inverted</em> relative to the carrier. The envelope alone (orange) is the same on both sides of that crossing: it gives the size of the error but not its direction.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig08.svg){#fig:carrier}
+/// caption
+**Figure 7.** Suppressed-carrier modulation at the output of the synchro pair. Cf. Nagrath & Gopal Fig. 4.13, p. 95. Where the shaft difference passes through zero (dashed lines) the output vanishes and then comes back *inverted* relative to the carrier. The envelope alone (orange) is the same on both sides of that crossing: it gives the size of the error but not its direction.
+///
 
 /// admonition | Common pitfall
     type: warning
@@ -411,11 +393,11 @@ clP6.9cm Eq. & Result & Origin<br>
 
 The actuator is the muscle of the loop: it takes the amplified error signal and does physical work on the plant. Three of them carry almost all of the positional control done with electricity, and each answers a different question.
 
-- The **d.c. servomotor** — the workhorse. Question: where do its two constants $K_{t}$ and $K_{b}$ come from, and why are they the same number?
+-   The **d.c. servomotor** — the workhorse. Question: where do its two constants $K_{t}$ and $K_{b}$ come from, and why are they the same number?
 
-- The **a.c. two-phase servomotor** — used where the signals are already a.c. Question: why must its rotor be deliberately built with a *high* resistance, when every other motor designer works to keep rotor resistance low?
+-   The **a.c. two-phase servomotor** — used where the signals are already a.c. Question: why must its rotor be deliberately built with a *high* resistance, when every other motor designer works to keep rotor resistance low?
 
-- The **stepper motor** — the digital actuator. Question: where does the step angle come from, and why can it be run open loop when almost nothing else can?
+-   The **stepper motor** — the digital actuator. Question: where does the step angle come from, and why can it be run open loop when almost nothing else can?
 
 One theme runs through the first two and is worth naming in advance: in both machines, the thing that makes the motor *controllable* also supplies most of its *damping*. That is not a coincidence, and §[2.2.4](#sss:samething) says why.
 
@@ -423,9 +405,9 @@ One theme runs through the first two and is worth naming in advance: in both mac
 
 A d.c. motor becomes a *servo*motor by construction rather than by principle: low rotor inertia, so it accelerates quickly, and a design that tolerates constant reversal. The physics is the physics of any d.c. machine. Two ways of controlling it:
 
-- **Armature control** — field current held constant, armature voltage varied. Almost universal, and the case treated below.
+-   **Armature control** — field current held constant, armature voltage varied. Almost universal, and the case treated below.
 
-- **Field control** — armature current held constant, field voltage varied. Cheaper amplifier, but slower, for a reason derived in §[2.1.6](#sss:field).
+-   **Field control** — armature current held constant, field voltage varied. Cheaper amplifier, but slower, for a reason derived in §[2.1.6](#sss:field).
 
 ##### Step 1 — where $T_{m}=K_{t}i_{a}$ comes from { #sss:torqueconst }
 
@@ -437,11 +419,9 @@ $$F=B\,\ell\,i .$$
 
 <a id="eq:ct"></a>
 
-$$\begin{equation}
-  T_{m}=z\,B\ell r\,i_{a}=K_{t}\,i_{a},
+$$T_{m}=z\,B\ell r\,i_{a}=K_{t}\,i_{a},
   \qquad K_{t}=z B\ell r,\qquad [K_{t}]=\mathrm{N}\,\mathrm{m}\,\mathrm{A}^{-1}.
-  \tag{16}
-\end{equation}$$
+  \tag{16}$$
 
  Everything in $K_{t}$ is a fixed feature of the machine *except* $B$, and $B$ is set by the field current. This is the whole reason armature control gives a linear model: hold the field constant and $K_{t}$ is a constant, so torque is proportional to armature current with no product of two varying quantities. Vary the field instead and you are multiplying two signals together, which is not linear — see §[2.1.6](#sss:field).
 
@@ -455,19 +435,17 @@ $$e=B\,\ell\,v .$$
 
 <a id="eq:phi"></a>
 
-$$\begin{equation}
-  e_{b}=z B\ell r\,\dot\theta=K_{b}\,\dot\theta,
+$$e_{b}=z B\ell r\,\dot\theta=K_{b}\,\dot\theta,
   \qquad K_{b}=z B\ell r,
   \qquad [K_{b}]=\mathrm{V}\,\mathrm{s}\,\mathrm{rad}^{-1}.
-  \tag{17}
-\end{equation}$$
+  \tag{17}$$
 
  This is the **back e.m.f.**: it appears the moment the shaft moves, and by Lenz’s law it opposes the current that is driving the motion.
 
-<figure id="fig:dcmotor" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig09.svg" />
-<figcaption><strong>Figure 8.</strong> The same conductors, the same field, the same geometry — read two ways. Because <span class="math inline">\(zB\ell r\)</span> appears in both <a href="#eq:torqueconst">(16)</a> and <a href="#eq:emfconst">(17)</a>, <span class="math inline">\(K_{t}\)</span> and <span class="math inline">\(K_{b}\)</span> are not merely similar: in a consistent set of units they are the <em>same number</em>.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig09.svg){#fig:dcmotor}
+/// caption
+**Figure 8.** The same conductors, the same field, the same geometry — read two ways. Because $zB\ell r$ appears in both [(16)](#eq:torqueconst) and [(17)](#eq:emfconst), $K_{t}$ and $K_{b}$ are not merely similar: in a consistent set of units they are the *same number*.
+///
 
 ##### Step 3 — why $K_{t}$ and $K_{b}$ are the same number
 
@@ -506,24 +484,22 @@ Let the shaft turn steadily at $\dot\theta$, so the armature current has settled
 
 <a id="eq:synchro"></a>
 
-$$\begin{equation}
-  T_{m}=\underbrace{\frac{K_{t}}{R_{a}}\,v_{a}}_{\text{set by the input}}
+$$T_{m}=\underbrace{\frac{K_{t}}{R_{a}}\,v_{a}}_{\text{set by the input}}
        \;-\;\underbrace{\frac{K_{t}K_{b}}{R_{a}}\,\dot\theta}_{\text{opposes motion}} .
-  \tag{18}
-\end{equation}$$
+  \tag{18}$$
 
 Read [(18)](#eq:dctorquespeed) as a family of straight lines: torque against speed, one line per armature voltage, all with the *same* negative slope $K_{t}K_{b}/R_{a}$. A torque that grows more negative in proportion to speed is precisely what viscous friction does. So the back e.m.f. contributes an effective viscous damping coefficient $K_{t}K_{b}/R_{a}$, in parallel with whatever mechanical friction $b$ the bearings supply.
 
-<figure id="fig:dcslope" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig10.svg" />
-<figcaption><strong>Figure 9.</strong> The armature-controlled d.c. motor’s torque–speed characteristic, <a href="#eq:dctorquespeed">(18)</a>. Raising the armature voltage lifts the line without tilting it. The negative slope is the back e.m.f. acting as viscous friction; compare Figure <a href="#fig:acslope">11</a>, where an a.c. servomotor achieves the same negative slope by a completely different mechanism.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig10.svg){#fig:dcslope}
+/// caption
+**Figure 9.** The armature-controlled d.c. motor’s torque–speed characteristic, [(18)](#eq:dctorquespeed). Raising the armature voltage lifts the line without tilting it. The negative slope is the back e.m.f. acting as viscous friction; compare Figure [11](#fig:acslope), where an a.c. servomotor achieves the same negative slope by a completely different mechanism.
+///
 
 Two things follow immediately, without doing any more algebra.
 
-- **A d.c. motor is self-damping.** Lower $R_{a}$ and the slope steepens: a low-resistance armature is a heavily damped one. Drive the same motor from a high-impedance (current) source instead and that damping disappears, because the current — and hence the torque — no longer responds to the back e.m.f. at all.
+-   **A d.c. motor is self-damping.** Lower $R_{a}$ and the slope steepens: a low-resistance armature is a heavily damped one. Drive the same motor from a high-impedance (current) source instead and that damping disappears, because the current — and hence the torque — no longer responds to the back e.m.f. at all.
 
-- **Stall torque and no-load speed follow from one line.** Setting $\dot\theta=0$ gives the stall torque $K_{t}v_{a}/R_{a}$; setting $T_{m}=0$ gives the no-load speed $v_{a}/K_{b}$. Those are the two numbers a catalogue quotes, and they fix the whole characteristic.
+-   **Stall torque and no-load speed follow from one line.** Setting $\dot\theta=0$ gives the stall torque $K_{t}v_{a}/R_{a}$; setting $T_{m}=0$ gives the no-load speed $v_{a}/K_{b}$. Those are the two numbers a catalogue quotes, and they fix the whole characteristic.
 
 ##### The transfer function, and where it is derived
 
@@ -531,13 +507,11 @@ Add the mechanical equation $T_{m}=J_{m}\ddot\theta_{m}+b\dot\theta_{m}$ and the
 
 <a id="eq:linear"></a>
 
-$$\begin{equation}
-  \frac{\theta_{m}(s)}{V_{a}(s)}
+$$\frac{\theta_{m}(s)}{V_{a}(s)}
      =\frac{K_{t}}{s\big[(R_{a}+L_{a}s)(J_{m}s+b)+K_{t}K_{b}\big]}
      \;\xrightarrow[\;L_{a}\to0\;]{}\;
      \frac{K_{m}}{s(\tau_{m}s+1)},
-  \tag{19}
-\end{equation}$$
+  \tag{19}$$
 
  
 
@@ -558,19 +532,17 @@ $$T_{m}=K_{f}\,i_{f},\qquad
 
 <a id="eq:torqueconst"></a>
 
-$$\begin{equation}
-  \frac{\theta(s)}{V_{f}(s)}
+$$\frac{\theta(s)}{V_{f}(s)}
    =\frac{K_{f}}{s\,(R_{f}+L_{f}s)(Js+b)}
    =\frac{K}{s(\tau_{f}s+1)(\tau_{m}s+1)},
   \qquad \tau_{f}=\frac{L_{f}}{R_{f}},\ \ \tau_{m}=\frac{J}{b}.
-  \tag{20}
-\end{equation}$$
+  \tag{20}$$
 
  Compare this with [(19)](#eq:dcm) and two differences stand out, both of them disadvantages.
 
-- **There is no $K_{t}K_{b}$ term.** With the armature current forced constant, the back e.m.f. can no longer alter it, so the electromechanical damping of §[2.1.4](#sss:dcdamping) is gone and the motor is left with only its bearing friction $b$. The field-controlled motor is the more lightly damped machine.
+-   **There is no $K_{t}K_{b}$ term.** With the armature current forced constant, the back e.m.f. can no longer alter it, so the electromechanical damping of §[2.1.4](#sss:dcdamping) is gone and the motor is left with only its bearing friction $b$. The field-controlled motor is the more lightly damped machine.
 
-- **There is an extra lag $\tau_{f}$.** The field winding is built for many turns and low current, so $L_{f}$ is large and $\tau_{f}$ is long. The armature circuit it replaced was fast enough that [(19)](#eq:dcm) routinely throws it away; the field circuit is not.
+-   **There is an extra lag $\tau_{f}$.** The field winding is built for many turns and low current, so $L_{f}$ is large and $\tau_{f}$ is long. The armature circuit it replaced was fast enough that [(19)](#eq:dcm) routinely throws it away; the field circuit is not.
 
 Its one advantage is power: the field carries a small current, so the amplifier driving it is cheap. Field control survives where that matters more than speed of response.
 
@@ -588,12 +560,10 @@ Structurally it is a two-phase induction motor: two stator windings $90^\circ$ a
 
 <a id="eq:emfconst"></a>
 
-$$\begin{equation}
-  \mathbf{F}(t)=F_{m}\cos\omega t\;\hat{u}(0)
+$$\mathbf{F}(t)=F_{m}\cos\omega t\;\hat{u}(0)
               + F_{m}\cos(\omega t-90^\circ)\;\hat{u}(90^\circ)
               = F_{m}\big(\cos\omega t,\;\sin\omega t\big).
-  \tag{21}
-\end{equation}$$
+  \tag{21}$$
 
  The magnitude is $F_{m}$ at every instant, and the direction advances at $\omega$ radians per second. This is a **rotating field of constant magnitude**, turning at synchronous speed. It sweeps past the short-circuited rotor, induces currents in it, and drags it round — ordinary induction-motor action.
 
@@ -614,10 +584,10 @@ The synchro of §[1.2](#sec:synchro) and the two-phase motor use the *same* vect
 
 Getting these two confused is the single most common error in this material.
 
-<figure id="fig:loci" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig11.svg" />
-<figcaption><strong>Figure 10.</strong> The same vector sum, two different time phasings. In (a) the coil currents are in time quadrature and the resultant sweeps round at constant length; in (b) — the synchro of §<a href="#sec:synchro">1.2</a> — they are in time phase, and the resultant stands still along the direction <span class="math inline">\(\theta\)</span> while its length pulsates through zero and reverses.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig11.svg){#fig:loci}
+/// caption
+**Figure 10.** The same vector sum, two different time phasings. In (a) the coil currents are in time quadrature and the resultant sweeps round at constant length; in (b) — the synchro of §[1.2](#sec:synchro) — they are in time phase, and the resultant stands still along the direction $\theta$ while its length pulsates through zero and reverses.
+///
 
 ###### Reversing it.
 
@@ -635,35 +605,31 @@ For an induction machine with rotor resistance $R$ and standstill rotor reactanc
 
 <a id="eq:dctorquespeed"></a>
 
-$$\begin{equation}
-  T\;\propto\;\frac{s\,R}{R^{2}+s^{2}X^{2}} .
-  \tag{22}
-\end{equation}$$
+$$T\;\propto\;\frac{s\,R}{R^{2}+s^{2}X^{2}} .
+  \tag{22}$$
 
  Differentiate and set to zero: the maximum occurs at 
 
 <a id="eq:dcm"></a>
 
-$$\begin{equation}
-  s_{\max}=\frac{R}{X},
+$$s_{\max}=\frac{R}{X},
   \qquad\text{and there}\qquad
   T_{\max}\propto\frac{1}{2X}
   \quad\text{--- independent of }R.
-  \tag{23}
-\end{equation}$$
+  \tag{23}$$
 
  Raising the rotor resistance does not change how much torque the machine can produce; it changes *where* that maximum sits. And since slip runs from $s=1$ at standstill down to $s=0$ at synchronous speed, everything turns on whether $s_{\max}$ falls inside that interval:
 
-- **Ordinary motor, $X/R$ large.** Then $s_{\max}=R/X$ is small — typically a few per cent — so the peak sits close to synchronous speed. Over the whole range from standstill up to $s_{\max}$, torque *rises* as the motor speeds up. That is a **positive** torque–speed slope.
+-   **Ordinary motor, $X/R$ large.** Then $s_{\max}=R/X$ is small — typically a few per cent — so the peak sits close to synchronous speed. Over the whole range from standstill up to $s_{\max}$, torque *rises* as the motor speeds up. That is a **positive** torque–speed slope.
 
-- **Servomotor, $R\ge X$.** Then $s_{\max}\ge1$, so the peak lies at or beyond standstill and is never reached in normal running. Over the entire operating range torque falls monotonically as speed rises: the slope is **negative everywhere**.
+-   **Servomotor, $R\ge X$.** Then $s_{\max}\ge1$, so the peak lies at or beyond standstill and is never reached in normal running. Over the entire operating range torque falls monotonically as speed rises: the slope is **negative everywhere**.
 
 There is a bonus. When $R\gg sX$ the denominator of [(22)](#eq:torqueslip) is dominated by $R^{2}$ and $T\propto s/R$ — torque becomes very nearly *linear* in slip, and therefore linear in speed. So the one design change buys both properties the control engineer needs: a negative slope, and a straight enough line to linearise about.
 
-<figure id="fig:acslope" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig12.svg" />
-<figcaption><strong>Figure 11.</strong> Equation <a href="#eq:torqueslip">(22)</a> plotted for the two designs. The ordinary motor’s peak sits at <span class="math inline">\(s_{\max}=R/X=0.2\)</span>, i.e. at 80% of synchronous speed, leaving the shaded region below it with a positive torque–speed slope. The servomotor’s peak is pushed out to <span class="math inline">\(s_{\max}=3\)</span>, beyond standstill, so its whole characteristic falls — and it hugs the dashed straight line to within about 8%. Cf. Nagrath &amp; Gopal Fig. 4.4, p. 85.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig12.svg){#fig:acslope}
+/// caption
+**Figure 11.** Equation [(22)](#eq:torqueslip) plotted for the two designs. The ordinary motor’s peak sits at $s_{\max}=R/X=0.2$, i.e. at 80% of synchronous speed, leaving the shaded region below it with a positive torque–speed slope. The servomotor’s peak is pushed out to $s_{\max}=3$, beyond standstill, so its whole characteristic falls — and it hugs the dashed straight line to within about 8%. Cf. Nagrath & Gopal Fig. 4.4, p. 85.
+///
 
 /// admonition | Common pitfall
     type: warning
@@ -685,14 +651,12 @@ $$T_{m}=T_{m0}
 
 <a id="eq:fieldctl"></a>
 
-$$\begin{equation}
-  \Delta T_{m}=K\,\Delta E-f\,\Delta\dot\theta,
+$$\Delta T_{m}=K\,\Delta E-f\,\Delta\dot\theta,
   \qquad
   K=\left.\frac{\partial T_{m}}{\partial E}\right|_{0},
   \qquad
   f=-\left.\frac{\partial T_{m}}{\partial\dot\theta}\right|_{0}.
-  \tag{24}
-\end{equation}$$
+  \tag{24}$$
 
  The minus sign in the definition of $f$ is deliberate: the slope $\partial T_{m}/\partial\dot\theta$ is negative, so defining $f$ as its negative makes $f$ a positive number, and [(24)](#eq:aclin) then reads as “driving torque minus a friction torque”.
 
@@ -700,15 +664,13 @@ With a load of inertia $J$ and friction $f_{0}$, the torque balance is $\Delta T
 
 <a id="eq:rotfield"></a>
 
-$$\begin{equation}
-  G_{m}(s)=\frac{\Delta\theta(s)}{\Delta E(s)}
+$$G_{m}(s)=\frac{\Delta\theta(s)}{\Delta E(s)}
    =\frac{K}{Js^{2}+(f_{0}+f)s}
    =\frac{K_{m}}{s(\tau_{m}s+1)},
   \qquad
   K_{m}=\frac{K}{f_{0}+f},\quad
   \tau_{m}=\frac{J}{f_{0}+f} .
-  \tag{25}
-\end{equation}$$
+  \tag{25}$$
 
  In a position control system the operating point is $(\dot\theta_{0}=0,
 E_{0}=0)$, so the increments are the quantities themselves and the $\Delta$s can be dropped.
@@ -734,13 +696,13 @@ $$f\approx\frac{\text{stall torque at rated voltage}}
 
 Compare [(18)](#eq:dctorquespeed) with [(24)](#eq:aclin). Both say *developed torque $=$ (a constant) $\times$ (the input) $-$ (a constant) $\times$ (speed)*, and in both the second constant is a viscous damping that the machine supplies to itself:
 
-|  | d.c. servomotor | a.c. servomotor |
-|:---|:---|:---|
-| input | armature voltage $v_{a}$ | control-phase voltage $E$ |
-| drive constant | $K_{t}/R_{a}$ | $K=\partial T_{m}/\partial E$ |
-| damping | $K_{t}K_{b}/R_{a}$ | $f=-\partial T_{m}/\partial\dot\theta$ |
-| its origin | back e.m.f. | negative torque–speed slope |
-| result | $K_{m}/[s(\tau_{m}s+1)]$ | $K_{m}/[s(\tau_{m}s+1)]$ |
+|                | d.c. servomotor          | a.c. servomotor                        |
+|:---------------|:-------------------------|:---------------------------------------|
+| input          | armature voltage $v_{a}$ | control-phase voltage $E$              |
+| drive constant | $K_{t}/R_{a}$            | $K=\partial T_{m}/\partial E$          |
+| damping        | $K_{t}K_{b}/R_{a}$       | $f=-\partial T_{m}/\partial\dot\theta$ |
+| its origin     | back e.m.f.              | negative torque–speed slope            |
+| result         | $K_{m}/[s(\tau_{m}s+1)]$ | $K_{m}/[s(\tau_{m}s+1)]$               |
 
 ///
 
@@ -762,17 +724,15 @@ $$\lambda=\frac{360^\circ}{T} .$$
 
 <a id="eq:torqueslip"></a>
 
-$$\begin{equation}
-  \alpha=\frac{\lambda}{n}=\frac{360^\circ}{n\,T} .
-  \tag{26}
-\end{equation}$$
+$$\alpha=\frac{\lambda}{n}=\frac{360^\circ}{n\,T} .
+  \tag{26}$$
 
  For $n=3$ stacks and $T=12$ teeth, $\alpha=360/36=10{}^{\circ}$: thirty-six pulses per revolution. Note what [(26)](#eq:step) says about resolution — to make the steps finer you may either add teeth or add stacks, and adding teeth is by far the cheaper of the two.
 
-<figure id="fig:stepper" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig13.svg" />
-<figcaption><strong>Figure 12.</strong> Developed (rolled-out) view of a three-stack variable-reluctance stepper. The rotor teeth line up across all three stacks; the stator stacks are offset from one another by a third of a tooth pitch. Energising <span class="math inline">\(c\)</span>, then <span class="math inline">\(a\)</span>, then <span class="math inline">\(b\)</span> walks the rotor forward one <span class="math inline">\(\alpha\)</span> at a time. Cf. Nagrath &amp; Gopal Figs. 4.18 and 4.20, pp. 100–101.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig13.svg){#fig:stepper}
+/// caption
+**Figure 12.** Developed (rolled-out) view of a three-stack variable-reluctance stepper. The rotor teeth line up across all three stacks; the stator stacks are offset from one another by a third of a tooth pitch. Energising $c$, then $a$, then $b$ walks the rotor forward one $\alpha$ at a time. Cf. Nagrath & Gopal Figs. 4.18 and 4.20, pp. 100–101.
+///
 
 ##### Where the torque comes from
 
@@ -786,11 +746,9 @@ $$W=\tfrac{1}{2}L(\theta)\,i^{2},$$
 
 <a id="eq:smax"></a>
 
-$$\begin{equation}
-  T_{m}=\frac{\partial W}{\partial\theta}\bigg|_{i}
+$$T_{m}=\frac{\partial W}{\partial\theta}\bigg|_{i}
        =\tfrac{1}{2}\,i^{2}\,\frac{\mathrm{d}L}{\mathrm{d}\theta} .
-  \tag{27}
-\end{equation}$$
+  \tag{27}$$
 
  Read that: *the rotor moves so as to increase the inductance*, which is the same thing as decreasing the reluctance — the qualitative rule stated above, now with a formula behind it.
 
@@ -802,16 +760,14 @@ $$L(\theta)=L_{1}+L_{2}\cos T\theta .$$
 
 <a id="eq:aclin"></a>
 
-$$\begin{equation}
-  T_{m}=-\tfrac{1}{2}L_{2}T\,i^{2}(t)\,\sin T\theta
+$$T_{m}=-\tfrac{1}{2}L_{2}T\,i^{2}(t)\,\sin T\theta
        =-K\,i^{2}(t)\,\sin T\theta .
-  \tag{28}
-\end{equation}$$
+  \tag{28}$$
 
-<figure id="fig:steptorque" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig14.svg" />
-<figcaption><strong>Figure 13.</strong> The static torque–angle curve <a href="#eq:steptorque">(28)</a> of one stack, for a fixed excitation current. The aligned position is stable — displace the rotor either way and the torque drives it back. The tooth-faces-slot position a half-pitch away is an equilibrium too, but an unstable one: any disturbance sends the rotor off to one of the neighbouring stable positions. Cf. Nagrath &amp; Gopal Fig. 4.19, p. 101.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig14.svg){#fig:steptorque}
+/// caption
+**Figure 13.** The static torque–angle curve [(28)](#eq:steptorque) of one stack, for a fixed excitation current. The aligned position is stable — displace the rotor either way and the torque drives it back. The tooth-faces-slot position a half-pitch away is an equilibrium too, but an unstable one: any disturbance sends the rotor off to one of the neighbouring stable positions. Cf. Nagrath & Gopal Fig. 4.19, p. 101.
+///
 
 ###### Why three phases are the minimum.
 
@@ -829,9 +785,9 @@ $$e(t)=Ri+\frac{\mathrm{d}}{\mathrm{d}t}\big[L(\theta)i\big]
 
 Two consequences do matter for control, though.
 
-- **The stepper is a digital actuator.** Shaft position is determined entirely by the pulse count, so an *open-loop* step servo can reach the accuracy of a closed-loop analogue system with no position sensor at all. This is the rare case where open loop is the right engineering answer, and it is worth holding on to as a counterexample to the general argument for feedback.
+-   **The stepper is a digital actuator.** Shaft position is determined entirely by the pulse count, so an *open-loop* step servo can reach the accuracy of a closed-loop analogue system with no position sensor at all. This is the rare case where open loop is the right engineering answer, and it is worth holding on to as a counterexample to the general argument for feedback.
 
-- **The price is skipped steps.** If pulses arrive faster than the rotor can settle into its lock position, or if it overshoots too far, a step is lost — and because nothing is measured, it is lost silently and permanently, and every subsequent position is wrong by $\alpha$. High-performance systems therefore close the loop after all, gating the pulse train from a position feedback signal.
+-   **The price is skipped steps.** If pulses arrive faster than the rotor can settle into its lock position, or if it overshoots too far, a step is lost — and because nothing is measured, it is lost silently and permanently, and every subsequent position is wrong by $\alpha$. High-performance systems therefore close the loop after all, gating the pulse train from a position feedback signal.
 
 ### 3. Sensors: the tachogenerator { #sec:tacho }
 
@@ -839,11 +795,9 @@ A **tachogenerator** produces a voltage proportional to shaft speed:
 
 <a id="eq:acm"></a>
 
-$$\begin{equation}
-  v_{t}=K_{t}\,\dot\theta,
+$$v_{t}=K_{t}\,\dot\theta,
   \qquad [K_{t}]=\mathrm{V}\,\mathrm{s}\,\mathrm{rad}^{-1}.
-  \tag{29}
-\end{equation}$$
+  \tag{29}$$
 
  It is the only sensor we look at in this survey.
 
@@ -870,10 +824,10 @@ Where the loop is a carrier system, the tachometer must produce a carrier-modula
 
 Two stator coils sit at right angles: a **reference** coil, excited from the carrier supply, and a **quadrature** coil, from which the output is taken. The rotor is a thin aluminium cup spinning in the air gap — a short-circuited secondary of very low inertia. With the shaft standing still, the two coils are in space quadrature and there is no coupling between them: the reference flux threads the quadrature coil edge-on and induces nothing. Rotation is what breaks that symmetry.
 
-<figure id="fig:actacho" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig15.svg" />
-<figcaption><strong>Figure 14.</strong> The a.c. (drag-cup) tachometer. The cup is treated as two imaginary short-circuited conductor pairs. Pair <span class="math inline">\((1,1&#39;)\)</span> sits <em>on</em> the reference axis, where the radial field is strongest, so it develops the largest speed voltage — and because a current loop’s magnetic axis is perpendicular to the line joining its two sides, the current it drives produces a flux along the <em>quadrature</em> axis, which is exactly what the output coil sees. Cf. Nagrath &amp; Gopal Fig. 4.7, p. 88.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig15.svg){#fig:actacho}
+/// caption
+**Figure 14.** The a.c. (drag-cup) tachometer. The cup is treated as two imaginary short-circuited conductor pairs. Pair $(1,1')$ sits *on* the reference axis, where the radial field is strongest, so it develops the largest speed voltage — and because a current loop’s magnetic axis is perpendicular to the line joining its two sides, the current it drives produces a flux along the *quadrature* axis, which is exactly what the output coil sees. Cf. Nagrath & Gopal Fig. 4.7, p. 88.
+///
 
 The chain has four links, and each is one line.
 
@@ -899,11 +853,8 @@ $$e_{q}\propto\frac{\mathrm{d}\phi_{q}}{\mathrm{d}t}
 
 <a id="eq:step"></a>
 
-$$\begin{equation}
-            e_{q}(t)=K_{t}\,\dot\theta(t)\,\sin\omega_{c}t .
-            \tag{30}
-          
-    \end{equation}$$
+$$e_{q}(t)=K_{t}\,\dot\theta(t)\,\sin\omega_{c}t .
+            \tag{30}$$
 
 Note what happened to the phase along the way: the reference winding put the flux $90^\circ$ behind its excitation, and the output winding, by differentiating, put that $90^\circ$ straight back. The two cancel, so $e_{q}$ comes out *in phase with the carrier supply* — exactly like the synchro’s output [(15)](#eq:linear). That is not an accident of algebra but the reason the two devices can be summed in the same loop at all: fed from one carrier, their signals are commensurate, and the amplifier can add them without any phase-shifting network between.
 
@@ -927,12 +878,10 @@ $$\frac{\theta_{m}}{u}
 
 <a id="eq:reluctorque"></a>
 
-$$\begin{equation}
-  \frac{\theta_{c}(s)}{\theta_{r}(s)}
+$$\frac{\theta_{c}(s)}{\theta_{r}(s)}
    =\frac{nK_{a}K_{m}K_{s}}
          {\tau_{m}s^{2}+\big(1+K_{a}K_{m}K_{t}\big)s+nK_{a}K_{m}K_{s}} .
-  \tag{31}
-\end{equation}$$
+  \tag{31}$$
 
 /// admonition | Key idea
     type: info
@@ -970,7 +919,7 @@ $$\frac{\theta_{c}}{\theta_{r}}=\frac{20}{0.2s^{2}+3s+20}
 
 ///
 
-<figure id="fig:ratefb" data-latex-placement="H">
+<figure id="fig:ratefb">
 <img src="../svg/week-01-notes-supp/fig16.svg" />
 <img src="../svg/week-01-notes-supp/fig17.svg" />
 <figcaption><strong>Figure 15.</strong> Rate feedback in a position servo, and what it does. The tachometer signal never reaches the outer summing junction, so it cannot affect the steady-state error; it acts only on the motor’s effective damping. Both responses have the same natural frequency and the same final value. Cf. Nagrath &amp; Gopal Fig. 4.14, p. 97.</figcaption>
@@ -1034,10 +983,10 @@ Hydraulic output devices split by the motion they produce: **rotary output** fro
 
 The classical arrangement is a **variable-stroke pump** driving a **fixed-stroke motor**. Both are axial-piston machines: several pistons, arranged in a circle in a rotating cylinder block, bear on a stationary *swash plate* through shoes. Figure [16](#fig:swashplate) shows the idea. With the swash plate perpendicular to the shaft (the dashed “neutral” position) a piston’s distance to the plate does not change as the block turns, so no piston reciprocates and no oil is pumped. Tilt the plate through the **stroke angle** $x$ and that distance now varies once per revolution: as a piston’s bore turns past the plate, it is first pushed in and then drawn back out, once per turn, so it pumps. Reversing the tilt reverses which side pumps and which side returns, and hence reverses the motor. One mechanical variable, the stroke angle $x$, controls everything — flow rate, direction, motor speed.
 
-<figure id="fig:swashplate" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig18.svg" />
-<figcaption><strong>Figure 16.</strong> Axial-piston pump (schematic, one representative piston pair). As the block rotates, a piston whose bore is on the side where the tilted plate sits <em>closer</em> is pushed in; half a turn later, on the side where the plate is <em>farther</em>, the same piston is drawn back out. That reciprocation is the pumping action, and its amplitude — hence the flow — is set by the stroke angle <span class="math inline">\(x\)</span>. A fixed-stroke motor runs the same machine in reverse: fixed <span class="math inline">\(x\)</span>, oil in, shaft out. Cf. Nagrath &amp; Gopal §4.5, p. 104.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig18.svg){#fig:swashplate}
+/// caption
+**Figure 16.** Axial-piston pump (schematic, one representative piston pair). As the block rotates, a piston whose bore is on the side where the tilted plate sits *closer* is pushed in; half a turn later, on the side where the plate is *farther*, the same piston is drawn back out. That reciprocation is the pumping action, and its amplitude — hence the flow — is set by the stroke angle $x$. A fixed-stroke motor runs the same machine in reverse: fixed $x$, oil in, shaft out. Cf. Nagrath & Gopal §4.5, p. 104.
+///
 
 ##### From two balances to one transfer function { #sss:swashplate }
 
@@ -1052,19 +1001,15 @@ $$q_{p}=K_{p}x, \qquad q_{m}=K_{m}\dot\theta, \qquad
 
 <a id="eq:steptorque"></a>
 
-$$\begin{equation}
-  q_{p}=q_{m}+q_{\ell}+q_{c}.
-  \tag{32}
-\end{equation}$$
+$$q_{p}=q_{m}+q_{\ell}+q_{c}.
+  \tag{32}$$
 
 **Torque.** The motor develops a torque in proportion to the pressure across it, and that torque drives the load’s inertia and friction: 
 
 <a id="eq:tacho"></a>
 
-$$\begin{equation}
-  T_{m}=K_{T}p=J\ddot\theta+f\dot\theta .
-  \tag{33}
-\end{equation}$$
+$$T_{m}=K_{T}p=J\ddot\theta+f\dot\theta .
+  \tag{33}$$
 
 Two balances, one unknown pressure $p$ to eliminate between them. Before doing the algebra, drop the compressibility term: $K_{c}\dot p$ is small compared with $K_{m}\dot\theta$ because oil is nearly incompressible, and keeping it would add a third pole to what is about to become a second-order system — correct, but a complication this course does not need. (If it mattered, it would show up as a very fast additional lag; [(32)](#eq:hydcontinuity) shows exactly where to put it back.) With $q_{c}$ dropped, solve [(33)](#eq:hydtorque) for $p=(J\ddot\theta+f\dot\theta)/K_{T}$ and substitute into [(32)](#eq:hydcontinuity): 
 
@@ -1075,14 +1020,12 @@ $$K_{p}x = K_{m}\dot\theta + \frac{K_{\ell}}{K_{T}}\bigl(J\ddot\theta+f\dot\thet
 
 <a id="eq:actacho"></a>
 
-$$\begin{equation}
-  G(s)=\frac{\Theta(s)}{X(s)}=\frac{K}{s(\tau s+1)},
+$$G(s)=\frac{\Theta(s)}{X(s)}=\frac{K}{s(\tau s+1)},
   \qquad
   K=\frac{K_{p}}{K_{m}+K_{\ell}f/K_{T}},
   \qquad
   \tau=\frac{K_{\ell}J}{K_{T}K_{m}+K_{\ell}f} .
-  \tag{34}
-\end{equation}$$
+  \tag{34}$$
 
  The same shape as [(19)](#eq:dcm) and [(25)](#eq:acm) — and for the same reason: $x$ commands a *flow*, flow drives a *speed*, and the output of interest is the *position* that speed integrates to.
 
@@ -1103,19 +1046,17 @@ Instead of varying the pump stroke, hold the supply pressure constant and thrott
 
 <a id="eq:ratefb"></a>
 
-$$\begin{equation}
-  q = K_{1}x - K_{2}p
-  \tag{35}
-\end{equation}$$
+$$q = K_{1}x - K_{2}p
+  \tag{35}$$
 
  is therefore a *linearisation* about the neutral operating point — valid for small spool displacements, invalid for large ones — built by the same first-order Taylor-expansion technique used for the a.c. servomotor’s torque–speed surface in §[2.2.2](#sss:highR).
 
 A **three-way** valve has one supply port, one sump port and one service port; a **four-way** valve has two service ports and can drive a double-acting cylinder in both directions, which is what Figure [17](#fig:spool) shows. At neutral, $x=0$, both service ports are blocked. Move the spool one way and the supply connects to one side of the piston while the other side drains to sump; move it the other way and the connections swap.
 
-<figure id="fig:spool" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig19.svg" />
-<figcaption><strong>Figure 17.</strong> Four-way spool valve controlling a double-acting power cylinder — a hydraulic linear actuator. Spool displacement <span class="math inline">\(x\)</span> admits high-pressure oil to one side of the piston and vents the other to sump; the differential pressure drives the load a distance <span class="math inline">\(y\)</span>. Cf. Nagrath &amp; Gopal Fig. 4.27, p. 111.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig19.svg){#fig:spool}
+/// caption
+**Figure 17.** Four-way spool valve controlling a double-acting power cylinder — a hydraulic linear actuator. Spool displacement $x$ admits high-pressure oil to one side of the piston and vents the other to sump; the differential pressure drives the load a distance $y$. Cf. Nagrath & Gopal Fig. 4.27, p. 111.
+///
 
 #### 4.3. The linear actuator (cylinder) { #sss:cylinder }
 
@@ -1136,14 +1077,12 @@ $$K_{1}Ax = \bigl(A^{2}+K_{2}f\bigr)s\,y + K_{2}M\,s^{2}y
 
 <a id="eq:hydcontinuity"></a>
 
-$$\begin{equation}
-  \frac{Y(s)}{X(s)}=\frac{K}{s(\tau s+1)},
+$$\frac{Y(s)}{X(s)}=\frac{K}{s(\tau s+1)},
   \qquad
   K=\frac{AK_{1}}{A^{2}+K_{2}f},
   \qquad
   \tau=\frac{MK_{2}}{A^{2}+K_{2}f} .
-  \tag{36}
-\end{equation}$$
+  \tag{36}$$
 
  Again the same shape. Leakage past the piston seal ($K_{2}$) is usually small enough that $K_{2}f\ll A^{2}$, and then [(36)](#eq:cyl) collapses to the tidier $K\approx K_{1}/A$, $\tau\approx MK_{2}/A^{2}$ quoted in the main notes — but “usually small enough” is a claim to check, not to assume, which is exactly what Worked example 4.1 does.
 
@@ -1187,10 +1126,8 @@ A hollow chamber with thin corrugated side walls and flat end faces behaves as a
 
 <a id="eq:hydtorque"></a>
 
-$$\begin{equation}
-  \frac{\Delta X(s)}{\Delta P(s)}=\frac{A}{K}.
-  \tag{37}
-\end{equation}$$
+$$\frac{\Delta X(s)}{\Delta P(s)}=\frac{A}{K}.
+  \tag{37}$$
 
  A pure gain, no dynamics at all — pressure in, displacement out, instantly. (A real bellows does have some mass and some air compressibility inside it, which would add a fast second-order lag; at the frequencies this course works with, that lag is negligible next to everything else in the loop, so [(37)](#eq:bellows) is taken as exact.)
 
@@ -1198,20 +1135,18 @@ $$\begin{equation}
 
 The key pneumatic *sensing* element, and the pneumatic analogue of the potentiometer or the synchro: it turns a small mechanical displacement into an electrical-strength — here, pneumatic-strength — signal. Air at constant supply pressure $P_{s}$ passes through a fixed *orifice* and out of a *nozzle*. A pivoted *flapper* sits a distance $e$ in front of the nozzle, Figure [18](#fig:flapper). Move the flapper closer and the escape route narrows, so back pressure builds up in the chamber between orifice and nozzle and $P_{b}$ rises towards $P_{s}$; move it away and the restriction eases and $P_{b}$ falls towards ambient.
 
-<figure id="fig:flapper" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig20.svg" />
-<figcaption><strong>Figure 18.</strong> Flapper–nozzle valve. Small movements of the flapper produce large changes in back pressure — a high-gain displacement-to-pressure transducer. Cf. Nagrath &amp; Gopal Fig. 4.34, p. 117.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig20.svg){#fig:flapper}
+/// caption
+**Figure 18.** Flapper–nozzle valve. Small movements of the flapper produce large changes in back pressure — a high-gain displacement-to-pressure transducer. Cf. Nagrath & Gopal Fig. 4.34, p. 117.
+///
 
 The lever arms $a$ (pivot to nozzle) and $b$ (pivot to input point) fix the gap in terms of the input displacement, $e=[a/(a+b)]x$: it is the same lever-arm bookkeeping used for any pivoted linkage, nothing pneumatic about it yet. What *is* pneumatic is the characteristic of $P_{b}$ against $e$: it is strongly nonlinear over its full range (as $e\to 0$ the nozzle seals and $P_{b}\to P_{s}$; as $e$ grows large, $P_{b}$ saturates at the value set by the orifice alone), but it has one steep, nearly straight region in between, and that is the region the device is operated in. Writing $K$ for the local slope $\mathrm{d}P_{b}/\mathrm{d}e$ there (negative: closing the gap raises the pressure) and combining it with the lever-arm relation, 
 
 <a id="eq:hyd"></a>
 
-$$\begin{equation}
-  \frac{\Delta P_{b}(s)}{\Delta X(s)}=\left(\frac{a}{a+b}\right)K,
+$$\frac{\Delta P_{b}(s)}{\Delta X(s)}=\left(\frac{a}{a+b}\right)K,
   \qquad K<0.
-  \tag{38}
-\end{equation}$$
+  \tag{38}$$
 
  $K$ is large — typically a fraction of a millimetre of flapper travel spans the whole working range of $P_{b}$ — which is exactly what makes the device useful as a sensor: it turns a mechanical signal too small to measure any other way into a pressure signal that is easy to measure and to act on.
 
@@ -1221,17 +1156,15 @@ Keeping the flapper motion inside the linear region of Figure [18](#fig:flapper
 
 <a id="eq:valve"></a>
 
-$$\begin{equation}
-  \frac{\Delta P(s)}{\Delta X(s)}=\left(\frac{a}{a+b}\right)K, \qquad K>0.
-  \tag{39}
-\end{equation}$$
+$$\frac{\Delta P(s)}{\Delta X(s)}=\left(\frac{a}{a+b}\right)K, \qquad K>0.
+  \tag{39}$$
 
  Nothing here needs a new constant: the relay’s job is to reproduce $P_{b}$’s *shape* at supply-line power, and the two sign flips — flapper-to-$P_b$ negative, relay negative again — cancel, so [(39)](#eq:relay) uses the same magnitude $|K|$ and lever ratio as [(38)](#eq:flapper).
 
-<figure id="fig:relay" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig21.svg" />
-<figcaption><strong>Figure 19.</strong> Pneumatic relay (power amplifier), schematic. The flapper’s back pressure <span class="math inline">\(P_b\)</span> positions a lightweight ball between a supply seat and a vent seat; whichever seat it leaves open decides whether the output line fills from supply or empties to atmosphere. Output pressure swings over the full supply range for a very small ball travel, and the sign is inverted relative to <span class="math inline">\(P_b\)</span>.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig21.svg){#fig:relay}
+/// caption
+**Figure 19.** Pneumatic relay (power amplifier), schematic. The flapper’s back pressure $P_b$ positions a lightweight ball between a supply seat and a vent seat; whichever seat it leaves open decides whether the output line fills from supply or empties to atmosphere. Output pressure swings over the full supply range for a very small ball travel, and the sign is inverted relative to $P_b$.
+///
 
 #### 5.4. The pneumatic (diaphragm) actuator { #sss:diaphragm }
 
@@ -1243,15 +1176,13 @@ $$A\,\Delta P = M\Delta\ddot y + f\Delta\dot y + K\Delta y .$$
 
 <a id="eq:cyl"></a>
 
-$$\begin{equation}
-  \frac{\Delta Y(s)}{\Delta P(s)}=\frac{A}{Ms^{2}+fs+K}.
-  \tag{40}
-\end{equation}$$
+$$\frac{\Delta Y(s)}{\Delta P(s)}=\frac{A}{Ms^{2}+fs+K}.
+  \tag{40}$$
 
-<figure id="fig:pneuact" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig22.svg" />
-<figcaption><strong>Figure 20.</strong> Pneumatic diaphragm actuator. Unlike the hydraulic cylinder, the spring gives it a definite equilibrium position for each pressure — so its transfer function <a href="#eq:pneuact">(40)</a> is second order with <em>no</em> free integrator. Cf. Nagrath &amp; Gopal Fig. 4.37, p. 119.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig22.svg){#fig:pneuact}
+/// caption
+**Figure 20.** Pneumatic diaphragm actuator. Unlike the hydraulic cylinder, the spring gives it a definite equilibrium position for each pressure — so its transfer function [(40)](#eq:pneuact) is second order with *no* free integrator. Cf. Nagrath & Gopal Fig. 4.37, p. 119.
+///
 
 /// admonition | Common pitfall
     type: warning
@@ -1277,10 +1208,10 @@ $$\%\text{OS}=100\,e^{-\pi\zeta/\sqrt{1-\zeta^{2}}}=9.5\%,
 
  Figure [21](#fig:diaphragmstep) shows the response. The whole transient is over in about 50 ms — consistent with §[4.3](#sss:cylinder)’s observation that the actuator’s own dynamics are usually the fast part of a pneumatic loop; it is the *lines* carrying the pressure signal to and from it, not modelled here, that are pneumatics’ real speed limit.
 
-<figure id="fig:diaphragmstep" data-latex-placement="H">
-<img src="../svg/week-01-notes-supp/fig23.svg" />
-<figcaption><strong>Figure 21.</strong> Step response of the diaphragm actuator of Worked example 5.1: <span class="math inline">\(\omega_{n}=200\,\mathrm{rad/s}\)</span>, <span class="math inline">\(\zeta=0.60\)</span>. Compare the shape with Figure <a href="#fig:ratefb">15</a> — same mathematics, a mechanical spring supplying the restoring force instead of a synchro-and-amplifier loop.</figcaption>
-</figure>
+![](svg/week-01-notes-supp/fig23.svg){#fig:diaphragmstep}
+/// caption
+**Figure 21.** Step response of the diaphragm actuator of Worked example 5.1: $\omega_{n}=200\,\mathrm{rad/s}$, $\zeta=0.60$. Compare the shape with Figure [15](#fig:ratefb) — same mathematics, a mechanical spring supplying the restoring force instead of a synchro-and-amplifier loop.
+///
 
 ///
 
@@ -1323,17 +1254,17 @@ clP6.5cm Eq. & Result & Origin<br>
 
 ### 6. The shape that keeps recurring { #sec:shape }
 
-| **Device** | **Transfer function** | **Equation** |
-|:---|:---|:--:|
-| Armature-controlled d.c. motor | $\theta/V_a = K_m/[s(\tau_m s+1)]$ | [(19)](#eq:dcm) |
-| Two-phase a.c. servomotor | $\theta/E = K_m/[s(\tau_m s+1)]$ | [(25)](#eq:acm) |
-| Hydraulic pump–motor transmission | $\theta/X = K/[s(\tau s+1)]$ | [(34)](#eq:hyd) |
-| Hydraulic linear actuator | $Y/X = K/[s(\tau s+1)]$ | [(36)](#eq:cyl) |
-| Potentiometer error detector | $V_e/(r-c)=K_p$ | [(1)](#eq:pot) |
-| Synchro error detector | $E/(\theta-\alpha)=K_s$ | [(14)](#eq:synchro) |
-| Tachogenerator | $V_t/\dot\theta = K_t$ | [(29)](#eq:tacho) |
-| Pneumatic bellows | $\Delta X/\Delta P = A/K$ | [(37)](#eq:bellows) |
-| Pneumatic diaphragm actuator | $\Delta Y/\Delta P = A/(Ms^2+fs+K)$ | [(40)](#eq:pneuact) |
+| **Device**                        | **Transfer function**               |    **Equation**     |
+|:----------------------------------|:------------------------------------|:-------------------:|
+| Armature-controlled d.c. motor    | $\theta/V_a = K_m/[s(\tau_m s+1)]$  |   [(19)](#eq:dcm)   |
+| Two-phase a.c. servomotor         | $\theta/E = K_m/[s(\tau_m s+1)]$    |   [(25)](#eq:acm)   |
+| Hydraulic pump–motor transmission | $\theta/X = K/[s(\tau s+1)]$        |   [(34)](#eq:hyd)   |
+| Hydraulic linear actuator         | $Y/X = K/[s(\tau s+1)]$             |   [(36)](#eq:cyl)   |
+| Potentiometer error detector      | $V_e/(r-c)=K_p$                     |   [(1)](#eq:pot)    |
+| Synchro error detector            | $E/(\theta-\alpha)=K_s$             | [(14)](#eq:synchro) |
+| Tachogenerator                    | $V_t/\dot\theta = K_t$              |  [(29)](#eq:tacho)  |
+| Pneumatic bellows                 | $\Delta X/\Delta P = A/K$           | [(37)](#eq:bellows) |
+| Pneumatic diaphragm actuator      | $\Delta Y/\Delta P = A/(Ms^2+fs+K)$ | [(40)](#eq:pneuact) |
 
 /// admonition | Key idea
     type: info

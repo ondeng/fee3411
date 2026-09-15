@@ -4,7 +4,7 @@ title: Assignments
 
 # Assignments
 
-Four assignments, each issued two weeks before it is due, and each worth 1.5%.
+Four assignments, each issued two weeks before it is due, and each worth 2.5%.
 
 | | Issued | Due | Covers | |
 |---|---|---|---|---|
