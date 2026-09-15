@@ -40,8 +40,3 @@ a second explanation and a much larger problem bank.
 - **Sundararajan, D. — *Control Systems: An Introduction*.** A compact second
   treatment.
 
-/// warning | Check your edition
-Section and figure numbers move between editions. The references throughout
-these notes are to the **editions named above** — Nise 6th, Nagrath 2nd. If your
-copy is a different edition, navigate by section *title*, not by number.
-///

@@ -18,7 +18,7 @@
 # ============================================================================
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
-PROJ="$(cd "$HERE/.." && pwd)"
+PROJ="$(cd "$HERE/../Edited" && pwd)"
 SRC="$HERE/src"
 
 if [ ! -d "$PROJ/Notes" ]; then

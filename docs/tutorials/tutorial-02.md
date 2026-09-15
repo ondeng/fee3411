@@ -29,6 +29,8 @@ $$L_a\to0:\quad \frac{\theta_m(s)}{V_a(s)}=\frac{K_m}{s(\tau_ms+1)},$$
 
 $$K_m=\frac{K_t}{R_ab+K_tK_b},\qquad \tau_m=\frac{J_mR_a}{R_ab+K_tK_b}$$
 
+///
+
 **Gear reflection to the motor shaft**<br>
 
 $$n=\frac{\theta_L}{\theta_m},\qquad
@@ -41,8 +43,6 @@ $$\Delta\dot x \approx
   \left.\frac{\partial f}{\partial x}\right|_{0}\!\Delta x
   +\left.\frac{\partial f}{\partial u}\right|_{0}\!\Delta u,
   \qquad f(x_0,u_0)=0$$
-
-///
 
 ## Question 1 — The servomotor: derive, reduce, and check the reduction *\[in the hour\]* { #question-1-the-servomotor-derive-reduce-and-check-the-reduction-in-the-hour }
 

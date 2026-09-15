@@ -36,6 +36,8 @@ $$y(\infty)=\lim_{s\to0}sY(s)=G(0)$$
 
  (poles of $sY(s)$ all in the open left half plane)
 
+///
+
 **Partial-fraction templates**<br>
 *Distinct real pole:* 
 
@@ -54,8 +56,6 @@ $$\frac{s+a}{(s+a)^2+\omega^2}\leftrightarrow e^{-at}\cos\omega t$$
  
 
 $$\frac{\omega}{(s+a)^2+\omega^2}\leftrightarrow e^{-at}\sin\omega t$$
-
-///
 
 ## Question 1 — Series *RLC* circuit: full derivation *\[in the hour\]* { #question-1-series-rlc-circuit-full-derivation-in-the-hour }
 

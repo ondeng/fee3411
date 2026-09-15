@@ -8,21 +8,21 @@ title: "Week 3 — Transfer Functions and the s-Plane"
 /// admonition | By the end of this week you should be able to
     type: abstract
 
--   Solve a linear constant-coefficient differential equation with non-zero initial conditions by Laplace transform, and separate the forced response from the natural response in the answer.
+- Solve a linear constant-coefficient differential equation with non-zero initial conditions by Laplace transform, and separate the forced response from the natural response in the answer.
 
--   Define the transfer function of an LTI system and derive it directly from the system differential equation, stating the zero-initial-condition assumption that makes the definition legitimate.
+- Define the transfer function of an LTI system and derive it directly from the system differential equation, stating the zero-initial-condition assumption that makes the definition legitimate.
 
--   Obtain a transfer function of an electrical network in one step using the impedances $R$, $Ls$ and $1/Cs$, without first writing a differential equation.
+- Obtain a transfer function of an electrical network in one step using the impedances $R$, $Ls$ and $1/Cs$, without first writing a differential equation.
 
--   Find the poles and zeros of a transfer function, draw its pole–zero map, and read the form of the natural response off the pole locations alone.
+- Find the poles and zeros of a transfer function, draw its pole–zero map, and read the form of the natural response off the pole locations alone.
 
--   Invert a rational transfer function by partial fractions for distinct real poles and for a complex-conjugate pair.
+- Invert a rational transfer function by partial fractions for distinct real poles and for a complex-conjugate pair.
 
--   Explain what a zero does to a response — and what it does not do — including the initial undershoot of a non-minimum-phase system.
+- Explain what a zero does to a response — and what it does not do — including the initial undershoot of a non-minimum-phase system.
 
--   Compute the d.c. gain of a transfer function and state the condition under which the final value theorem may be applied at all.
+- Compute the d.c. gain of a transfer function and state the condition under which the final value theorem may be applied at all.
 
--   State the discrete-time counterparts of the transfer function and of the stability region, and write the transfer function of a pure time delay, distinguishing it from the transient specification called delay time.
+- State the discrete-time counterparts of the transfer function and of the stability region, and write the transfer function of a pure time delay, distinguishing it from the transient specification called delay time.
 
 ///
 
@@ -51,8 +51,10 @@ The (one-sided) Laplace transform of $f(t)$ is
 
 <a id="eq:laplace-def"></a>
 
-$$F(s) = \mathcal{L}\{f(t)\} = \int_{0^-}^{\infty} f(t)\,e^{-st}\,dt ,
-  \tag{1}$$
+$$\begin{equation}
+  F(s) = \mathcal{L}\{f(t)\} = \int_{0^-}^{\infty} f(t)\,e^{-st}\,dt ,
+  \tag{1}
+\end{equation}$$
 
  where $s=\sigma+\mathrm{j}\omega$ is a complex variable (Khalil, p. 438). The lower limit is written $0^-$, just *before* $t=0$, so that an impulse applied at the origin is captured rather than half-captured. Table [1](#tab:pairs) lists the pairs and properties used in this unit; Khalil’s Appendix C (p. 444) is the fuller table to work from.
 
@@ -159,30 +161,32 @@ $$a_n y^{(n)} + \cdots + a_1\dot y + a_0 y
 
 <a id="eq:tf-general"></a>
 
-$$G(s) = \frac{Y(s)}{U(s)}
+$$\begin{equation}
+  G(s) = \frac{Y(s)}{U(s)}
        = \frac{b_m s^{m} + b_{m-1}s^{m-1} + \cdots + b_1 s + b_0}
               {a_n s^{n} + a_{n-1}s^{n-1} + \cdots + a_1 s + a_0}
        = \frac{N(s)}{D(s)} .
-  \tag{2}$$
+  \tag{2}
+\end{equation}$$
 
  Reading [(2)](#eq:tf-general) in reverse is just as useful: given a transfer function, the differential equation can be written straight back down by replacing $s^k Y$ with $y^{(k)}$ and $s^k U$ with $u^{(k)}$.
 
-![](svg/week-03-notes/fig01.svg){#fig:tf-block}
-/// caption
-**Figure 1.** The transfer function as a block: $Y(s)=G(s)\,U(s)$. Multiplication in the $s$-domain replaces convolution in the time domain. Cf. Nise Fig. 2.2, p. 45.
-///
+<figure id="fig:tf-block" data-latex-placement="htbp">
+<img src="../svg/week-03-notes/fig01.svg" />
+<figcaption><strong>Figure 1.</strong> The transfer function as a block: <span class="math inline">\(Y(s)=G(s)\,U(s)\)</span>. Multiplication in the <span class="math inline">\(s\)</span>-domain replaces convolution in the time domain. Cf. Nise Fig. 2.2, p. 45.</figcaption>
+</figure>
 
 Several properties follow immediately from [(2)](#eq:tf-general), and each is used later in the unit:
 
--   **The denominator is the characteristic polynomial.** Setting $D(s)=0$ gives the characteristic equation of Week 2. Every stability method from Week 7 onward is a statement about the roots of $D(s)$.
+- **The denominator is the characteristic polynomial.** Setting $D(s)=0$ gives the characteristic equation of Week 2. Every stability method from Week 7 onward is a statement about the roots of $D(s)$.
 
--   **Order.** The order of the system is $n$, the degree of $D(s)$.
+- **Order.** The order of the system is $n$, the degree of $D(s)$.
 
--   **Proper and strictly proper.** A physical system has $m\le n$ (*proper*); most have $m<n$ (*strictly proper*). A transfer function with $m>n$ would differentiate its input more times than it integrates, which no physical device does. The difference $n-m$ is the **relative degree**, and §[9](#sec:zeros) shows it is visible in the very first instant of the step response.
+- **Proper and strictly proper.** A physical system has $m\le n$ (*proper*); most have $m<n$ (*strictly proper*). A transfer function with $m>n$ would differentiate its input more times than it integrates, which no physical device does. The difference $n-m$ is the **relative degree**, and §[9](#sec:zeros) shows it is visible in the very first instant of the step response.
 
--   **The impulse response.** Since $\mathcal{L}\{\delta(t)\}=1$, the response to a unit impulse is $Y(s)=G(s)$, so $g(t)=\mathcal{L}^{-1}\{G(s)\}$. The transfer function *is* the impulse response, transformed.
+- **The impulse response.** Since $\mathcal{L}\{\delta(t)\}=1$, the response to a unit impulse is $Y(s)=G(s)$, so $g(t)=\mathcal{L}^{-1}\{G(s)\}$. The transfer function *is* the impulse response, transformed.
 
--   **Series connection.** Two blocks in cascade multiply: $Y=G_2G_1U$. This is the property Week 4 builds block-diagram algebra on.
+- **Series connection.** Two blocks in cascade multiply: $Y=G_2G_1U$. This is the property Week 4 builds block-diagram algebra on.
 
 /// admonition | Common pitfall
     type: warning
@@ -197,10 +201,10 @@ Week 2 derived the differential equation of the series $RLC$ network of Figure�
 
 $$LC\,\ddot v_o + RC\,\dot v_o + v_o = v_i .$$
 
-![](svg/week-03-notes/fig02.svg){#fig:rlc}
-/// caption
-**Figure 2.** The series $RLC$ network of Week 2, drawn (a) with its components and (b) with their $s$-domain impedances. The output is the capacitor voltage in both. Cf. Khalil Fig. 2-4, p. 17.
-///
+<figure id="fig:rlc" data-latex-placement="htbp">
+<img src="../svg/week-03-notes/fig02.svg" />
+<figcaption><strong>Figure 2.</strong> The series <span class="math inline">\(RLC\)</span> network of Week 2, drawn (a) with its components and (b) with their <span class="math inline">\(s\)</span>-domain impedances. The output is the capacitor voltage in both. Cf. Khalil Fig. 2-4, p. 17.</figcaption>
+</figure>
 
 /// admonition | Worked example 3.2 — transfer function of the series $RLC$ network
     type: example
@@ -263,21 +267,23 @@ Write the transfer function in factored form:
 
 <a id="eq:factored"></a>
 
-$$G(s) = K\,\frac{(s-z_1)(s-z_2)\cdots(s-z_m)}{(s-p_1)(s-p_2)\cdots(s-p_n)} .
-  \tag{3}$$
+$$\begin{equation}
+  G(s) = K\,\frac{(s-z_1)(s-z_2)\cdots(s-z_m)}{(s-p_1)(s-p_2)\cdots(s-p_n)} .
+  \tag{3}
+\end{equation}$$
 
--   The **zeros** $z_1,\dots,z_m$ are the roots of the numerator: the values of $s$ at which $G(s)=0$.
+- The **zeros** $z_1,\dots,z_m$ are the roots of the numerator: the values of $s$ at which $G(s)=0$.
 
--   The **poles** $p_1,\dots,p_n$ are the roots of the denominator: the values of $s$ at which $G(s)$ becomes infinite. They are the roots of the characteristic equation.
+- The **poles** $p_1,\dots,p_n$ are the roots of the denominator: the values of $s$ at which $G(s)$ becomes infinite. They are the roots of the characteristic equation.
 
--   $K$ is the **gain factor**. It is *not* the d.c. gain — see §[10](#sec:dcgain).
+- $K$ is the **gain factor**. It is *not* the d.c. gain — see §[10](#sec:dcgain).
 
 Because the coefficients of $N(s)$ and $D(s)$ are real, any complex poles or zeros occur in conjugate pairs, so the pole–zero map is always symmetric about the real axis. Plotting poles as $\times$ and zeros as $\circ$ on the complex plane gives the **pole–zero map**, and that picture is essentially the whole of the system’s dynamics.
 
-![](svg/week-03-notes/fig03.svg){#fig:pzmap}
-/// caption
-**Figure 3.** Pole–zero map of $G(s)=4(s+3)/\bigl[(s+1)(s^{2}+2s+10)\bigr]$: poles ($\times$) at $-1$ and $-1\pm\mathrm{j}3$, a zero ($\circ$) at $-3$. Cf. Nise §4.2, p. 162.
-///
+<figure id="fig:pzmap" data-latex-placement="htbp">
+<img src="../svg/week-03-notes/fig03.svg" />
+<figcaption><strong>Figure 3.</strong> Pole–zero map of <span class="math inline">\(G(s)=4(s+3)/\bigl[(s+1)(s^{2}+2s+10)\bigr]\)</span>: poles (<span class="math inline">\(\times\)</span>) at <span class="math inline">\(-1\)</span> and <span class="math inline">\(-1\pm\mathrm{j}3\)</span>, a zero (<span class="math inline">\(\circ\)</span>) at <span class="math inline">\(-3\)</span>. Cf. Nise §4.2, p. 162.</figcaption>
+</figure>
 
 ### 7. The poles set the natural modes { #sec:modes }
 
@@ -287,14 +293,14 @@ Partial-fraction expansion of $Y(s)=G(s)U(s)$ produces one term for each pole. E
 
 <a id="tab:pairs"></a>
 
-| **Pole location**                                            | **Term in $y(t)$**                                |               **Shape**               |
-|:-------------------------------------------------------------|:--------------------------------------------------|:-------------------------------------:|
-| Negative real, $s=-a$                                        | $Ae^{-at}$, decaying                              | ![image](svg/week-03-notes/fig04.svg) |
-| At the origin, $s=0$                                         | $A$, constant (an integrator)                     | ![image](svg/week-03-notes/fig05.svg) |
-| Positive real, $s=+a$                                        | $Ae^{+at}$, growing                               | ![image](svg/week-03-notes/fig06.svg) |
-| Complex pair, $s=-a\pm\mathrm{j}\omega$                      | $Ae^{-at}\sin(\omega t+\phi)$, damped oscillation | ![image](svg/week-03-notes/fig07.svg) |
-| Pair on the $\mathrm{j}\omega$ axis, $s=\pm\mathrm{j}\omega$ | $A\sin(\omega t+\phi)$, sustained                 | ![image](svg/week-03-notes/fig08.svg) |
-| Complex pair, $s=+a\pm\mathrm{j}\omega$                      | $Ae^{+at}\sin(\omega t+\phi)$, growing            | ![image](svg/week-03-notes/fig09.svg) |
+| **Pole location** | **Term in $y(t)$** | **Shape** |
+|:---|:---|:--:|
+| Negative real, $s=-a$ | $Ae^{-at}$, decaying | ![image](svg/week-03-notes/fig04.svg) |
+| At the origin, $s=0$ | $A$, constant (an integrator) | ![image](svg/week-03-notes/fig05.svg) |
+| Positive real, $s=+a$ | $Ae^{+at}$, growing | ![image](svg/week-03-notes/fig06.svg) |
+| Complex pair, $s=-a\pm\mathrm{j}\omega$ | $Ae^{-at}\sin(\omega t+\phi)$, damped oscillation | ![image](svg/week-03-notes/fig07.svg) |
+| Pair on the $\mathrm{j}\omega$ axis, $s=\pm\mathrm{j}\omega$ | $A\sin(\omega t+\phi)$, sustained | ![image](svg/week-03-notes/fig08.svg) |
+| Complex pair, $s=+a\pm\mathrm{j}\omega$ | $Ae^{+at}\sin(\omega t+\phi)$, growing | ![image](svg/week-03-notes/fig09.svg) |
 
 **Table 1.** Pole location and the mode it contributes to the natural response.
 
@@ -307,10 +313,10 @@ Every mode decays if and only if its pole has a *strictly negative real part*. S
 
 ///
 
-![](svg/week-03-notes/fig10.svg){#fig:splane-regions}
-/// caption
-**Figure 4.** The stability picture in the $s$-plane. Every stability test in Weeks 7–12 — Routh–Hurwitz, root locus, Nyquist — is a different way of answering the same question: are any poles to the right of the imaginary axis?
-///
+<figure id="fig:splane-regions" data-latex-placement="htbp">
+<img src="../svg/week-03-notes/fig10.svg" />
+<figcaption><strong>Figure 4.</strong> The stability picture in the <span class="math inline">\(s\)</span>-plane. Every stability test in Weeks 7–12 — Routh–Hurwitz, root locus, Nyquist — is a different way of answering the same question: are any poles to the right of the imaginary axis?</figcaption>
+</figure>
 
 ### 8. Inverse Laplace by partial fractions { #sec:partial }
 
@@ -390,10 +396,10 @@ $$\dot y_1(0)=0, \qquad \dot y_2(0)=+\tfrac{2}{3}, \qquad
 
 ///
 
-![](svg/week-03-notes/fig11.svg){#fig:zeros}
-/// caption
-**Figure 5.** Step responses of the three systems of Worked example 3.4. Identical poles and identical d.c. gain; only the zero differs. The right-half-plane zero of $G_3$ produces the initial undershoot.
-///
+<figure id="fig:zeros" data-latex-placement="htbp">
+<img src="../svg/week-03-notes/fig11.svg" />
+<figcaption><strong>Figure 5.</strong> Step responses of the three systems of Worked example 3.4. Identical poles and identical d.c. gain; only the zero differs. The right-half-plane zero of <span class="math inline">\(G_3\)</span> produces the initial undershoot.</figcaption>
+</figure>
 
 /// admonition | Key idea
     type: info
@@ -415,8 +421,10 @@ For a constant input, all derivatives vanish in the steady state, so $s\to0$ in 
 
 <a id="eq:dcgain"></a>
 
-$$G(0) = \frac{b_0}{a_0} ,
-  \tag{4}$$
+$$\begin{equation}
+  G(0) = \frac{b_0}{a_0} ,
+  \tag{4}
+\end{equation}$$
 
  the ratio of the constant terms. It is the factor by which a constant input is multiplied once the transients have died away. For a unit step input, the steady-state output *is* $G(0)$.
 
@@ -464,10 +472,10 @@ A continuous system is stable when every pole satisfies $\mathrm{Re}(s)<0$; a di
 
 ///
 
-![](svg/week-03-notes/fig12.svg){#fig:s-vs-z}
-/// caption
-**Figure 6.** Stability regions compared. The map $z=e^{sT}$ carries the shaded left half plane onto the shaded interior of the unit circle.
-///
+<figure id="fig:s-vs-z" data-latex-placement="htbp">
+<img src="../svg/week-03-notes/fig12.svg" />
+<figcaption><strong>Figure 6.</strong> Stability regions compared. The map <span class="math inline">\(z=e^{sT}\)</span> carries the shaded left half plane onto the shaded interior of the unit circle.</figcaption>
+</figure>
 
 FEE3411 works entirely in continuous time; this section exists because the syllabus asks for the comparison, and because every controller you will actually build is a discrete one running on a processor.
 
@@ -479,10 +487,10 @@ $$y(t) = u(t-\tau)\,1(t-\tau)
   \qquad\Longrightarrow\qquad
   \frac{Y(s)}{U(s)} = e^{-\tau s} .$$
 
-![](svg/week-03-notes/fig13.svg){#fig:delay}
-/// caption
-**Figure 7.** A pure time delay reproduces the input shape exactly, $\tau$ seconds later. (The two traces are drawn at slightly different heights only so that both remain visible.)
-///
+<figure id="fig:delay" data-latex-placement="htbp">
+<img src="../svg/week-03-notes/fig13.svg" />
+<figcaption><strong>Figure 7.</strong> A pure time delay reproduces the input shape exactly, <span class="math inline">\(\tau\)</span> seconds later. (The two traces are drawn at slightly different heights only so that both remain visible.)</figcaption>
+</figure>
 
 /// admonition | Common pitfall
     type: warning
@@ -495,8 +503,10 @@ Where a rational approximation is needed, the **Padé approximation** supplies o
 
 <a id="eq:pade"></a>
 
-$$e^{-\tau s} \approx \frac{1-\tau s/2}{1+\tau s/2} ,
-  \tag{5}$$
+$$\begin{equation}
+  e^{-\tau s} \approx \frac{1-\tau s/2}{1+\tau s/2} ,
+  \tag{5}
+\end{equation}$$
 
  whose series expansion agrees with $e^{-\tau s}$ up to and including the $s^{2}$ term. Notice where its zero sits: at $s=+2/\tau$, in the right half plane. A delay behaves like a non-minimum-phase system in exactly the sense of §[9](#sec:zeros) — which is the analytical reason delay is so damaging to a feedback loop.
 
@@ -509,21 +519,21 @@ The syllabus phrase *delay time* means something different from the pure time de
 
 ## Summary { #summary }
 
--   The Laplace transform turns a linear constant-coefficient differential equation into algebra, carrying initial conditions in automatically through $\mathcal{L}\{\dot f\}=sF(s)-f(0^-)$.
+- The Laplace transform turns a linear constant-coefficient differential equation into algebra, carrying initial conditions in automatically through $\mathcal{L}\{\dot f\}=sF(s)-f(0^-)$.
 
--   The transfer function $G(s)=Y(s)/U(s)$, defined with zero initial conditions, is a property of the plant alone. Its denominator is the characteristic polynomial, its inverse transform is the impulse response, and blocks in cascade multiply.
+- The transfer function $G(s)=Y(s)/U(s)$, defined with zero initial conditions, is a property of the plant alone. Its denominator is the characteristic polynomial, its inverse transform is the impulse response, and blocks in cascade multiply.
 
--   For an electrical network, the impedances $R$, $Ls$, $1/Cs$ give the transfer function directly by voltage- and current-divider algebra, with no differential equation.
+- For an electrical network, the impedances $R$, $Ls$, $1/Cs$ give the transfer function directly by voltage- and current-divider algebra, with no differential equation.
 
--   Poles are the roots of the denominator, zeros the roots of the numerator; both are plotted on the pole–zero map, which is symmetric about the real axis.
+- Poles are the roots of the denominator, zeros the roots of the numerator; both are plotted on the pole–zero map, which is symmetric about the real axis.
 
--   Each pole contributes one mode: real part sets growth or decay, imaginary part sets oscillation. A system is stable exactly when every pole lies in the open left half plane.
+- Each pole contributes one mode: real part sets growth or decay, imaginary part sets oscillation. A system is stable exactly when every pole lies in the open left half plane.
 
--   Zeros add no modes; they reweight the residues and so reshape the transient. A right-half-plane zero causes initial undershoot (non-minimum-phase) but does not cause instability.
+- Zeros add no modes; they reweight the residues and so reshape the transient. A right-half-plane zero causes initial undershoot (non-minimum-phase) but does not cause instability.
 
--   The d.c. gain is $G(0)=b_0/a_0$, and is not the gain factor $K$. The final value theorem gives it, but only for a stable system.
+- The d.c. gain is $G(0)=b_0/a_0$, and is not the gain factor $K$. The final value theorem gives it, but only for a stable system.
 
--   Discrete systems use $G(z)$ in place of $G(s)$, with the stability region the unit circle instead of the left half plane. A pure time delay has transfer function $e^{-\tau s}$, is not rational, and is distinct from the transient specification called delay time.
+- Discrete systems use $G(z)$ in place of $G(s)$, with the stability region the unit circle instead of the left half plane. A pure time delay has transfer function $e^{-\tau s}$, is not rational, and is distinct from the transient specification called delay time.
 
 ## Before the tutorial { #before-the-tutorial }
 

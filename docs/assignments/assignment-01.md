@@ -8,13 +8,11 @@ title: "Assignment 1 — Components, Devices and Modelling"
 /// admonition | Reading
     type: quote
 
-**Issued** Week 1. **Due** at the start of the Week 3 lecture. **Weight** 1.5% of the unit. **Total** 40 marks.
+**Issued** Week 1. **Due** after 2 weeks. **Weight** 1.5% of the unit. **Total** 40 marks.
 
 **Covers** Week 1 (control system components and devices) and Week 2 (mathematical modelling of physical systems). Questions 3 and 4 use material from the Week 2 lecture and tutorial, so attempt them after that week.
 
-**Submit** your own handwritten or typed solutions. Show your working — an unsupported final answer earns little credit, and a wrong answer with sound working earns most of it. This is individual work: you may discuss the questions with others, but what you hand in must be written by you.
-
-**No software is required.** Everything here is to be done by hand.
+**Submit** your own handwritten solutions. Show your working. This is individual work: you may discuss the questions with others, but what you hand in must be written by you.
 
 ///
 
@@ -86,4 +84,3 @@ $$\frac{\theta_{m}(s)}{V_{a}(s)}=\frac{K_{m}}{s(\tau_{m}s+1)},$$
 <br>
 
 End of Assignment 1. Total 40 marks.<br>
-Due at the start of the Week 3 lecture.

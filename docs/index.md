@@ -12,7 +12,8 @@ phone, tutorial sheets with worked solutions, and the assignments. The notes are
 The set texts are there to reinforce and to give you more problems, not as a
 prerequisite.
 
-/// info | How to use this site
+/// admonition | How to use this site
+    type: info
 Each week's notes are one page. Read the **outcomes** box first, work through the
 body, then try the self-checks under *Before the tutorial* before the tutorial
 hour -- that hour is much more useful to you if you arrive having already got
@@ -23,9 +24,9 @@ stuck on something.
 
 | Week | Topic | Notes | Extra |
 |---|---|---|---|
-| 1 | Introduction and control system components | [Notes](notes/week-01.md) | |
-| 2 | Mathematical modelling of physical systems | [Notes](notes/week-02.md) | |
-| 3 | Transfer functions and the s-plane | [Notes](notes/week-03.md) | |
+| 1 | Introduction and control system components | [Notes](notes/week-01.md) | [Supplementary](supplementary/week-01-notes-supp.md)|
+| 2 | Mathematical modelling of physical systems | *to come* | |
+| 3 | Transfer functions and the s-plane | *to come* | |
 | 4 | Block diagrams and signal flow graphs | *to come* | |
 | 5 | Transient response of first- and second-order systems | *to come* | |
 | 6 | Standard inputs and steady-state errors · **CAT 1** | *to come* | |
@@ -37,9 +38,6 @@ stuck on something.
 | 12 | Nyquist stability, relative stability and Nichols · **CAT 2** | *to come* | |
 | 13 | Revision | *to come* | |
 
-The **Extra** column links any supplementary material for that week (a deeper
-derivation, extra worked examples) once there is any -- see
-`web/build_site.sh`'s `SUPPLEMENTARY` array to add one.
 
 Teaching runs Weeks 1–12. Week 13 is revision; Weeks 14–15 are examinations.
 
@@ -56,11 +54,6 @@ Continuous assessment **30%**, main examination **70%**. Fixed by the syllabus.
 | Assignment 4 (simulation) | Issued Wk 9, due Wk 11 | 1.5% | Gain adjustment, Simulink, frequency response |
 | **CAT 2** | Week 12, tutorial hour | **12%** | Weeks 6–11 |
 
-/// warning | Protected tutorial hours — Weeks 8, 10 and 11
-Those three tutorial hours are hand-sketching practice for root locus, Bode and
-Nyquist. They are motor skills, learned by drawing rather than by watching.
-Nothing displaces them, which is why CAT 2 sits in Week 12 rather than Week 11.
-///
 
 ## What you should be able to do by the end
 
@@ -74,8 +67,4 @@ Nothing displaces them, which is why CAT 2 sits in Week 12 rather than Week 11.
 FEE3411 is the **analysis** half. Design is introduced in Week 9 and developed
 properly in FEE3412.
 
----
 
-*Course materials by Oscar Ondeng. Figures are original redrawings; the source
-of each is attributed in its caption so you can find the original in the set
-texts.*

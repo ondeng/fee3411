@@ -257,8 +257,8 @@ PY
 # Week list:  <stem>|<week no>|<topic>
 WEEKS=(
   "week-01-notes|1|Introduction and Control System Components"
-  "week-02-notes|2|Mathematical Modelling of Physical Systems"
-  "week-03-notes|3|Transfer Functions and the s-Plane"
+  # "week-02-notes|2|Mathematical Modelling of Physical Systems"
+  # "week-03-notes|3|Transfer Functions and the s-Plane"
 )
 mkdir -p "$DOCS/notes/svg"
 for entry in "${WEEKS[@]}"; do
@@ -274,9 +274,9 @@ done
 # before anything else runs, so the page has questions only -- this is the
 # actual publish-time switch: flip it and push, no other change needed.
 TUTORIALS=(
-  "week-01-tutorial|1|Mathematical toolkit: Laplace, partial fractions, the s-plane|yes"
-  "week-02-tutorial|2|Electromechanical modelling; linear approximation|yes"
-  "week-03-tutorial|3|Transfer functions; inverse Laplace; poles, zeros and response shape|yes"
+  "week-01-tutorial|1|Mathematical toolkit: Laplace, partial fractions, the s-plane|no"
+  # "week-02-tutorial|2|Electromechanical modelling; linear approximation|no"
+  # "week-03-tutorial|3|Transfer functions; inverse Laplace; poles, zeros and response shape|no"
 )
 mkdir -p "$DOCS/tutorials/svg"
 for entry in "${TUTORIALS[@]}"; do
@@ -316,7 +316,7 @@ done
 #      week's line in docs/index.md, or a line in the relevant notes page.
 # No entries yet.
 SUPPLEMENTARY=(
-  # "week-05-observers-deeper-look|Observer Design: A Deeper Look"
+  "week-01-notes-supp|Control System Components"
 )
 mkdir -p "$DOCS/supplementary/svg"
 for entry in "${SUPPLEMENTARY[@]}"; do

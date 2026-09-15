@@ -8,19 +8,19 @@ title: "Week 2 — Mathematical Modelling of Physical Systems"
 /// admonition | By the end of this week you should be able to
     type: abstract
 
--   State the standard differential-equation model of a linear, time-invariant, causal (LTI) system, and write down its characteristic equation directly from the equation of motion.
+- State the standard differential-equation model of a linear, time-invariant, causal (LTI) system, and write down its characteristic equation directly from the equation of motion.
 
--   Derive the governing differential equation of an electrical network from Kirchhoff’s voltage law, and obtain its transfer function.
+- Derive the governing differential equation of an electrical network from Kirchhoff’s voltage law, and obtain its transfer function.
 
--   Derive the governing differential equation of a translational mechanical system from Newton’s second law, using a free-body diagram, and recognise the force–voltage analogy with an electrical network.
+- Derive the governing differential equation of a translational mechanical system from Newton’s second law, using a free-body diagram, and recognise the force–voltage analogy with an electrical network.
 
--   Derive the governing equation of a rotational mechanical system (moment of inertia, torsional spring, viscous friction) by the rotational analogue of Newton’s second law.
+- Derive the governing equation of a rotational mechanical system (moment of inertia, torsional spring, viscous friction) by the rotational analogue of Newton’s second law.
 
--   Explain how a gear train reflects torque, speed and moment of inertia from one shaft to another, and compute an equivalent inertia at a chosen shaft.
+- Explain how a gear train reflects torque, speed and moment of inertia from one shaft to another, and compute an equivalent inertia at a chosen shaft.
 
--   Derive the transfer function of an armature-controlled d.c. servomotor from first principles, with and without armature inductance, and combine it with a gear train driving a load.
+- Derive the transfer function of an armature-controlled d.c. servomotor from first principles, with and without armature inductance, and combine it with a gear train driving a load.
 
--   Linearise a nonlinear differential equation about an operating point by a first-order Taylor expansion, and identify when the approximation is and is not valid.
+- Linearise a nonlinear differential equation about an operating point by a first-order Taylor expansion, and identify when the approximation is and is not valid.
 
 ///
 
@@ -47,18 +47,20 @@ Every method in FEE3411 — Routh–Hurwitz, root locus, Bode, Nyquist — is ap
 
 <a id="eq:general-ode"></a>
 
-$$a_n\,y^{(n)}(t) + a_{n-1}\,y^{(n-1)}(t) + \cdots + a_1\,\dot y(t) + a_0\,y(t)
+$$\begin{equation}
+  a_n\,y^{(n)}(t) + a_{n-1}\,y^{(n-1)}(t) + \cdots + a_1\,\dot y(t) + a_0\,y(t)
   = b_m\,u^{(m)}(t) + \cdots + b_1\,\dot u(t) + b_0\,u(t),
-  \tag{1}$$
+  \tag{1}
+\end{equation}$$
 
  a linear, constant-coefficient ordinary differential equation, where $y^{(k)}=d^k y/dt^k$. Three words describe it precisely, and each is doing real work:
 
--   **Linear** — superposition holds: the response to $\alpha u_1+\beta
-          u_2$ is $\alpha y_1 + \beta y_2$. Every coefficient in [(1)](#eq:general-ode) multiplies $u$, $y$ or a derivative to the first power only; there is no $y^2$, no $u\dot y$, no $\sin y$.
+- **Linear** — superposition holds: the response to $\alpha u_1+\beta
+        u_2$ is $\alpha y_1 + \beta y_2$. Every coefficient in [(1)](#eq:general-ode) multiplies $u$, $y$ or a derivative to the first power only; there is no $y^2$, no $u\dot y$, no $\sin y$.
 
--   **Time-invariant** — the coefficients $a_i,b_i$ do not themselves depend on $t$. Delaying the input by $t_0$ simply delays the output by $t_0$; the system does not care what time it is.
+- **Time-invariant** — the coefficients $a_i,b_i$ do not themselves depend on $t$. Delaying the input by $t_0$ simply delays the output by $t_0$; the system does not care what time it is.
 
--   **Causal** — the output at time $t$ depends only on the input up to time $t$, never on the future. Every physical system is causal; it is listed as a property because *mathematical* operators that are not causal (a pure differentiator applied to noisy data, for instance) turn up in textbooks and cannot be built.
+- **Causal** — the output at time $t$ depends only on the input up to time $t$, never on the future. Every physical system is causal; it is listed as a property because *mathematical* operators that are not causal (a pure differentiator applied to noisy data, for instance) turn up in textbooks and cannot be built.
 
 /// admonition | Key idea
     type: info
@@ -88,8 +90,10 @@ Every lumped electrical network is modelled by two laws and three element relati
 
 <a id="eq:elements"></a>
 
-$$v_R = Ri, \qquad v_L = L\frac{di}{dt}, \qquad i_C = C\frac{dv_C}{dt} .
-  \tag{2}$$
+$$\begin{equation}
+  v_R = Ri, \qquad v_L = L\frac{di}{dt}, \qquad i_C = C\frac{dv_C}{dt} .
+  \tag{2}
+\end{equation}$$
 
 /// admonition | Key idea
     type: info
@@ -100,10 +104,10 @@ Writing KVL (or KCL) around a network with the element relations [(2)](#eq:eleme
 
 #### 2.2. Worked example: the series *RLC* network { #sec:rlc }
 
-![](svg/week-02-notes/fig01.svg){#fig:rlc}
-/// caption
-**Figure 1.** Series $RLC$ network with source voltage $v_i(t)$ and the capacitor voltage $v_o(t)$ taken as output. Cf. Khalil Fig. 2-4, p. 17, relabelled with output $v_o$ across $C$ rather than the loop current.
-///
+<figure id="fig:rlc" data-latex-placement="htbp">
+<img src="../svg/week-02-notes/fig01.svg" />
+<figcaption><strong>Figure 1.</strong> Series <span class="math inline">\(RLC\)</span> network with source voltage <span class="math inline">\(v_i(t)\)</span> and the capacitor voltage <span class="math inline">\(v_o(t)\)</span> taken as output. Cf. Khalil Fig. 2-4, p. 17, relabelled with output <span class="math inline">\(v_o\)</span> across <span class="math inline">\(C\)</span> rather than the loop current.</figcaption>
+</figure>
 
 /// admonition | Worked example 2.1 — series $RLC$ network
     type: example
@@ -116,16 +120,20 @@ $$v_i(t) = Ri(t) + L\frac{di(t)}{dt} + v_o(t), \qquad i(t)=C\frac{dv_o(t)}{dt}.$
 
 <a id="eq:rlc-ode"></a>
 
-$$\boxed{\;LC\,\ddot v_o(t) + RC\,\dot v_o(t) + v_o(t) = v_i(t)\;}
-  \tag{3}$$
+$$\begin{equation}
+  \boxed{\;LC\,\ddot v_o(t) + RC\,\dot v_o(t) + v_o(t) = v_i(t)\;}
+  \tag{3}
+\end{equation}$$
 
  a second-order linear ODE of exactly the form [(1)](#eq:general-ode). Taking Laplace transforms with zero initial conditions, 
 
 <a id="eq:rlc-tf"></a>
 
-$$\frac{V_o(s)}{V_i(s)} = \frac{1}{LCs^2+RCs+1},
+$$\begin{equation}
+  \frac{V_o(s)}{V_i(s)} = \frac{1}{LCs^2+RCs+1},
   \qquad\text{characteristic equation } LCs^2+RCs+1=0 .
-  \tag{4}$$
+  \tag{4}
+\end{equation}$$
 
  For $R=6\,\Omega$, $L=2\,\mathrm{H}$, $C=0.05\,\mathrm{F}$: $LC=0.1$, $RC=0.3$, so $0.1s^2+0.3s+1=0$, i.e. $s^2+3s+10=0$, with roots $s=-1.5\pm j2.78$.
 
@@ -155,14 +163,16 @@ The three basic elements are the spring, the viscous damper and the mass (Khalil
 
 <a id="eq:mech-elements"></a>
 
-$$f_{\text{spring}} = Kx, \qquad
+$$\begin{equation}
+  f_{\text{spring}} = Kx, \qquad
   f_{\text{damper}} = B\dot x, \qquad
   f_{\text{net}} = M\ddot x,
-  \tag{5}$$
+  \tag{5}
+\end{equation}$$
 
  where $K$ is the spring constant, $B$ the viscous friction (damping) coefficient, and $M$ the mass. A free-body diagram — every force acting on the mass, drawn with its correct sign — turns [(5)](#eq:mech-elements) into an equation of motion by Newton’s second law.
 
-<figure id="fig:msd">
+<figure id="fig:msd" data-latex-placement="htbp">
 <p><img src="../svg/week-02-notes/fig02.svg" alt="image" /> <img src="../svg/week-02-notes/fig03.svg" alt="image" /></p>
 <figcaption><strong>Figure 2.</strong> Mass–spring–damper system and its free-body diagram: the spring and damper forces oppose the applied force <span class="math inline">\(f(t)\)</span>. Cf. Khalil Fig. 2-13/2-14, p. 24, and Nise Fig. 2.15, p. 63.</figcaption>
 </figure>
@@ -203,15 +213,17 @@ Rotational systems follow the same pattern with torque $T(t)$, angle $\theta(t)$
 
 <a id="eq:rot-elements"></a>
 
-$$T_{\text{spring}} = K\theta, \qquad
+$$\begin{equation}
+  T_{\text{spring}} = K\theta, \qquad
   T_{\text{damper}} = b\dot\theta, \qquad
   T_{\text{net}} = J\ddot\theta .
-  \tag{6}$$
+  \tag{6}
+\end{equation}$$
 
-![](svg/week-02-notes/fig04.svg){#fig:rot}
-/// caption
-**Figure 3.** Rotational system: a torsional spring (represented here by the coiled support) and viscous friction $b$ restrain an inertia $J$ driven by an applied torque $T(t)$. Cf. Nise Fig. 2.21, p. 69.
-///
+<figure id="fig:rot" data-latex-placement="htbp">
+<img src="../svg/week-02-notes/fig04.svg" />
+<figcaption><strong>Figure 3.</strong> Rotational system: a torsional spring (represented here by the coiled support) and viscous friction <span class="math inline">\(b\)</span> restrain an inertia <span class="math inline">\(J\)</span> driven by an applied torque <span class="math inline">\(T(t)\)</span>. Cf. Nise Fig. 2.21, p. 69.</figcaption>
+</figure>
 
 /// admonition | Worked example 2.3 — rotational system
     type: example
@@ -234,19 +246,21 @@ $$\frac{\theta(s)}{T(s)}=\frac{1}{Js^2+bs+K}.$$
 
 A gear train couples two shafts turning at different speeds and torques. Two meshed gears with $N_1$ and $N_2$ teeth turn through angles related by $N_1\theta_1=N_2\theta_2$ (the teeth that mesh must match), so with $n\triangleq\theta_2/\theta_1=N_1/N_2$ the speeds are in ratio $n$ while, since power is conserved across an ideal (lossless) gear pair, the torques are in the inverse ratio $T_2/T_1=1/n$ (Khalil, p. 35; Nise Fig. 2.27, p. 74).
 
-![](svg/week-02-notes/fig05.svg){#fig:gears}
-/// caption
-**Figure 4.** A gear train: the motor drives the small gear ($N_1$ teeth), meshed with the load’s larger gear ($N_2$ teeth), so the load turns more slowly and with more torque than the motor. Cf. Khalil Fig. 2-26/2-27, p. 35–36, and Nise Fig. 2.31, p. 77 (gear train).
-///
+<figure id="fig:gears" data-latex-placement="htbp">
+<img src="../svg/week-02-notes/fig05.svg" />
+<figcaption><strong>Figure 4.</strong> A gear train: the motor drives the small gear (<span class="math inline">\(N_1\)</span> teeth), meshed with the load’s larger gear (<span class="math inline">\(N_2\)</span> teeth), so the load turns more slowly and with more torque than the motor. Cf. Khalil Fig. 2-26/2-27, p. 35–36, and Nise Fig. 2.31, p. 77 (gear train).</figcaption>
+</figure>
 
 Suppose a motor of inertia $J_m$ and friction $b_m$ drives, through a gear train of ratio $n=\theta_L/\theta_m$, a load of inertia $J_L$ and friction $b_L$. Writing the load’s own equation of motion and substituting the torque and angle relations through the gears into the motor’s equation of motion (Khalil, p. 36, eq. 2.30) gives, after eliminating the load variables entirely, 
 
 <a id="eq:gear-reflect"></a>
 
-$$\big(J_m+n^2J_L\big)\ddot\theta_m + \big(b_m+n^2b_L\big)\dot\theta_m = T_m,
+$$\begin{equation}
+  \big(J_m+n^2J_L\big)\ddot\theta_m + \big(b_m+n^2b_L\big)\dot\theta_m = T_m,
   \qquad\text{i.e.}\qquad
   J_{\text{eq}}=J_m+n^2J_L,\quad b_{\text{eq}}=b_m+n^2b_L .
-  \tag{7}$$
+  \tag{7}
+\end{equation}$$
 
 /// admonition | Key idea
     type: info
@@ -266,10 +280,10 @@ The single most common numerical error with gears is reflecting inertia by $n$ i
 
 This is the electromechanical system promised at the end of Week 1: it combines the electrical modelling of §[2](#sec:electrical) with the rotational modelling of §[4](#sec:mech-rot), coupled by the motor’s two electromechanical constants.
 
-![](svg/week-02-notes/fig06.svg){#fig:dcmotor}
-/// caption
-**Figure 5.** Armature-controlled d.c. servomotor: the armature circuit ($R_a$, $L_a$) drives the rotor (inertia $J_m$, friction $b$) against its own back e.m.f. $e_b$; the field is separately excited and held constant. Cf. Khalil Fig. 2-29, p. 37, and Nise Fig. 2.35, p. 79.
-///
+<figure id="fig:dcmotor" data-latex-placement="htbp">
+<img src="../svg/week-02-notes/fig06.svg" />
+<figcaption><strong>Figure 5.</strong> Armature-controlled d.c. servomotor: the armature circuit (<span class="math inline">\(R_a\)</span>, <span class="math inline">\(L_a\)</span>) drives the rotor (inertia <span class="math inline">\(J_m\)</span>, friction <span class="math inline">\(b\)</span>) against its own back e.m.f. <span class="math inline">\(e_b\)</span>; the field is separately excited and held constant. Cf. Khalil Fig. 2-29, p. 37, and Nise Fig. 2.35, p. 79.</figcaption>
+</figure>
 
 #### 6.1. The two coupled equations
 
@@ -279,9 +293,11 @@ With armature resistance $R_a$, inductance $L_a$, current $i_a(t)$ and applied v
 
 <a id="eq:motor-elec"></a>
 
-$$v_a(t) = R_a i_a(t) + L_a\frac{di_a(t)}{dt} + e_b(t),
+$$\begin{equation}
+  v_a(t) = R_a i_a(t) + L_a\frac{di_a(t)}{dt} + e_b(t),
   \qquad e_b(t) = K_b\frac{d\theta_m(t)}{dt},
-  \tag{8}$$
+  \tag{8}
+\end{equation}$$
 
  where $e_b$ is the **back e.m.f.**, induced because a rotating armature in a magnetic field generates a voltage opposing the current that drives it; $K_b$ is the back-e.m.f. constant.
 
@@ -289,8 +305,10 @@ $$v_a(t) = R_a i_a(t) + L_a\frac{di_a(t)}{dt} + e_b(t),
 
 <a id="eq:motor-mech"></a>
 
-$$T_m(t) = K_t\,i_a(t) = J_m\frac{d^2\theta_m(t)}{dt^2}+b\frac{d\theta_m(t)}{dt},
-  \tag{9}$$
+$$\begin{equation}
+  T_m(t) = K_t\,i_a(t) = J_m\frac{d^2\theta_m(t)}{dt^2}+b\frac{d\theta_m(t)}{dt},
+  \tag{9}
+\end{equation}$$
 
  where $T_m$ is the torque developed by the motor and $K_t$ is the torque constant.
 
@@ -312,9 +330,11 @@ $$V_a(s) = (R_a+L_as)I_a(s) + K_bs\,\theta_m(s), \qquad
 
 <a id="eq:motor-full"></a>
 
-$$\boxed{\;\frac{\theta_m(s)}{V_a(s)} =
+$$\begin{equation}
+  \boxed{\;\frac{\theta_m(s)}{V_a(s)} =
    \frac{K_t}{s\big[(R_a+L_as)(J_ms+b)+K_tK_b\big]}\;}
-  \tag{10}$$
+  \tag{10}
+\end{equation}$$
 
  Note the free $s$ standing outside the bracket: it was factored out of $J_ms^2+bs$, and it means the motor is an **integrator** — a constant armature voltage produces a constant *speed*, and position is the integral of speed. This is exactly the $K/[s(\tau s+1)]$ shape flagged for the a.c. servomotor in Week 1.
 
@@ -330,11 +350,13 @@ $$\frac{\theta_m}{V_a} = \frac{K_t}{s\big[R_a(J_ms+b)+K_tK_b\big]}
 
 <a id="eq:motor-reduced"></a>
 
-$$\boxed{\;\frac{\theta_m(s)}{V_a(s)}=\frac{K_m}{s(\tau_ms+1)}\;},
+$$\begin{equation}
+  \boxed{\;\frac{\theta_m(s)}{V_a(s)}=\frac{K_m}{s(\tau_ms+1)}\;},
   \qquad
   K_m=\frac{K_t}{R_ab+K_tK_b}, \qquad
   \tau_m=\frac{J_mR_a}{R_ab+K_tK_b} .
-  \tag{11}$$
+  \tag{11}
+\end{equation}$$
 
 /// admonition | Common pitfall
     type: warning
@@ -365,8 +387,10 @@ Combine §[5](#sec:gears) with the servomotor: if the motor drives a load of ine
 
 <a id="eq:servo-gear-Jeq"></a>
 
-$$J_{\text{eq}} = J_m + n^2J_L .
-  \tag{12}$$
+$$\begin{equation}
+  J_{\text{eq}} = J_m + n^2J_L .
+  \tag{12}
+\end{equation}$$
 
 /// admonition | Worked example 2.5 — geared servomotor
     type: example
@@ -400,18 +424,20 @@ For a static nonlinearity $y=f(x)$ about operating point $(x_0,y_0)$, with $y_0=
 
 <a id="eq:lin-static"></a>
 
-$$\Delta y \;\approx\; f'(x_0)\,\Delta x, \qquad \Delta x = x-x_0,\quad
+$$\begin{equation}
+  \Delta y \;\approx\; f'(x_0)\,\Delta x, \qquad \Delta x = x-x_0,\quad
   \Delta y = y-y_0 .
-  \tag{13}$$
+  \tag{13}
+\end{equation}$$
 
  This is precisely the method already used, without naming it, for the a.c. servomotor torque–speed characteristic in Week 1: $T_m=f(\dot\theta,E)$ was expanded about an operating point to give $\Delta T_m=K\Delta E-f\Delta\dot\theta$.
 
 For a *dynamic* system $\dot x=f(x,u)$, linearization is done about an equilibrium point $(x_0,u_0)$ satisfying $f(x_0,u_0)=0$ — a point where the system, once there, stays there with no input change — using the same first-order Taylor idea on each variable.
 
-![](svg/week-02-notes/fig07.svg){#fig:pendulum}
-/// caption
-**Figure 6.** The simple pendulum: rigid massless rod of length $l$, bob of mass $m$, viscous friction coefficient $k$ (not shown) resisting the swing. Cf. Khalil Fig. 2-44, p. 51.
-///
+<figure id="fig:pendulum" data-latex-placement="htbp">
+<img src="../svg/week-02-notes/fig07.svg" />
+<figcaption><strong>Figure 6.</strong> The simple pendulum: rigid massless rod of length <span class="math inline">\(l\)</span>, bob of mass <span class="math inline">\(m\)</span>, viscous friction coefficient <span class="math inline">\(k\)</span> (not shown) resisting the swing. Cf. Khalil Fig. 2-44, p. 51.</figcaption>
+</figure>
 
 /// admonition | Worked example 2.6 — linearizing the pendulum
     type: example
@@ -445,17 +471,17 @@ A linearization is only valid near the point it was taken about. The two equatio
 
 ## Summary { #summary }
 
--   An LTI causal system’s differential-equation model always has the shape of equation [(1)](#eq:general-ode); its characteristic equation depends only on the plant, never on the input.
+- An LTI causal system’s differential-equation model always has the shape of equation [(1)](#eq:general-ode); its characteristic equation depends only on the plant, never on the input.
 
--   Electrical networks are modelled by Kirchhoff’s laws with the element relations $v_R=Ri$, $v_L=L\dot i$, $i_C=C\dot v_C$; translational mechanical systems by Newton’s second law with $f=Kx$, $B\dot x$, $M\ddot x$; rotational systems the same way with torque, angle and moment of inertia.
+- Electrical networks are modelled by Kirchhoff’s laws with the element relations $v_R=Ri$, $v_L=L\dot i$, $i_C=C\dot v_C$; translational mechanical systems by Newton’s second law with $f=Kx$, $B\dot x$, $M\ddot x$; rotational systems the same way with torque, angle and moment of inertia.
 
--   The force–voltage analogy ($M\leftrightarrow L$, $B\leftrightarrow R$, $K\leftrightarrow 1/C$) means electrical and mechanical systems with the same characteristic equation have identical dynamics but, in general, different gains and units.
+- The force–voltage analogy ($M\leftrightarrow L$, $B\leftrightarrow R$, $K\leftrightarrow 1/C$) means electrical and mechanical systems with the same characteristic equation have identical dynamics but, in general, different gains and units.
 
--   A gear train of ratio $n=\theta_2/\theta_1$ reflects torque by $1/n$ and inertia (and friction) by $n^2$: $J_{\text{eq}}=J_1+n^2J_2$.
+- A gear train of ratio $n=\theta_2/\theta_1$ reflects torque by $1/n$ and inertia (and friction) by $n^2$: $J_{\text{eq}}=J_1+n^2J_2$.
 
--   The armature-controlled d.c. servomotor couples an electrical equation (KVL with back e.m.f.) to a mechanical one (torque balance); eliminating the armature current gives $\theta_m/V_a=K_t/\{s[(R_a+L_as)(J_ms+b)+K_tK_b]\}$, which reduces to $K_m/[s(\tau_ms+1)]$ when $L_a\to0$.
+- The armature-controlled d.c. servomotor couples an electrical equation (KVL with back e.m.f.) to a mechanical one (torque balance); eliminating the armature current gives $\theta_m/V_a=K_t/\{s[(R_a+L_as)(J_ms+b)+K_tK_b]\}$, which reduces to $K_m/[s(\tau_ms+1)]$ when $L_a\to0$.
 
--   Linearization replaces a nonlinear equation by its first-order Taylor expansion about a stated operating point; the result, and even its stability, can differ completely between operating points.
+- Linearization replaces a nonlinear equation by its first-order Taylor expansion about a stated operating point; the result, and even its stability, can differ completely between operating points.
 
 ## Before the tutorial { #before-the-tutorial }
 

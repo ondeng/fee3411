@@ -12,8 +12,8 @@ when you are ready to check yourself, not before.
 | Week | Topic | Sheet |
 |---|---|---|
 | 1 | Mathematical toolkit: Laplace, partial fractions, the s-plane | [Open](tutorials/tutorial-01.md) |
-| 2 | Electromechanical modelling; linear approximation | [Open](tutorials/tutorial-02.md) |
-| 3 | Transfer functions; inverse Laplace; poles, zeros and response shape | [Open](tutorials/tutorial-03.md) |
+| 2 | Electromechanical modelling; linear approximation | *to come* |
+| 3 | Transfer functions; inverse Laplace; poles, zeros and response shape | *to come* |
 
 /// warning | Weeks 8, 10 and 11 are sketching practice
 Those tutorials are hand-drawing sessions — root locus, Bode, Nyquist. Bring
