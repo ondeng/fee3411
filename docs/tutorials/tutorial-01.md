@@ -31,22 +31,22 @@ Questions marked **\[in the hour\]** are the ones we work through together, if t
 | $e^{-at}\sin\omega t$ | $\omega/[(s+a)^{2}+\omega^{2}]$ |
 | $e^{-at}\cos\omega t$ | $(s+a)/[(s+a)^{2}+\omega^{2}]$  |
 
+///
+
 **Properties**<br>
 
-|                 |                                                             |
-|:----------------|:------------------------------------------------------------|
-| Linearity       | $\mathcal{L}\{af+bg\}=aF+bG$                                |
-| Differentiation | $\mathcal{L}\{\dot f\}=sF(s)-f(0^{-})$                      |
-|                 | $\mathcal{L}\{\ddot f\}=s^{2}F(s)-s f(0^{-})-\dot f(0^{-})$ |
-| Integration     | $\mathcal{L}\left\{\int_{0}^{t}\!f\right\}=F(s)/s$          |
-| Frequency shift | $\mathcal{L}\{e^{-at}f(t)\}=F(s+a)$                         |
-| Time shift      | $\mathcal{L}\{f(t-T)u(t-T)\}=e^{-sT}F(s)$                   |
-| Initial value   | $f(0^{+})=\lim_{s\to\infty}sF(s)$                           |
-| Final value     | $f(\infty)=\lim_{s\to 0}sF(s)$                              |
-|                 | *only if all poles of $sF(s)$*                              |
-|                 | *have negative real parts*                                  |
-
-///
+|  |  |
+|:---|:---|
+| Linearity | $\mathcal{L}\{af+bg\}=aF+bG$ |
+| Differentiation | $\mathcal{L}\{\dot f\}=sF(s)-f(0^{-})$ |
+|  | $\mathcal{L}\{\ddot f\}=s^{2}F(s)-s f(0^{-})-\dot f(0^{-})$ |
+| Integration | $\mathcal{L}\left\{\int_{0}^{t}\!f\right\}=F(s)/s$ |
+| Frequency shift | $\mathcal{L}\{e^{-at}f(t)\}=F(s+a)$ |
+| Time shift | $\mathcal{L}\{f(t-T)u(t-T)\}=e^{-sT}F(s)$ |
+| Initial value | $f(0^{+})=\lim_{s\to\infty}sF(s)$ |
+| Final value | $f(\infty)=\lim_{s\to 0}sF(s)$ |
+|  | *only if all poles of $sF(s)$* |
+|  | *have negative real parts* |
 
 ## Question 1 — Standard test signals *\[in the hour\]* { #question-1-standard-test-signals-in-the-hour }
 
@@ -82,25 +82,7 @@ Expand each of the following and hence find $f(t)$. In each case check your answ
 
 3.  $\displaystyle F(s)=\frac{10}{s(s^{2}+2s+5)}$ (a complex pair)
 
-For (c), also read off the undamped natural frequency $\omega_{n}$ and damping ratio $\zeta$ of the quadratic factor.
-
-## Question 4 — Complex numbers and the *s*-plane *\[in the hour\]* { #question-4-complex-numbers-and-the-s-plane-in-the-hour }
-
-This question is the one that pays off most later: the graphical evaluation in part (b) is the whole basis of root-locus sketching in Week 8 and of Bode and Nyquist plots in Weeks 10–12.
-
-Consider 
-
-$$G(s)=\frac{4(s+2)}{s(s+4)} .$$
-
-1.  Mark the poles ($\times$) and zeros ($\circ$) of $G$ on an $s$-plane diagram.
-
-2.  Evaluate $G(s)$ at the point $s=-1+j$ **graphically**: draw the vector from each pole and zero to that point, measure (or compute) its length and angle, and combine them. Confirm your answer algebraically.
-
-3.  A second-order system has poles at $s=-1\pm j2$. Write down the form of the corresponding time-domain term. On a sketch of the $s$-plane, mark $\omega_{n}$ and the angle $\theta$ from the negative real axis, and show that $\zeta=\cos\theta$. Evaluate both.
-
-4.  In one sentence each: what does the *real* part of a pole control, and what does the *imaginary* part control?
-
-## Question 5 — Solving a differential equation *\[homework\]* { #question-5-solving-a-differential-equation-homework }
+## Question 4 — Solving a differential equation *\[homework\]* { #question-4-solving-a-differential-equation-homework }
 
 The position servomechanism of this week’s lecture (Figure 5 of the notes), with a particular choice of amplifier gain, obeys 
 
@@ -110,24 +92,14 @@ $$\ddot{c}+4\dot{c}+8c=8r(t),$$
 
 1.  With the load initially at rest at the origin, $c(0)=\dot c(0)=0$, find $c(t)$ for a unit step reference $r(t)=u(t)$.
 
-2.  Identify $\omega_{n}$ and $\zeta$. Is the response overdamped, critically damped or underdamped?
+2.  Now set $r(t)=0$ but start the load displaced: $c(0)=1$, $\dot c(0)=0$. Find $c(t)$.
 
-3.  Now set $r(t)=0$ but start the load displaced: $c(0)=1$, $\dot c(0)=0$. Find $c(t)$.
+3.  Comment on what is the same and what is different between (a) and (c), and say which part of the answer is a property of the *system* rather than of the input.
 
-4.  Comment on what is the same and what is different between (a) and (c), and say which part of the answer is a property of the *system* rather than of the input.
-
-## Question 6 — Time delay, and a warning about $s\to\infty$ *\[homework\]* { #question-6-time-delay-and-a-warning-about-stoinfty-homework }
+## Question 5 — Time delay, and a warning about $s\to\infty$ *\[homework\]* { #question-5-time-delay-and-a-warning-about-stoinfty-homework }
 
 1.  A sensor introduces a pure time delay of $T$ seconds: its output is the input, unchanged in shape, but arriving $T$ seconds late. Show from the time-shift property that its transfer function is $e^{-sT}$.
 
 2.  A step of height $5$ is applied at $t=0$ to such a sensor with $T=0.4\,\mathrm{s}$. Write down the transform of the output, and sketch the output against time.
 
-3.  Explain why $e^{-sT}$ is *not* a ratio of polynomials in $s$, and why that is inconvenient. (You are not expected to solve this problem yet — it is dealt with in Weeks 3 and 10.)
-
-4.  Apply the initial value theorem to $\displaystyle F(s)=\frac{s+1}{s+2}$. Then find $f(t)$ properly and explain the discrepancy.
-
-------------------------------------------------------------------------
-
-<br>
-
-Next week: mathematical modelling of physical systems.
+3.  Apply the initial value theorem to $\displaystyle F(s)=\frac{s+1}{s+2}$. Then find $f(t)$ properly and explain the discrepancy.
