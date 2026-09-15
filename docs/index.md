@@ -44,7 +44,7 @@ Teaching runs Weeks 1–12. Week 13 is revision; Weeks 14–15 are examinations.
 ## Assessment
 
 Continuous assessment **30%**, main examination **70%**. Fixed by the
-[syllabus](pdf/fee3411-syllabus.pdf).
+[syllabus](syllabus.md).
 
 | Component | When | Weight | Covers |
 |---|---|---|---|
