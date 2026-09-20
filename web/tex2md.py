@@ -253,6 +253,25 @@ def normalize_blocks(md):
     sent it.
     """
     md = re.sub(r'(<img src=")(?!\.\./|https?://|/)', r'\1../', md)
+
+    # Pandoc's raw-HTML fallback (--mathjax, see to_markdown() above) renders
+    # inline/display maths as <span class="math inline">\(...\)</span> -- its
+    # OWN class, not pymdownx.arithmatex's "arithmatex". Material's MathJax
+    # config (docs/javascripts/mathjax.js) deliberately scopes MathJax to
+    # scan ONLY elements carrying the "arithmatex" class
+    # (ignoreHtmlClass=".*|", processHtmlClass="arithmatex" -- the standard
+    # recipe for arithmatex's generic mode, so MathJax doesn't waste time
+    # walking the rest of the page). Pandoc's spans never carry that class,
+    # so MathJax silently skips them and the reader sees literal
+    # "\(K_p(r-c)\)" text instead of typeset maths -- this hit every figure
+    # caption containing a formula that pandoc renders via its raw-HTML
+    # <figure> fallback (confirmed 2026-09-20 by loading the built page in a
+    # real browser: mjx-merror count 0 and a real <mjx-container> appearing
+    # inside the caption after this fix, vs the literal escaped text before
+    # it). Add the class MathJax is actually looking for; keep pandoc's own
+    # class too in case anything else keys off it.
+    md = re.sub(r'(class="math (?:inline|display))"', r'\1 arithmatex"', md)
+
     lines = md.split('\n')
     out, pending_id = [], None
 

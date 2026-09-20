@@ -91,7 +91,7 @@ There is the cosine. It is not an assumption and not an approximation: it is wha
 
 <figure id="fig:cosine" data-latex-placement="H">
 <p><img src="../svg/week-01-notes-supp/fig01.svg" alt="image" /> <img src="../svg/week-01-notes-supp/fig02.svg" alt="image" /></p>
-<figcaption><strong>Figure 1.</strong> Where the cosine in <a href="#eq:fluxlink">(3)</a> comes from. The rotor drives a flux density that varies sinusoidally around the bore, <a href="#eq:airgap">(2)</a>. The stator coil links whatever lies between its two sides — the shaded window in (b). Flux entering the coil (blue) counts positively and flux leaving it (orange) counts negatively, so the net linkage is the <em>signed</em> area, <span class="math inline">\(2B_{m}\cos(\psi_{s}-\theta)\)</span>. Slide the window around the bore and that signed area traces out a cosine.</figcaption>
+<figcaption><strong>Figure 1.</strong> Where the cosine in <a href="#eq:fluxlink">(3)</a> comes from. The rotor drives a flux density that varies sinusoidally around the bore, <a href="#eq:airgap">(2)</a>. The stator coil links whatever lies between its two sides — the shaded window in (b). Flux entering the coil (blue) counts positively and flux leaving it (orange) counts negatively, so the net linkage is the <em>signed</em> area, <span class="math inline arithmatex">\(2B_{m}\cos(\psi_{s}-\theta)\)</span>. Slide the window around the bore and that signed area traces out a cosine.</figcaption>
 </figure>
 
 To turn flux linkage into a voltage, use the transformer relation rather than differentiating [(3)](#eq:fluxlink) directly — it is shorter and it gets the phase right. Neglecting the resistance and leakage of the rotor winding, the applied rotor voltage is absorbed entirely by the rate of change of its own flux linkage: 
@@ -140,7 +140,7 @@ $$\begin{align}
 
 <figure id="fig:transmitter" data-latex-placement="H">
 <img src="../svg/week-01-notes-supp/fig03.svg" />
-<figcaption><strong>Figure 2.</strong> The synchro transmitter. (a) Mechanically, three coil axes <span class="math inline">\(120^\circ\)</span> apart and a rotor at angle <span class="math inline">\(\theta\)</span>, measured from the <span class="math inline">\(S_{2}\)</span> axis. (b) Electrically, three Y-connected secondaries and one rotating primary <span class="math inline">\(R_{1}\)</span>–<span class="math inline">\(R_{2}\)</span> fed through slip rings. Cf. Nagrath &amp; Gopal Figs. 4.10–4.11, pp. 92–93. Note that only three wires leave the stator: the neutral <span class="math inline">\(n\)</span> is internal and is not brought out.</figcaption>
+<figcaption><strong>Figure 2.</strong> The synchro transmitter. (a) Mechanically, three coil axes <span class="math inline arithmatex">\(120^\circ\)</span> apart and a rotor at angle <span class="math inline arithmatex">\(\theta\)</span>, measured from the <span class="math inline arithmatex">\(S_{2}\)</span> axis. (b) Electrically, three Y-connected secondaries and one rotating primary <span class="math inline arithmatex">\(R_{1}\)</span>–<span class="math inline arithmatex">\(R_{2}\)</span> fed through slip rings. Cf. Nagrath &amp; Gopal Figs. 4.10–4.11, pp. 92–93. Note that only three wires leave the stator: the neutral <span class="math inline arithmatex">\(n\)</span> is internal and is not brought out.</figcaption>
 </figure>
 
 ###### What is actually measurable.
@@ -177,7 +177,7 @@ $$\cos(\theta+120^\circ)+\cos\theta+\cos(\theta+240^\circ)=0
 
 <figure id="fig:linev" data-latex-placement="H">
 <img src="../svg/week-01-notes-supp/fig04.svg" />
-<figcaption><strong>Figure 3.</strong> The three line voltages of <a href="#eq:l1">(8)</a>–<a href="#eq:l3">(10)</a> as the transmitter shaft turns. No two shaft angles in a full revolution give the same set of three amplitudes-with-signs, so the three wires carry an unambiguous code for <span class="math inline">\(\theta\)</span>. This is why a synchro can also be used on its own as a position <em>transmitter</em>, not only inside an error detector.</figcaption>
+<figcaption><strong>Figure 3.</strong> The three line voltages of <a href="#eq:l1">(8)</a>–<a href="#eq:l3">(10)</a> as the transmitter shaft turns. No two shaft angles in a full revolution give the same set of three amplitudes-with-signs, so the three wires carry an unambiguous code for <span class="math inline arithmatex">\(\theta\)</span>. This is why a synchro can also be used on its own as a position <em>transmitter</em>, not only inside an error detector.</figcaption>
 </figure>
 
 ##### Step 3 — rebuilding the flux in the second machine { #sss:rebuild }
@@ -213,7 +213,7 @@ Equation [(11)](#eq:mmf) is the synchro. Three stationary coils, carrying curre
 
 <figure id="fig:mmf" data-latex-placement="H">
 <img src="../svg/week-01-notes-supp/fig05.svg" />
-<figcaption><strong>Figure 4.</strong> Equation <a href="#eq:mmf">(11)</a> drawn, for <span class="math inline">\(\theta=50^\circ\)</span>. In (a), <span class="math inline">\(F_{1}=\cos170^\circ\)</span> is negative, so it points <em>opposite</em> to the <span class="math inline">\(S_{1}\)</span> axis. Adding the three head to tail in (b) gives a resultant of length <span class="math inline">\(\tfrac{3}{2}\)</span> lying exactly along <span class="math inline">\(\theta\)</span>. Repeat the construction for any other <span class="math inline">\(\theta\)</span> and the same two facts hold — that constancy of length and fidelity of direction is what makes the device useful.</figcaption>
+<figcaption><strong>Figure 4.</strong> Equation <a href="#eq:mmf">(11)</a> drawn, for <span class="math inline arithmatex">\(\theta=50^\circ\)</span>. In (a), <span class="math inline arithmatex">\(F_{1}=\cos170^\circ\)</span> is negative, so it points <em>opposite</em> to the <span class="math inline arithmatex">\(S_{1}\)</span> axis. Adding the three head to tail in (b) gives a resultant of length <span class="math inline arithmatex">\(\tfrac{3}{2}\)</span> lying exactly along <span class="math inline arithmatex">\(\theta\)</span>. Repeat the construction for any other <span class="math inline arithmatex">\(\theta\)</span> and the same two facts hold — that constancy of length and fidelity of direction is what makes the device useful.</figcaption>
 </figure>
 
 /// admonition | Common pitfall
@@ -262,7 +262,7 @@ $$\begin{equation}
 
 <figure id="fig:pair" data-latex-placement="H">
 <img src="../svg/week-01-notes-supp/fig06.svg" />
-<figcaption><strong>Figure 5.</strong> The geometry behind <a href="#eq:phi">(13)</a>, drawn for <span class="math inline">\(\theta=25^\circ\)</span> and <span class="math inline">\(\alpha=15^\circ\)</span>, so <span class="math inline">\(\phi=80^\circ\)</span>. The transmitter’s rotor angle is reproduced as the direction of the flux inside the control transformer; the control transformer’s own rotor is mounted a further <span class="math inline">\(90^\circ\)</span> round. Cf. Nagrath &amp; Gopal Fig. 4.12, p. 94.</figcaption>
+<figcaption><strong>Figure 5.</strong> The geometry behind <a href="#eq:phi">(13)</a>, drawn for <span class="math inline arithmatex">\(\theta=25^\circ\)</span> and <span class="math inline arithmatex">\(\alpha=15^\circ\)</span>, so <span class="math inline arithmatex">\(\phi=80^\circ\)</span>. The transmitter’s rotor angle is reproduced as the direction of the flux inside the control transformer; the control transformer’s own rotor is mounted a further <span class="math inline arithmatex">\(90^\circ\)</span> round. Cf. Nagrath &amp; Gopal Fig. 4.12, p. 94.</figcaption>
 </figure>
 
 ###### Why mount the rotor at $90^\circ$?
@@ -466,7 +466,7 @@ $$\begin{equation}
 
 <figure id="fig:dcmotor" data-latex-placement="H">
 <img src="../svg/week-01-notes-supp/fig09.svg" />
-<figcaption><strong>Figure 8.</strong> The same conductors, the same field, the same geometry — read two ways. Because <span class="math inline">\(zB\ell r\)</span> appears in both <a href="#eq:torqueconst">(16)</a> and <a href="#eq:emfconst">(17)</a>, <span class="math inline">\(K_{t}\)</span> and <span class="math inline">\(K_{b}\)</span> are not merely similar: in a consistent set of units they are the <em>same number</em>.</figcaption>
+<figcaption><strong>Figure 8.</strong> The same conductors, the same field, the same geometry — read two ways. Because <span class="math inline arithmatex">\(zB\ell r\)</span> appears in both <a href="#eq:torqueconst">(16)</a> and <a href="#eq:emfconst">(17)</a>, <span class="math inline arithmatex">\(K_{t}\)</span> and <span class="math inline arithmatex">\(K_{b}\)</span> are not merely similar: in a consistent set of units they are the <em>same number</em>.</figcaption>
 </figure>
 
 ##### Step 3 — why $K_{t}$ and $K_{b}$ are the same number
@@ -616,7 +616,7 @@ Getting these two confused is the single most common error in this material.
 
 <figure id="fig:loci" data-latex-placement="H">
 <img src="../svg/week-01-notes-supp/fig11.svg" />
-<figcaption><strong>Figure 10.</strong> The same vector sum, two different time phasings. In (a) the coil currents are in time quadrature and the resultant sweeps round at constant length; in (b) — the synchro of §<a href="#sec:synchro">1.2</a> — they are in time phase, and the resultant stands still along the direction <span class="math inline">\(\theta\)</span> while its length pulsates through zero and reverses.</figcaption>
+<figcaption><strong>Figure 10.</strong> The same vector sum, two different time phasings. In (a) the coil currents are in time quadrature and the resultant sweeps round at constant length; in (b) — the synchro of §<a href="#sec:synchro">1.2</a> — they are in time phase, and the resultant stands still along the direction <span class="math inline arithmatex">\(\theta\)</span> while its length pulsates through zero and reverses.</figcaption>
 </figure>
 
 ###### Reversing it.
@@ -662,7 +662,7 @@ There is a bonus. When $R\gg sX$ the denominator of [(22)](#eq:torqueslip) is do
 
 <figure id="fig:acslope" data-latex-placement="H">
 <img src="../svg/week-01-notes-supp/fig12.svg" />
-<figcaption><strong>Figure 11.</strong> Equation <a href="#eq:torqueslip">(22)</a> plotted for the two designs. The ordinary motor’s peak sits at <span class="math inline">\(s_{\max}=R/X=0.2\)</span>, i.e. at 80% of synchronous speed, leaving the shaded region below it with a positive torque–speed slope. The servomotor’s peak is pushed out to <span class="math inline">\(s_{\max}=3\)</span>, beyond standstill, so its whole characteristic falls — and it hugs the dashed straight line to within about 8%. Cf. Nagrath &amp; Gopal Fig. 4.4, p. 85.</figcaption>
+<figcaption><strong>Figure 11.</strong> Equation <a href="#eq:torqueslip">(22)</a> plotted for the two designs. The ordinary motor’s peak sits at <span class="math inline arithmatex">\(s_{\max}=R/X=0.2\)</span>, i.e. at 80% of synchronous speed, leaving the shaded region below it with a positive torque–speed slope. The servomotor’s peak is pushed out to <span class="math inline arithmatex">\(s_{\max}=3\)</span>, beyond standstill, so its whole characteristic falls — and it hugs the dashed straight line to within about 8%. Cf. Nagrath &amp; Gopal Fig. 4.4, p. 85.</figcaption>
 </figure>
 
 /// admonition | Common pitfall
@@ -771,7 +771,7 @@ $$\begin{equation}
 
 <figure id="fig:stepper" data-latex-placement="H">
 <img src="../svg/week-01-notes-supp/fig13.svg" />
-<figcaption><strong>Figure 12.</strong> Developed (rolled-out) view of a three-stack variable-reluctance stepper. The rotor teeth line up across all three stacks; the stator stacks are offset from one another by a third of a tooth pitch. Energising <span class="math inline">\(c\)</span>, then <span class="math inline">\(a\)</span>, then <span class="math inline">\(b\)</span> walks the rotor forward one <span class="math inline">\(\alpha\)</span> at a time. Cf. Nagrath &amp; Gopal Figs. 4.18 and 4.20, pp. 100–101.</figcaption>
+<figcaption><strong>Figure 12.</strong> Developed (rolled-out) view of a three-stack variable-reluctance stepper. The rotor teeth line up across all three stacks; the stator stacks are offset from one another by a third of a tooth pitch. Energising <span class="math inline arithmatex">\(c\)</span>, then <span class="math inline arithmatex">\(a\)</span>, then <span class="math inline arithmatex">\(b\)</span> walks the rotor forward one <span class="math inline arithmatex">\(\alpha\)</span> at a time. Cf. Nagrath &amp; Gopal Figs. 4.18 and 4.20, pp. 100–101.</figcaption>
 </figure>
 
 ##### Where the torque comes from
@@ -872,7 +872,7 @@ Two stator coils sit at right angles: a **reference** coil, excited from the car
 
 <figure id="fig:actacho" data-latex-placement="H">
 <img src="../svg/week-01-notes-supp/fig15.svg" />
-<figcaption><strong>Figure 14.</strong> The a.c. (drag-cup) tachometer. The cup is treated as two imaginary short-circuited conductor pairs. Pair <span class="math inline">\((1,1&#39;)\)</span> sits <em>on</em> the reference axis, where the radial field is strongest, so it develops the largest speed voltage — and because a current loop’s magnetic axis is perpendicular to the line joining its two sides, the current it drives produces a flux along the <em>quadrature</em> axis, which is exactly what the output coil sees. Cf. Nagrath &amp; Gopal Fig. 4.7, p. 88.</figcaption>
+<figcaption><strong>Figure 14.</strong> The a.c. (drag-cup) tachometer. The cup is treated as two imaginary short-circuited conductor pairs. Pair <span class="math inline arithmatex">\((1,1&#39;)\)</span> sits <em>on</em> the reference axis, where the radial field is strongest, so it develops the largest speed voltage — and because a current loop’s magnetic axis is perpendicular to the line joining its two sides, the current it drives produces a flux along the <em>quadrature</em> axis, which is exactly what the output coil sees. Cf. Nagrath &amp; Gopal Fig. 4.7, p. 88.</figcaption>
 </figure>
 
 The chain has four links, and each is one line.
@@ -1036,7 +1036,7 @@ The classical arrangement is a **variable-stroke pump** driving a **fixed-stroke
 
 <figure id="fig:swashplate" data-latex-placement="H">
 <img src="../svg/week-01-notes-supp/fig18.svg" />
-<figcaption><strong>Figure 16.</strong> Axial-piston pump (schematic, one representative piston pair). As the block rotates, a piston whose bore is on the side where the tilted plate sits <em>closer</em> is pushed in; half a turn later, on the side where the plate is <em>farther</em>, the same piston is drawn back out. That reciprocation is the pumping action, and its amplitude — hence the flow — is set by the stroke angle <span class="math inline">\(x\)</span>. A fixed-stroke motor runs the same machine in reverse: fixed <span class="math inline">\(x\)</span>, oil in, shaft out. Cf. Nagrath &amp; Gopal §4.5, p. 104.</figcaption>
+<figcaption><strong>Figure 16.</strong> Axial-piston pump (schematic, one representative piston pair). As the block rotates, a piston whose bore is on the side where the tilted plate sits <em>closer</em> is pushed in; half a turn later, on the side where the plate is <em>farther</em>, the same piston is drawn back out. That reciprocation is the pumping action, and its amplitude — hence the flow — is set by the stroke angle <span class="math inline arithmatex">\(x\)</span>. A fixed-stroke motor runs the same machine in reverse: fixed <span class="math inline arithmatex">\(x\)</span>, oil in, shaft out. Cf. Nagrath &amp; Gopal §4.5, p. 104.</figcaption>
 </figure>
 
 ##### From two balances to one transfer function { #sss:swashplate }
@@ -1114,7 +1114,7 @@ A **three-way** valve has one supply port, one sump port and one service port; a
 
 <figure id="fig:spool" data-latex-placement="H">
 <img src="../svg/week-01-notes-supp/fig19.svg" />
-<figcaption><strong>Figure 17.</strong> Four-way spool valve controlling a double-acting power cylinder — a hydraulic linear actuator. Spool displacement <span class="math inline">\(x\)</span> admits high-pressure oil to one side of the piston and vents the other to sump; the differential pressure drives the load a distance <span class="math inline">\(y\)</span>. Cf. Nagrath &amp; Gopal Fig. 4.27, p. 111.</figcaption>
+<figcaption><strong>Figure 17.</strong> Four-way spool valve controlling a double-acting power cylinder — a hydraulic linear actuator. Spool displacement <span class="math inline arithmatex">\(x\)</span> admits high-pressure oil to one side of the piston and vents the other to sump; the differential pressure drives the load a distance <span class="math inline arithmatex">\(y\)</span>. Cf. Nagrath &amp; Gopal Fig. 4.27, p. 111.</figcaption>
 </figure>
 
 #### 4.3. The linear actuator (cylinder) { #sss:cylinder }
@@ -1230,7 +1230,7 @@ $$\begin{equation}
 
 <figure id="fig:relay" data-latex-placement="H">
 <img src="../svg/week-01-notes-supp/fig21.svg" />
-<figcaption><strong>Figure 19.</strong> Pneumatic relay (power amplifier), schematic. The flapper’s back pressure <span class="math inline">\(P_b\)</span> positions a lightweight ball between a supply seat and a vent seat; whichever seat it leaves open decides whether the output line fills from supply or empties to atmosphere. Output pressure swings over the full supply range for a very small ball travel, and the sign is inverted relative to <span class="math inline">\(P_b\)</span>.</figcaption>
+<figcaption><strong>Figure 19.</strong> Pneumatic relay (power amplifier), schematic. The flapper’s back pressure <span class="math inline arithmatex">\(P_b\)</span> positions a lightweight ball between a supply seat and a vent seat; whichever seat it leaves open decides whether the output line fills from supply or empties to atmosphere. Output pressure swings over the full supply range for a very small ball travel, and the sign is inverted relative to <span class="math inline arithmatex">\(P_b\)</span>.</figcaption>
 </figure>
 
 #### 5.4. The pneumatic (diaphragm) actuator { #sss:diaphragm }
@@ -1279,7 +1279,7 @@ $$\%\text{OS}=100\,e^{-\pi\zeta/\sqrt{1-\zeta^{2}}}=9.5\%,
 
 <figure id="fig:diaphragmstep" data-latex-placement="H">
 <img src="../svg/week-01-notes-supp/fig23.svg" />
-<figcaption><strong>Figure 21.</strong> Step response of the diaphragm actuator of Worked example 5.1: <span class="math inline">\(\omega_{n}=200\,\mathrm{rad/s}\)</span>, <span class="math inline">\(\zeta=0.60\)</span>. Compare the shape with Figure <a href="#fig:ratefb">15</a> — same mathematics, a mechanical spring supplying the restoring force instead of a synchro-and-amplifier loop.</figcaption>
+<figcaption><strong>Figure 21.</strong> Step response of the diaphragm actuator of Worked example 5.1: <span class="math inline arithmatex">\(\omega_{n}=200\,\mathrm{rad/s}\)</span>, <span class="math inline arithmatex">\(\zeta=0.60\)</span>. Compare the shape with Figure <a href="#fig:ratefb">15</a> — same mathematics, a mechanical spring supplying the restoring force instead of a synchro-and-amplifier loop.</figcaption>
 </figure>
 
 ///
