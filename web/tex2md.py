@@ -263,14 +263,24 @@ def normalize_blocks(md):
     # recipe for arithmatex's generic mode, so MathJax doesn't waste time
     # walking the rest of the page). Pandoc's spans never carry that class,
     # so MathJax silently skips them and the reader sees literal
-    # "\(K_p(r-c)\)" text instead of typeset maths -- this hit every figure
-    # caption containing a formula that pandoc renders via its raw-HTML
-    # <figure> fallback (confirmed 2026-09-20 by loading the built page in a
-    # real browser: mjx-merror count 0 and a real <mjx-container> appearing
-    # inside the caption after this fix, vs the literal escaped text before
-    # it). Add the class MathJax is actually looking for; keep pandoc's own
-    # class too in case anything else keys off it.
-    md = re.sub(r'(class="math (?:inline|display))"', r'\1 arithmatex"', md)
+    # "\(K_p(r-c)\)" text instead of typeset maths.
+    #
+    # First attempt (2026-09-20) kept pandoc's own "math inline"/"math
+    # display" tokens alongside the new "arithmatex" one, giving
+    # class="math inline arithmatex". That backfired: Material's own base
+    # stylesheet has a generic utility rule
+    #   [dir="ltr"] .md-typeset .inline { float: left; }
+    # scoped to @media (min-width: 45em), which matches the literal "inline"
+    # token in that class string and floats the span left at tablet/desktop
+    # widths (but not on phones, below 45em) -- confirmed 2026-09-21 via
+    # getComputedStyle/CSSOM inspection on the live site, matching the
+    # user's report (fine on phone, math visually detached from the caption
+    # on tablet and desktop). Fix: don't keep pandoc's "math"/"inline"/
+    # "display" tokens at all -- use only "arithmatex", exactly like
+    # pymdownx.arithmatex's own generic-mode output (which never
+    # distinguishes inline/display by class either; MathJax tells them
+    # apart from the \( \)/\[ \] delimiters, not the class name).
+    md = re.sub(r'class="math (?:inline|display)"', 'class="arithmatex"', md)
 
     lines = md.split('\n')
     out, pending_id = [], None

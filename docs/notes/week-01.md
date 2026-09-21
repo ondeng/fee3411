@@ -102,7 +102,7 @@ The output is measured, fed back, and compared with the reference. The control i
 <figure id="fig:openclosed" data-latex-placement="htbp">
 <img src="../svg/week-01-notes/fig01.svg" />
 <img src="../svg/week-01-notes/fig02.svg" />
-<figcaption><strong>Figure 1.</strong> The two configurations. In (a) a disturbance <span class="math inline arithmatex">\(d\)</span> passes straight through to the output and is never corrected. In (b) its effect appears in the measurement, hence in the error <span class="math inline arithmatex">\(e\)</span>, and the controller acts on it. The price is the sensor, its cost, and its noise <span class="math inline arithmatex">\(n\)</span>. Cf. Nise Fig. 1.6, p. 8.</figcaption>
+<figcaption><strong>Figure 1.</strong> The two configurations. In (a) a disturbance <span class="arithmatex">\(d\)</span> passes straight through to the output and is never corrected. In (b) its effect appears in the measurement, hence in the error <span class="arithmatex">\(e\)</span>, and the controller acts on it. The price is the sensor, its cost, and its noise <span class="arithmatex">\(n\)</span>. Cf. Nise Fig. 1.6, p. 8.</figcaption>
 </figure>
 
 /// admonition | Key idea
@@ -120,7 +120,7 @@ This example carries most of the intellectual content of the week. It is worth f
 
 <figure id="fig:car" data-latex-placement="htbp">
 <img src="../svg/week-01-notes/fig03.svg" />
-<figcaption><strong>Figure 2.</strong> Forces on a vehicle on a road of slope <span class="math inline arithmatex">\(\theta\)</span>. Cf. Khalil Fig. 1-1, p. 3.</figcaption>
+<figcaption><strong>Figure 2.</strong> Forces on a vehicle on a road of slope <span class="arithmatex">\(\theta\)</span>. Cf. Khalil Fig. 1-1, p. 3.</figcaption>
 </figure>
 
 /// admonition | Worked example 2.1 — open- versus closed-loop cruise control
@@ -278,7 +278,7 @@ $$\begin{equation}
 
 <figure id="fig:servo" data-latex-placement="htbp">
 <img src="../svg/week-01-notes/fig06.svg" />
-<figcaption><strong>Figure 5.</strong> Position servomechanism with a potentiometer-pair error detector. The two wipers are the summing junction: the voltage between them is <span class="math inline arithmatex">\(K_p(r-c)\)</span>. Cf. Nagrath &amp; Gopal (2nd ed.) §5.4, p. 137, whose Fig. 5.6 (p. 138) is this schematic with its block diagram; we derive that block diagram in Week 4 and its response in Week 5.</figcaption>
+<figcaption><strong>Figure 5.</strong> Position servomechanism with a potentiometer-pair error detector. The two wipers are the summing junction: the voltage between them is <span class="arithmatex">\(K_p(r-c)\)</span>. Cf. Nagrath &amp; Gopal (2nd ed.) §5.4, p. 137, whose Fig. 5.6 (p. 138) is this schematic with its block diagram; we derive that block diagram in Week 4 and its response in Week 5.</figcaption>
 </figure>
 
 ###### Regulator or tracking system?
