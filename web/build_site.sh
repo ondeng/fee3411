@@ -257,7 +257,7 @@ PY
 # Week list:  <stem>|<week no>|<topic>
 WEEKS=(
   "week-01-notes|1|Introduction and Control System Components"
-  # "week-02-notes|2|Mathematical Modelling of Physical Systems"
+  "week-02-notes|2|Mathematical Modelling of Physical Systems"
   # "week-03-notes|3|Transfer Functions and the s-Plane"
 )
 mkdir -p "$DOCS/notes/svg"
@@ -275,7 +275,7 @@ done
 # actual publish-time switch: flip it and push, no other change needed.
 TUTORIALS=(
   "week-01-tutorial|1|Mathematical toolkit: Laplace, partial fractions, the s-plane|no"
-  # "week-02-tutorial|2|Electromechanical modelling; linear approximation|no"
+  "week-02-tutorial|2|Electromechanical modelling; linear approximation|no"
   # "week-03-tutorial|3|Transfer functions; inverse Laplace; poles, zeros and response shape|no"
 )
 mkdir -p "$DOCS/tutorials/svg"

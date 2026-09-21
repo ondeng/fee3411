@@ -25,7 +25,7 @@ stuck on something.
 | Week | Topic | Notes | Extra |
 |---|---|---|---|
 | 1 | Introduction and control system components | [Notes](notes/week-01.md) | [Supplementary](supplementary/week-01-notes-supp.md)|
-| 2 | Mathematical modelling of physical systems | *to come* | |
+| 2 | Mathematical modelling of physical systems | [Notes](notes/week-02.md) | |
 | 3 | Transfer functions and the s-plane | *to come* | |
 | 4 | Block diagrams and signal flow graphs | *to come* | |
 | 5 | Transient response of first- and second-order systems | *to come* | |

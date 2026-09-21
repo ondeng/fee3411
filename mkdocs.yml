@@ -89,12 +89,12 @@ nav:
   - Syllabus: syllabus.md
   - Lecture notes:
       - "Week 1 — Introduction and components": notes/week-01.md
-      # - "Week 2 — Mathematical modelling": notes/week-02.md
+      - "Week 2 — Mathematical modelling": notes/week-02.md
       # - "Week 3 — Transfer functions and the s-plane": notes/week-03.md
   - Tutorials:
       - Overview: tutorials.md
       - "Tutorial 1 — Mathematical toolkit": tutorials/tutorial-01.md
-      # - "Tutorial 2 — Electromechanical modelling": tutorials/tutorial-02.md
+      - "Tutorial 2 — Electromechanical modelling": tutorials/tutorial-02.md
       # - "Tutorial 3 — Transfer functions": tutorials/tutorial-03.md
   - Assignments:
       - Overview: assignments.md
