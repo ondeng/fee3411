@@ -26,17 +26,17 @@ stuck on something.
 |---|---|---|---|
 | 1 | Introduction and control system components | [Notes](notes/week-01.md) | [Supplementary](supplementary/week-01-notes-supp.md)|
 | 2 | Mathematical modelling of physical systems | [Notes](notes/week-02.md) | |
-| 3 | Transfer functions and the s-plane | *to come* | |
-| 4 | Block diagrams and signal flow graphs | *to come* | |
-| 5 | Transient response of first- and second-order systems | *to come* | |
-| 6 | Standard inputs and steady-state errors · **CAT 1** | *to come* | |
-| 7 | Stability and Routh–Hurwitz | *to come* | |
-| 8 | Root locus | *to come* | |
-| 9 | System design and simulation; intro to frequency response | *to come* | |
-| 10 | Bode plots | *to come* | |
-| 11 | Polar plots and the Nyquist criterion | *to come* | |
-| 12 | Nyquist stability, relative stability and Nichols · **CAT 2** | *to come* | |
-| 13 | Revision | *to come* | |
+| 3 | Transfer functions and the s-plane | [Notes](notes/week-02.md) | |
+| 4 | Block diagrams and signal flow graphs | *Watch this space* | |
+| 5 | Transient response of first- and second-order systems | *Watch this space* | |
+| 6 | Standard inputs and steady-state errors · **CAT 1** | *Watch this space* | |
+| 7 | Stability and Routh–Hurwitz | *Watch this space* | |
+| 8 | Root locus | *Watch this space* | |
+| 9 | System design and simulation; intro to frequency response | *Watch this space* | |
+| 10 | Bode plots | *Watch this space* | |
+| 11 | Polar plots and the Nyquist criterion | *Watch this space* | |
+| 12 | Nyquist stability, relative stability and Nichols · **CAT 2** | *Watch this space* | |
+| 13 | Revision | *Watch this space* | |
 
 
 Teaching runs Weeks 1–12. Week 13 is revision; Weeks 14–15 are examinations.

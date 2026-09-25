@@ -258,7 +258,7 @@ PY
 WEEKS=(
   "week-01-notes|1|Introduction and Control System Components"
   "week-02-notes|2|Mathematical Modelling of Physical Systems"
-  # "week-03-notes|3|Transfer Functions and the s-Plane"
+  "week-03-notes|3|Transfer Functions and the s-Plane"
 )
 mkdir -p "$DOCS/notes/svg"
 for entry in "${WEEKS[@]}"; do
@@ -276,7 +276,7 @@ done
 TUTORIALS=(
   "week-01-tutorial|1|Mathematical toolkit: Laplace, partial fractions, the s-plane|no"
   "week-02-tutorial|2|Electromechanical modelling; linear approximation|no"
-  # "week-03-tutorial|3|Transfer functions; inverse Laplace; poles, zeros and response shape|no"
+  "week-03-tutorial|3|Transfer functions; inverse Laplace; poles, zeros and response shape|no"
 )
 mkdir -p "$DOCS/tutorials/svg"
 for entry in "${TUTORIALS[@]}"; do
