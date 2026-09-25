@@ -161,8 +161,60 @@ def preprocess(src, labels, n_figs, number_sections=False, svg_prefix='svg'):
                 r'\\thispagestyle\{[^}]*\}', r'\\pagestyle\{[^}]*\}',
                 r'\\addcontentsline\{[^}]*\}\{[^}]*\}\{[^}]*\}',
                 r'\\clearpage', r'\\newpage', r'\\bigskip', r'\\medskip',
-                r'\\smallskip', r'\\noindent', r'\\centering', r'\\vspace\*?\{[^}]*\}']:
+                r'\\smallskip', r'\\noindent', r'\\centering', r'\\vspace\*?\{[^}]*\}',
+                r'\\hfill']:
         body = re.sub(cmd, '', body)
+
+    # -- unwrap side-by-side minipages (readingbox quick-reference boxes) --
+    # Tutorials 1-3's Reading box lays two tables out as two \hfill-separated
+    # minipages, purely a print-layout trick with no Markdown/HTML equivalent
+    # -- a web page can only stack them, which is fine, a "quick reference"
+    # box reads top-to-bottom either way (and stacking is *better* on a
+    # phone, where two real columns would be too narrow to be useful).
+    # Left in place, minipage is an environment pandoc doesn't know either,
+    # exactly like the box environments below, and pandoc is meant to wrap
+    # an unknown environment as a fenced div -- but a *second*, nested
+    # unknown environment inside the outer \begin{readingbox} sometimes
+    # throws that off: confirmed 2026-09-25 that pandoc can silently fail to
+    # keep both minipages' content inside the outer div, closing the fence
+    # after the first minipage and leaving the second (and everything after
+    # it, until the next real boundary) as plain, unboxed body text -- this
+    # is what broke the "Reading" box in Tutorials 1 and 3 (§ Properties /
+    # § Partial-fraction templates leaking out from under the first table).
+    # It reproduced with pandoc 3.1.3 on real content and failed outright
+    # (no div at all) with pandoc 2.9.2.1, so it's a real fragility in
+    # relying on pandoc to track nested unknown environments, not one
+    # pandoc version's bug to work around -- simplest fix is to not nest
+    # them: unwrap the minipages here (their content already reads fine
+    # stacked) so only the single outer readingbox environment is left for
+    # pandoc to wrap.
+    body = re.sub(r'\\begin\{minipage\}(?:\[[^\]]*\])?\{[^}]*\}\s*', '', body)
+    body = re.sub(r'\s*\\end\{minipage\}', '', body)
+
+    # -- flatten \multicolumn (Week 3's Laplace-pairs-and-properties table) --
+    # A Markdown pipe table has exactly one header row and no cell spanning,
+    # so a LaTeX table with a merged two-tier header (\multicolumn grouping
+    # "Pairs" over two real columns and "Properties" over the other two)
+    # can't be expressed in it. Confirmed 2026-09-25: fed as-is, pandoc can't
+    # parse the row as a table row at all (column count mismatch against the
+    # data rows) and gives up on the WHOLE table -- not just the header --
+    # silently dropping the \begin{table}/\caption/\label wrapper and
+    # emitting the \tabular body as garbled raw text (a literal "\@llll@ &"
+    # artifact, then every row as plain pipe-separated text with no <table>
+    # at all). Losing the table also threw off table_anchors()'s positional
+    # label matching, so its #tab:pairs anchor -- and every in-text "Table 1"
+    # cross-reference pointing at it throughout the notes -- silently landed
+    # on the NEXT table instead (#tab:modes, actually Table 2).
+    # Fix: expand \multicolumn{N}{spec}{content} to `content` plus (N-1)
+    # blank cells, so the row has the same column count as every other row
+    # and pandoc can parse it as an ordinary (if blank-celled) header.
+    def _expand_multicolumn(m):
+        n, content = int(m.group(1)), m.group(2)
+        return content + ' &' * (n - 1)
+    body = re.sub(
+        r'\\multicolumn\{(\d+)\}\{(?:[^{}]|\{[^{}]*\})*\}'
+        r'\{((?:[^{}]|\{[^{}]*\})*)\}',
+        _expand_multicolumn, body)
 
     # -- pictures -> <img> placeholders, in document order ----------------
     # BOTH tikzpicture and circuitikz: circuitikz is its own environment, not

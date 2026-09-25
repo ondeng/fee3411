@@ -31,8 +31,6 @@ Questions marked **\[in the hour\]** are the ones we work through together, if t
 | $e^{-at}\sin\omega t$ | $\omega/[(s+a)^{2}+\omega^{2}]$ |
 | $e^{-at}\cos\omega t$ | $(s+a)/[(s+a)^{2}+\omega^{2}]$  |
 
-///
-
 **Properties**<br>
 
 |  |  |
@@ -47,6 +45,8 @@ Questions marked **\[in the hour\]** are the ones we work through together, if t
 | Final value | $f(\infty)=\lim_{s\to 0}sF(s)$ |
 |  | *only if all poles of $sF(s)$* |
 |  | *have negative real parts* |
+
+///
 
 ## Question 1 — Standard test signals *\[in the hour\]* { #question-1-standard-test-signals-in-the-hour }
 

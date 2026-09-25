@@ -55,17 +55,23 @@ $$\begin{equation}
 
  where $s=\sigma+\mathrm{j}\omega$ is a complex variable. The lower limit is written $0^-$, just *before* $t=0$, so that an impulse applied at the origin is captured rather than half-captured. Table [1](#tab:pairs) lists the pairs and properties used in this unit; Khalil’s Appendix C (p. 444) is the fuller table to work from.
 
-\@llll@ &<br>
-$f(t),\ t\ge0$ & $F(s)$ & &<br>
-$\delta(t)$ & $1$ & Linearity & $\alpha f_1+\beta f_2 \ \to\ \alpha F_1+\beta F_2$<br>
-$1(t)$ (unit step) & $1/s$ & First derivative & $\dot f \ \to\ sF(s)-f(0^-)$<br>
-$t$ & $1/s^{2}$ & Second derivative& $\ddot f \ \to\ s^{2}F(s)-sf(0^-)-\dot f(0^-)$<br>
-$e^{-at}$ & $1/(s+a)$ & Integral & $\int_{0}^{t}\!f \ \to\ F(s)/s$<br>
-$t e^{-at}$ & $1/(s+a)^{2}$ & Time shift & $f(t-\tau)1(t-\tau)\ \to\ e^{-\tau s}F(s)$<br>
-$\sin\omega t$ & $\omega/(s^{2}+\omega^{2})$ & Frequency shift & $e^{-at}f(t)\ \to\ F(s+a)$<br>
-$\cos\omega t$ & $s/(s^{2}+\omega^{2})$ & Initial value & $f(0^{+})=\lim_{s\to\infty}sF(s)$<br>
-$e^{-at}\sin\omega t$ & $\omega/[(s+a)^{2}+\omega^{2}]$ & Final value & $f(\infty)=\lim_{s\to0}sF(s)$, *if stable*<br>
-$e^{-at}\cos\omega t$ & $(s+a)/[(s+a)^{2}+\omega^{2}]$ & Convolution & $f_1*f_2 \ \to\ F_1F_2$<br>
+<a id="tab:pairs"></a>
+
+|                       |                                 |                   |                                                    |
+|:----------------------|:--------------------------------|:------------------|:---------------------------------------------------|
+| **Pairs**             |                                 | **Properties**    |                                                    |
+| $f(t),\ t\ge0$        | $F(s)$                          |                   |                                                    |
+| $\delta(t)$           | $1$                             | Linearity         | $\alpha f_1+\beta f_2 \ \to\ \alpha F_1+\beta F_2$ |
+| $1(t)$ (unit step)    | $1/s$                           | First derivative  | $\dot f \ \to\ sF(s)-f(0^-)$                       |
+| $t$                   | $1/s^{2}$                       | Second derivative | $\ddot f \ \to\ s^{2}F(s)-sf(0^-)-\dot f(0^-)$     |
+| $e^{-at}$             | $1/(s+a)$                       | Integral          | $\int_{0}^{t}\!f \ \to\ F(s)/s$                    |
+| $t e^{-at}$           | $1/(s+a)^{2}$                   | Time shift        | $f(t-\tau)1(t-\tau)\ \to\ e^{-\tau s}F(s)$         |
+| $\sin\omega t$        | $\omega/(s^{2}+\omega^{2})$     | Frequency shift   | $e^{-at}f(t)\ \to\ F(s+a)$                         |
+| $\cos\omega t$        | $s/(s^{2}+\omega^{2})$          | Initial value     | $f(0^{+})=\lim_{s\to\infty}sF(s)$                  |
+| $e^{-at}\sin\omega t$ | $\omega/[(s+a)^{2}+\omega^{2}]$ | Final value       | $f(\infty)=\lim_{s\to0}sF(s)$, *if stable*         |
+| $e^{-at}\cos\omega t$ | $(s+a)/[(s+a)^{2}+\omega^{2}]$  | Convolution       | $f_1*f_2 \ \to\ F_1F_2$                            |
+
+**Table 1.** Laplace transform pairs and properties used in FEE3411.
 
 The derivative properties are the ones that do the work. Because $\mathcal{L}\{\dot f\}=sF(s)-f(0^-)$ and $\mathcal{L}\{\ddot f\}=s^2F(s)-sf(0^-)-\dot f(0^-)$, transforming a differential equation turns every derivative into a power of $s$ and every initial condition into an additive constant. What was a differential equation in $t$ becomes a polynomial equation in $s$, which is solved by rearrangement.
 
@@ -288,8 +294,6 @@ Partial-fraction expansion of $Y(s)=G(s)U(s)$ produces one term for each pole. E
 
 <a id="tab:modes"></a>
 
-<a id="tab:pairs"></a>
-
 | **Pole location** | **Term in $y(t)$** | **Shape** |
 |:---|:---|:--:|
 | Negative real, $s=-a$ | $Ae^{-at}$, decaying | ![image](svg/week-03-notes/fig04.svg) |
@@ -299,7 +303,7 @@ Partial-fraction expansion of $Y(s)=G(s)U(s)$ produces one term for each pole. E
 | Pair on the $\mathrm{j}\omega$ axis, $s=\pm\mathrm{j}\omega$ | $A\sin(\omega t+\phi)$, sustained | ![image](svg/week-03-notes/fig08.svg) |
 | Complex pair, $s=+a\pm\mathrm{j}\omega$ | $Ae^{+at}\sin(\omega t+\phi)$, growing | ![image](svg/week-03-notes/fig09.svg) |
 
-**Table 1.** Pole location and the mode it contributes to the natural response.
+**Table 2.** Pole location and the mode it contributes to the natural response.
 
 The pattern in Table [2](#tab:modes) has one consequence large enough to organise the rest of the unit around.
 
@@ -522,7 +526,7 @@ $$\begin{equation}
 | $z=-a$, $0<a<1$ | $(-a)^{k}$, sign alternating | no analogue: oscillation at $\pi/T$ |
 | $z=r\,e^{\pm\mathrm{j}\theta}$ | $r^{k}\cos(k\theta+\phi)$ | complex pair $\sigma\pm\mathrm{j}\omega$ |
 
-**Table 2.** What a pole at $z$ does, for a real sequence. Each mode is the discrete counterpart of the continuous mode named in the last column.
+**Table 3.** What a pole at $z$ does, for a real sequence. Each mode is the discrete counterpart of the continuous mode named in the last column.
 
 Take $T=0.1\,\mathrm{s}$ for all three examples in Figure [7](#fig:zmodes).
 
