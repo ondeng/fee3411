@@ -131,8 +131,8 @@ The stator carries three identical Y-connected coils with their axes $120^\circ$
 <a id="eq:v1"></a>
 
 $$\begin{align}
-  v_{s_{1}n}&=KV_{r}\sin\omega_{c}t\,\cos(\theta+120^\circ), \tag{5}\<br>
-  v_{s_{2}n}&=KV_{r}\sin\omega_{c}t\,\cos\theta,             \tag{6}\<br>
+  v_{s_{1}n}&=KV_{r}\sin\omega_{c}t\,\cos(\theta+120^\circ), \tag{5}\\
+  v_{s_{2}n}&=KV_{r}\sin\omega_{c}t\,\cos\theta,             \tag{6}\\
   v_{s_{3}n}&=KV_{r}\sin\omega_{c}t\,\cos(\theta+240^\circ). \tag{7}
 \end{align}$$
 
@@ -149,7 +149,7 @@ The neutral $n$ is buried inside the machine. Only three wires leave it, so the 
 
 $$\begin{align*}
   v_{s_{1}s_{2}}&=v_{s_{1}n}-v_{s_{2}n}
-   =KV_{r}\sin\omega_{c}t\big[\cos(\theta+120^\circ)-\cos\theta\big]\<br>
+   =KV_{r}\sin\omega_{c}t\big[\cos(\theta+120^\circ)-\cos\theta\big]\\
   &=KV_{r}\sin\omega_{c}t\big[-2\sin(\theta+60^\circ)\sin 60^\circ\big]
    =-\sqrt{3}\,KV_{r}\sin(\theta+60^\circ)\sin\omega_{c}t,
 \end{align*}$$
@@ -159,8 +159,8 @@ $$\begin{align*}
 <a id="eq:v2"></a>
 
 $$\begin{align}
-  v_{s_{1}s_{2}}&=\sqrt{3}\,KV_{r}\sin(\theta+240^\circ)\sin\omega_{c}t, \tag{8}\<br>
-  v_{s_{2}s_{3}}&=\sqrt{3}\,KV_{r}\sin(\theta+120^\circ)\sin\omega_{c}t, \tag{9}\<br>
+  v_{s_{1}s_{2}}&=\sqrt{3}\,KV_{r}\sin(\theta+240^\circ)\sin\omega_{c}t, \tag{8}\\
+  v_{s_{2}s_{3}}&=\sqrt{3}\,KV_{r}\sin(\theta+120^\circ)\sin\omega_{c}t, \tag{9}\\
   v_{s_{3}s_{1}}&=\sqrt{3}\,KV_{r}\sin\theta\,\sin\omega_{c}t.           \tag{10}
 \end{align}$$
 

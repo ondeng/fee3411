@@ -317,6 +317,7 @@ done
 # No entries yet.
 SUPPLEMENTARY=(
   "week-01-notes-supp|Control System Components"
+  "week-03-notes-supp|Discrete-Time LTI Systems"
 )
 mkdir -p "$DOCS/supplementary/svg"
 for entry in "${SUPPLEMENTARY[@]}"; do

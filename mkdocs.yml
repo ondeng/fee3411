@@ -99,4 +99,7 @@ nav:
   - Assignments:
       - Overview: assignments.md
       - "Assignment 1 — Components, devices and modelling": assignments/assignment-01.md
+  - Supplementary material:
+      - "Week 1 Extra - Control system components": supplementary/week-01-notes-supp.md
+      - "Week 3 Extra - Discrete-Time LTI Systems": supplementary/week-03-notes-supp.md
   - Software and reading: resources.md

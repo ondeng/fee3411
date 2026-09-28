@@ -123,10 +123,23 @@ def fix_siunitx(body):
     """Apply _si_in_math only inside math: $..$, \\(..\\), \\[..\\] and envs."""
     if r'\SI' not in body and r'\si{' not in body:
         return body
+    # re.S (DOTALL) already makes '.' match newlines, so the '(?:.|\n)*?' used
+    # here up to 2026-09-28 was a REDUNDANT alternation -- '.' and '\n' both
+    # match every newline character, so the engine has two ways to account for
+    # each one and, on a long enough unclosed-looking span, backtracks through
+    # 2^(newlines) partitions trying to satisfy the rest of the pattern:
+    # classic catastrophic backtracking. Confirmed 2026-09-28: with Week 3's
+    # new supplementary notes (many \[...\] display blocks, some spanning
+    # several lines), fix_siunitx() hung build_site.sh indefinitely -- a
+    # faulthandler trace pinned it to this regex's .sub() call, and swapping
+    # '(?:.|\n)*?' for plain '.*?' (semantically IDENTICAL under re.S) took it
+    # from "still running after 15s" to well under a millisecond on the exact
+    # same input. Every other math-editing file happened not to trip it, but
+    # the bug was always latent, not specific to this file.
     pat = re.compile(
         r'(?P<d>\$\$.*?\$\$)|(?P<i>(?<!\\)\$(?:\\.|[^$\\])*\$)'
-        r'|(?P<p>\\\((?:.|\n)*?\\\))|(?P<b>\\\[(?:.|\n)*?\\\])'
-        r'|(?P<e>\\begin\{(?:equation|align|gather|multline)\*?\}(?:.|\n)*?'
+        r'|(?P<p>\\\(.*?\\\))|(?P<b>\\\[.*?\\\])'
+        r'|(?P<e>\\begin\{(?:equation|align|gather|multline)\*?\}.*?'
         r'\\end\{(?:equation|align|gather|multline)\*?\})', re.S)
     return pat.sub(lambda m: _si_in_math(m.group(0)), body)
 

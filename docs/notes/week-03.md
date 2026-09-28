@@ -57,19 +57,19 @@ $$\begin{equation}
 
 <a id="tab:pairs"></a>
 
-|                       |                                 |                   |                                                    |
-|:----------------------|:--------------------------------|:------------------|:---------------------------------------------------|
-| **Pairs**             |                                 | **Properties**    |                                                    |
-| $f(t),\ t\ge0$        | $F(s)$                          |                   |                                                    |
-| $\delta(t)$           | $1$                             | Linearity         | $\alpha f_1+\beta f_2 \ \to\ \alpha F_1+\beta F_2$ |
-| $1(t)$ (unit step)    | $1/s$                           | First derivative  | $\dot f \ \to\ sF(s)-f(0^-)$                       |
-| $t$                   | $1/s^{2}$                       | Second derivative | $\ddot f \ \to\ s^{2}F(s)-sf(0^-)-\dot f(0^-)$     |
-| $e^{-at}$             | $1/(s+a)$                       | Integral          | $\int_{0}^{t}\!f \ \to\ F(s)/s$                    |
-| $t e^{-at}$           | $1/(s+a)^{2}$                   | Time shift        | $f(t-\tau)1(t-\tau)\ \to\ e^{-\tau s}F(s)$         |
-| $\sin\omega t$        | $\omega/(s^{2}+\omega^{2})$     | Frequency shift   | $e^{-at}f(t)\ \to\ F(s+a)$                         |
-| $\cos\omega t$        | $s/(s^{2}+\omega^{2})$          | Initial value     | $f(0^{+})=\lim_{s\to\infty}sF(s)$                  |
-| $e^{-at}\sin\omega t$ | $\omega/[(s+a)^{2}+\omega^{2}]$ | Final value       | $f(\infty)=\lim_{s\to0}sF(s)$, *if stable*         |
-| $e^{-at}\cos\omega t$ | $(s+a)/[(s+a)^{2}+\omega^{2}]$  | Convolution       | $f_1*f_2 \ \to\ F_1F_2$                            |
+|  |  |  |  |
+|:---|:---|:---|:---|
+| **Pairs** |  | **Properties** |  |
+| $f(t),\ t\ge0$ | $F(s)$ |  |  |
+| $\delta(t)$ | $1$ | Linearity | $\alpha f_1+\beta f_2 \ \to\ \alpha F_1+\beta F_2$ |
+| $1(t)$ (unit step) | $1/s$ | First derivative | $\dot f \ \to\ sF(s)-f(0^-)$ |
+| $t$ | $1/s^{2}$ | Second derivative | $\ddot f \ \to\ s^{2}F(s)-sf(0^-)-\dot f(0^-)$ |
+| $e^{-at}$ | $1/(s+a)$ | Integral | $\int_{0}^{t}\!f \ \to\ F(s)/s$ |
+| $t e^{-at}$ | $1/(s+a)^{2}$ | Time shift | $f(t-\tau)1(t-\tau)\ \to\ e^{-\tau s}F(s)$ |
+| $\sin\omega t$ | $\omega/(s^{2}+\omega^{2})$ | Frequency shift | $e^{-at}f(t)\ \to\ F(s+a)$ |
+| $\cos\omega t$ | $s/(s^{2}+\omega^{2})$ | Initial value | $f(0^{+})=\lim_{s\to\infty}sF(s)$ |
+| $e^{-at}\sin\omega t$ | $\omega/[(s+a)^{2}+\omega^{2}]$ | Final value | $f(\infty)=\lim_{s\to0}sF(s)$, *if stable* |
+| $e^{-at}\cos\omega t$ | $(s+a)/[(s+a)^{2}+\omega^{2}]$ | Convolution | $f_1*f_2 \ \to\ F_1F_2$ |
 
 **Table 1.** Laplace transform pairs and properties used in FEE3411.
 
@@ -446,29 +446,12 @@ Note also that the gain factor $K$ of the factored form [(3)](#eq:factored) is n
 
 ### 11. Discrete time-invariant systems { #sec:discrete }
 
-###### Where the samples come from.
-
-Everything so far assumes a signal defined at every instant $t$. A digital controller never sees one. It sees the plant only at the instants it chooses to look: an analogue-to-digital converter samples the measured output every $T$ seconds, giving the number sequence $y[k]=y(kT)$; the processor computes a command from those numbers; and a digital-to-analogue converter with a **zero-order hold** turns the command back into a voltage, holding each value constant until the next one is ready. $T$ is the **sampling period**, and it is a design choice, not a property of the plant.
-
-<figure id="fig:sampled-loop" data-latex-placement="htbp">
-<img src="../svg/week-03-notes/fig12.svg" />
-<figcaption><strong>Figure 6.</strong> A sampled-data loop. Only the shaded interior is discrete: the plant <span class="arithmatex">\(G(s)\)</span> is exactly the continuous system of the previous ten sections, and the A/D and D/A converters are the boundary between the two worlds.</figcaption>
-</figure>
-
-Two consequences are worth naming at once. First, *between* samples the loop is open: whatever happens to the plant in the interval, the controller cannot react to it until the next sample. Second, the signal the plant actually receives is a staircase, not a smooth curve — the hold reconstructs $u(t)$ from $u[k]$ by the crudest possible rule, holding the last value.
-
-###### Difference equations.
-
-The model of the algorithm itself is a **difference** equation rather than a differential one: 
+Everything so far assumes a signal defined for every instant $t$. A digital controller instead sees samples $u[k]=u(kT)$ at a sampling period $T$, and its model is a **difference** equation rather than a differential one: 
 
 $$y[k] + \alpha_1 y[k-1] + \cdots + \alpha_n y[k-n]
   = \beta_0 u[k] + \cdots + \beta_m u[k-m] .$$
 
- Where a differential equation must be solved, a difference equation can simply be *run*: rearranged for $y[k]$, it says how to compute the next output from values already stored, so the equation and the program that implements it are the same object. That is the whole reason digital control is easy to build — a controller of any order is a handful of multiplications and additions per sample, and changing the controller means changing numbers in a table rather than changing hardware.
-
-###### The *z*-transform.
-
-The $z$-transform, $Y(z)=\sum_{k=0}^{\infty}y[k]z^{-k}$, plays exactly the role the Laplace transform plays for continuous signals. Its key property is the shift rule: with zero initial conditions, a one-step delay $y[k-1]$ transforms to $z^{-1}Y(z)$. So a delay becomes multiplication by $z^{-1}$, just as differentiation became multiplication by $s$, and the same argument as §[3](#sec:tf) gives a **pulse transfer function** $G(z)=Y(z)/U(z)$. Read $z^{-1}$ as “wait one sample”: every block diagram of a digital filter is built from gains, adders and $z^{-1}$ blocks, and nothing else.
+ The $z$-transform, $Y(z)=\sum_{k=0}^{\infty}y[k]z^{-k}$, plays exactly the role the Laplace transform plays for continuous signals. Its key property is the shift rule: with zero initial conditions, a one-step delay $y[k-1]$ transforms to $z^{-1}Y(z)$. So a delay becomes multiplication by $z^{-1}$, just as differentiation became multiplication by $s$, and the same argument as §[3](#sec:tf) gives a **pulse transfer function** $G(z)=Y(z)/U(z)$.
 
 /// admonition | Worked example 3.5 — a first-order discrete system
     type: example
@@ -477,102 +460,25 @@ For $y[k] = 0.5\,y[k-1] + u[k]$, transforming with zero initial conditions gives
 
 $$G(z) = \frac{1}{1-0.5z^{-1}} = \frac{z}{z-0.5},$$
 
- a single pole at $z=0.5$. For a unit step, run the recursion forward from $y[-1]=0$: 
-
-$$y[0]=1,\quad
-  y[1]=0.5(1)+1=1.5,\quad
-  y[2]=0.5(1.5)+1=1.75,\quad
-  y[3]=1.875,\ \dots$$
-
- and the closed form is $y[k] = 2 - (0.5)^{k}$, which reproduces those four numbers and converges to $G(1)=1/(1-0.5)=2$ — the discrete d.c. gain, evaluated at $z=1$ rather than $s=0$.
-
-The two routes agree for a reason worth seeing. Expanding $Y(z)=z^{2}/[(z-0.5)(z-1)]$ as a power series in $z^{-1}$ gives 
-
-$$Y(z) = 1 + 1.5z^{-1} + 1.75z^{-2} + 1.875z^{-3} + \cdots$$
-
- and by the definition of the transform, the coefficient of $z^{-k}$ *is* $y[k]$. Inverting a $z$-transform by long division is therefore not a trick: it just reads the samples off one at a time, in order.
+ a single pole at $z=0.5$. The unit-step response is $y[k] = 2 - (0.5)^{k}$, giving $1,\ 1.5,\ 1.75,\ 1.875,\dots$ and converging to $G(1)=1/(1-0.5)=2$ — the discrete d.c. gain, evaluated at $z=1$ rather than $s=0$.
 
 ///
 
-###### Reading a pole in the *z*-plane.
-
-The two planes are related by one substitution. A continuous mode $e^{st}$, observed only at $t=kT$, is 
-
-$$e^{s(kT)} = \bigl(e^{sT}\bigr)^{k} = z^{k},
-  \qquad\text{so}\qquad
-  \boxed{\;z = e^{sT}\;}$$
-
- — a geometric sequence in $k$ wherever the continuous signal was an exponential in $t$. Writing $s=\sigma+\mathrm{j}\omega$ and separating modulus from argument, 
-
-<a id="eq:zmap"></a>
-
-$$\begin{equation}
-  |z| = e^{\sigma T},
-  \qquad
-  \angle z = \omega T ,
-  \tag{5}
-\end{equation}$$
-
- which is the whole of how to read a $z$-plane pole: **the modulus carries the decay and the angle carries the oscillation**, both measured per sample rather than per second. Table [3](#tab:zpoles) is Equation [(5)](#eq:zmap) spelled out, and Figure [7](#fig:zmodes) is the same thing drawn.
-
-<a id="tab:zpoles"></a>
-
-| **Pole** | **Mode $y[k]$** | **Continuous counterpart** |
-|:---|:---|:---|
-| $z=a$, $0<a<1$ | $a^{k}$, decaying, one sign | stable real pole $s<0$ |
-| $z=a$, $a>1$ | $a^{k}$, growing | unstable real pole $s>0$ |
-| $z=1$ | constant | pole at the origin, an integrator |
-| $z=0$ | zero after one step | no analogue: a pure delay |
-| $z=-a$, $0<a<1$ | $(-a)^{k}$, sign alternating | no analogue: oscillation at $\pi/T$ |
-| $z=r\,e^{\pm\mathrm{j}\theta}$ | $r^{k}\cos(k\theta+\phi)$ | complex pair $\sigma\pm\mathrm{j}\omega$ |
-
-**Table 3.** What a pole at $z$ does, for a real sequence. Each mode is the discrete counterpart of the continuous mode named in the last column.
-
-Take $T=0.1\,\mathrm{s}$ for all three examples in Figure [7](#fig:zmodes).
-
-- A pole at $z=0.8$ gives $0.8^{k}$: a decay with no oscillation. Its continuous equivalent is $s=\ln(0.8)/T=-2.23\,\mathrm{s}^{-1}$, a time constant $\tau = -T/\ln 0.8 = 0.448\,\mathrm{s}$, and the sequence is inside $2\%$ after about 18 samples.
-
-- A pole at $z=-0.6$ gives $1,\,-0.6,\,0.36,\,-0.216,\dots$ — a mode that changes sign at *every* sample. By Equation [(5)](#eq:zmap) its angle is $\pi$, so $\omega = \pi/T = 31.4\,\mathrm{rad}\,\mathrm{s}^{-1}$: it is oscillating at exactly the fastest frequency the sampling can represent. There is no continuous first-order system that does this; it is an artefact of sampling, and seeing it in a controller’s output is a sign that $T$ is wrong.
-
-- A conjugate pair at $r=0.85$, $\theta=\pi/6$ gives $0.85^{k}\cos(k\pi/6)$: a decaying oscillation with $2\pi/\theta=12$ samples per cycle. In continuous terms $s = (\ln r + \mathrm{j}\theta)/T = -1.63\pm\mathrm{j}5.24$, i.e. a period of 1.2 , which is those 12 samples.
-
-<figure id="fig:zmodes" data-latex-placement="htbp">
-<img src="../svg/week-03-notes/fig13.svg" />
-<figcaption><strong>Figure 7.</strong> Three modes, all with <span class="arithmatex">\(T=0.1\,\mathrm{s}\)</span>: a positive real pole decays smoothly; a negative real pole alternates sign every sample; a complex pair oscillates with <span class="arithmatex">\(2\pi/\theta = 12\)</span> samples to the cycle. The modulus sets how fast each envelope falls, the angle how fast it oscillates.</figcaption>
-</figure>
-
-###### Stability.
-
-Equation [(5)](#eq:zmap) also settles where the stable region is. A mode decays when $|z|<1$, and $|z|=e^{\sigma T}<1$ exactly when $\sigma<0$: the map $z=e^{sT}$ carries the left half plane onto the interior of the unit circle, the imaginary axis onto the circle itself, and the right half plane outside it.
+The stability region changes shape with the transform. A continuous mode $e^{st}$ sampled at spacing $T$ becomes $z^{k}$ with $z=e^{sT}$, and that mapping sends the left half plane to the interior of the unit circle.
 
 /// admonition | Key idea
     type: info
 
-A continuous system is stable when every pole satisfies $\mathrm{Re}(s)<0$; a discrete system is stable when every pole satisfies $|z|<1$. Same idea, different picture: the imaginary axis becomes the unit circle (Nise §13.6, p. 742).
+A continuous system is stable when every pole satisfies $\mathrm{Re}(s)<0$; a discrete system is stable when every pole satisfies $|z|<1$. Same idea, different picture: the imaginary axis becomes the unit circle.
 
 ///
 
 <figure id="fig:s-vs-z" data-latex-placement="htbp">
-<img src="../svg/week-03-notes/fig14.svg" />
-<figcaption><strong>Figure 8.</strong> Stability regions compared. The map <span class="arithmatex">\(z=e^{sT}\)</span> carries the shaded left half plane onto the shaded interior of the unit circle.</figcaption>
+<img src="../svg/week-03-notes/fig12.svg" />
+<figcaption><strong>Figure 6.</strong> Stability regions compared. The map <span class="arithmatex">\(z=e^{sT}\)</span> carries the shaded left half plane onto the shaded interior of the unit circle.</figcaption>
 </figure>
 
-###### D.c. gain and the final value theorem.
-
-Both survive the change of transform, with $z\to1$ doing the work $s\to0$ did in §[10](#sec:dcgain). The final value of a sequence is 
-
-$$y[\infty] = \lim_{z\to1}\bigl(1-z^{-1}\bigr)Y(z),$$
-
- valid under the same kind of condition as before — every pole of $(1-z^{-1})Y(z)$ strictly inside the unit circle — and the d.c. gain of a pulse transfer function is $G(1)$. Worked example 3.5 is the check: its step response tends to $2$, and $G(1)=2$.
-
-/// admonition | Common pitfall
-    type: warning
-
-$T$ is chosen, and choosing it badly cannot be repaired later in the design. Sample too slowly and two things go wrong at once: information is lost irrecoverably (a component above $\pi/T$ reappears disguised as a lower frequency — aliasing), and the hold’s own lag destabilises the loop. A workable starting rule is **ten to twenty samples per rise time** of the closed-loop response you are aiming for. It is also worth knowing why the lag appears: holding each value for a whole period delays the signal the plant sees by 0.5 sample on average, so a sampled-data loop carries roughly $T/2$ of extra dead time that no amount of tuning removes. That is a pure time delay, which is the subject of the next section.
-
-///
-
-FEE3411 works entirely in continuous time from here on; this section is just a brief introduction, and also because many controllers you will actually build are discrete ones running on a processor. What carries over is the part that matters: a pole is still a mode, its position still tells you the shape of that mode, and stability is still a statement about where the poles sit — only the region has changed shape.
+FEE3411 works entirely in continuous time; this section exists because the syllabus asks for the comparison, and because every controller you will actually build is a discrete one running on a processor. A fuller treatment — where the samples come from, how to read any $z$-plane pole, the worked step response in three independent ways, the frequency response on the unit circle, and how to choose $T$ — is in the Week 3 supplement, *Discrete-Time LTI Systems*.
 
 ### 12. Pure time delay, and delay time { #sec:delay }
 
@@ -583,8 +489,8 @@ $$y(t) = u(t-\tau)\,1(t-\tau)
   \frac{Y(s)}{U(s)} = e^{-\tau s} .$$
 
 <figure id="fig:delay" data-latex-placement="htbp">
-<img src="../svg/week-03-notes/fig15.svg" />
-<figcaption><strong>Figure 9.</strong> A pure time delay reproduces the input shape exactly, <span class="arithmatex">\(\tau\)</span> seconds later. (<strong>The two traces are drawn at slightly different heights only so that both remain visible.</strong>)</figcaption>
+<img src="../svg/week-03-notes/fig13.svg" />
+<figcaption><strong>Figure 7.</strong> A pure time delay reproduces the input shape exactly, <span class="arithmatex">\(\tau\)</span> seconds later. (The two traces are drawn at slightly different heights only so that both remain visible.)</figcaption>
 </figure>
 
 /// admonition | Common pitfall
@@ -600,7 +506,7 @@ Where a rational approximation is needed, the **Padé approximation** supplies o
 
 $$\begin{equation}
   e^{-\tau s} \approx \frac{1-\tau s/2}{1+\tau s/2} ,
-  \tag{6}
+  \tag{5}
 \end{equation}$$
 
  whose series expansion agrees with $e^{-\tau s}$ up to and including the $s^{2}$ term. Notice where its zero sits: at $s=+2/\tau$, in the right half plane. A delay behaves like a non-minimum-phase system in exactly the sense of §[9](#sec:zeros) — which is the analytical reason delay is so damaging to a feedback loop.
@@ -639,8 +545,6 @@ The syllabus phrase *delay time* means something different from the pure time de
 3.  Find the unit-step response of $G(s)=6/\bigl[(s+1)(s+3)\bigr]$ by partial fractions, and verify your answer at $t=0$ and $t\to\infty$.
 
 4.  Without computing anything, sketch the shape of the natural response of a system whose poles are at $-0.5\pm\mathrm{j}8$, and say which feature of the sketch is set by the $-0.5$ and which by the $8$.
-
-5.  A discrete system sampled at $T=0.05\,\mathrm{s}$ has a single pole at $z=-0.9$. Is it stable? Describe its natural response in words, and give the frequency in rad s^−1^ at which it oscillates.
 
 ## Looking ahead { #looking-ahead }
 

@@ -350,6 +350,31 @@ def number_captions(md):
     return md
 
 
+# pandoc's markdown writer represents a hard line break in PROSE as a
+# backslash immediately before the newline ("escaped_line_breaks"); MkDocs
+# Material doesn't reliably turn that into a visible break (e.g. inside an
+# admonition or table cell), so main() below rewrites it to an explicit
+# <br>. But '\' + newline is ALSO the LaTeX row separator inside
+# aligned/array/matrix/cases, and pandoc carries a $$...$$ or $...$ span's
+# LaTeX through verbatim -- backslash-newlines included -- for MathJax to
+# read as-is. Rewriting unconditionally corrupts every multi-row math block:
+# confirmed 2026-09-28, worked example 3.5's \begin{aligned}...\end{aligned}
+# had its row-separating \\ turned into literal '<br>' text, which MathJax
+# cannot parse as part of the array, breaking the whole block. So this skips
+# any '\' + newline that falls inside a $$...$$ or $...$ span, and only
+# rewrites the ones in ordinary prose outside math.
+_MATH_SPAN = re.compile(r'\$\$.*?\$\$|(?<!\\)\$(?:\\.|[^$\\])*\$', re.S)
+
+def hard_line_breaks(md):
+    out, last = [], 0
+    for m in _MATH_SPAN.finditer(md):
+        out.append(re.sub(r'\\\n', '<br>\n', md[last:m.start()]))
+        out.append(m.group(0))
+        last = m.end()
+    out.append(re.sub(r'\\\n', '<br>\n', md[last:]))
+    return ''.join(out)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--tex', required=True)
@@ -376,7 +401,7 @@ def main():
     md = table_anchors(md, table_labels(src))
     md = number_captions(md)
 
-    md = re.sub(r'\\\n', '<br>\n', md)      # hard line breaks
+    md = hard_line_breaks(md)                # hard line breaks (prose only, not math)
     md = re.sub(r'\n{3,}', '\n\n', md).strip()
 
     if a.kind and a.week:
