@@ -259,6 +259,7 @@ WEEKS=(
   "week-01-notes|1|Introduction and Control System Components"
   "week-02-notes|2|Mathematical Modelling of Physical Systems"
   "week-03-notes|3|Transfer Functions and the s-Plane"
+  "week-04-notes|4|Block Diagrams and Signal Flow Graphs"
 )
 mkdir -p "$DOCS/notes/svg"
 for entry in "${WEEKS[@]}"; do
@@ -277,6 +278,7 @@ TUTORIALS=(
   "week-01-tutorial|1|Mathematical toolkit: Laplace, partial fractions, the s-plane|no"
   "week-02-tutorial|2|Electromechanical modelling; linear approximation|no"
   "week-03-tutorial|3|Transfer functions; inverse Laplace; poles, zeros and response shape|no"
+  "week-04-tutorial|4|Block Diagrams, Signal Flow Graphs and Mason’s Rule|no"
 )
 mkdir -p "$DOCS/tutorials/svg"
 for entry in "${TUTORIALS[@]}"; do
@@ -296,6 +298,7 @@ done
 # solutions are.
 ASSIGNMENTS=(
   "assignment-1|1|Components, Devices and Modelling"
+  "assignment-2|2|Transfer Functions, Block Diagrams and Mason’s Rule"
 )
 mkdir -p "$DOCS/assignments/svg"
 for entry in "${ASSIGNMENTS[@]}"; do

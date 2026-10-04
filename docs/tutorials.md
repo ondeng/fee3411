@@ -10,5 +10,5 @@ title: Tutorials
 | 1 | Mathematical toolkit: Laplace, partial fractions, the s-plane | [Open](tutorials/tutorial-01.md) |
 | 2 | Electromechanical modelling; linear approximation | [Open](tutorials/tutorial-02.md) |
 | 3 | Transfer functions; inverse Laplace; poles, zeros and response shape | [Open](tutorials/tutorial-03.md) |
-
+| 4 | Block diagrams, signal flow graphs and Mason's rule | [Open](tutorials/tutorial-04.md) |
 

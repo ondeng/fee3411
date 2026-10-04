@@ -91,14 +91,17 @@ nav:
       - "Week 1 — Introduction and components": notes/week-01.md
       - "Week 2 — Mathematical modelling": notes/week-02.md
       - "Week 3 — Transfer functions and the s-plane": notes/week-03.md
+      - "Week 4 - Block diagrams and signal flow graphs": notes/week-04.md
   - Tutorials:
       - Overview: tutorials.md
       - "Tutorial 1 — Mathematical toolkit": tutorials/tutorial-01.md
       - "Tutorial 2 — Electromechanical modelling": tutorials/tutorial-02.md
       - "Tutorial 3 — Transfer functions": tutorials/tutorial-03.md
+      - "Tutorial 4 - Block diagrams, signal flow graphs and Mason's rule": tutorials/tutorial-04.md
   - Assignments:
       - Overview: assignments.md
       - "Assignment 1 — Components, devices and modelling": assignments/assignment-01.md
+      - "Assignment 2 - Transfer functions, block diagrams and Mason's rule": assignments/assignment-02.md
   - Supplementary material:
       - "Week 1 Extra - Control system components": supplementary/week-01-notes-supp.md
       - "Week 3 Extra - Discrete-Time LTI Systems": supplementary/week-03-notes-supp.md
