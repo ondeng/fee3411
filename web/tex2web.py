@@ -251,6 +251,27 @@ def preprocess(src, labels, n_figs, number_sections=False, svg_prefix='svg'):
     out.append(body[prev:])
     body = ''.join(out)
 
+    # -- strip \scalebox{...}{...} wrapping a substituted figure ----------
+    # \scalebox is a plain LaTeX sizing directive with no web equivalent --
+    # and none is needed, since an SVG already scales responsively -- but
+    # pandoc's LaTeX reader doesn't know \scalebox at all, and with raw_tex
+    # off on the writer side (see to_markdown() in tex2md.py) an
+    # unrecognised command silently drops its ENTIRE argument, not just its
+    # own name: \includegraphics and all, with no warning. Confirmed
+    # 2026-10-10: Assignment 2 wraps every one of its 4 figures' tikzpicture
+    # in \scalebox{N}{...} (common for sizing a diagram to fit inside a
+    # \begin{figure} float), which meant all 4 vanished from the built
+    # Markdown -- `\scalebox{0.88}{\includegraphics{...}}` converts to
+    # nothing while bare `\includegraphics{...}` converts fine (direct
+    # pandoc test). The SAME bug had already silently dropped Figure 1 of
+    # the Week 3 discrete-time supplement on the live site (its \scalebox
+    # was found the same way, by grepping every synced source for
+    # "scalebox" after this one was diagnosed) -- so this isn't limited to
+    # the file that first surfaced it. Fix: strip the wrapper, keeping only
+    # the \includegraphics call the substitution loop above just inserted.
+    body = re.sub(r'\\scalebox\{[^{}]*\}\{(\\includegraphics\{[^{}]*\})\}',
+                  r'\1', body)
+
     # -- section numbers baked in, matching what LaTeX numbers -----------
     # (the HTML path uses CSS counters instead; Markdown has no section
     #  wrappers to hang a counter on, so the numbers go into the text.)

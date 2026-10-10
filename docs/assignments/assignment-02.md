@@ -21,7 +21,7 @@ title: "Assignment 2 — Transfer Functions, Block Diagrams and Mason’s Rule"
 In the series $RLC$ network of Figure [1](#fig:a2q1) the input is the source voltage $v_i(t)$ and the output is the voltage $v_o(t)$ across the *resistor*. Take $R=11\,\Omega$, $L=1\,\mathrm{H}$, $C=0.1\,\mathrm{F}$ and zero initial conditions.
 
 <figure id="fig:a2q1" data-latex-placement="htbp">
-
+<img src="../svg/assignment-2/fig01.svg" />
 <figcaption><strong>Figure 1.</strong> Question 1: a series <span class="arithmatex">\(RLC\)</span> network with the output taken across the resistor.</figcaption>
 </figure>
 
@@ -44,7 +44,7 @@ $$G_1=4,\qquad
   H_2=1 .$$
 
 <figure id="fig:a2q2" data-latex-placement="htbp">
-
+<img src="../svg/assignment-2/fig02.svg" />
 <figcaption><strong>Figure 2.</strong> Question 2: minor loop 1 spans <span class="arithmatex">\(G_1,G_2\)</span> and minor loop 2 spans <span class="arithmatex">\(G_2,G_3\)</span>. Neither contains the other.</figcaption>
 </figure>
 
@@ -61,7 +61,7 @@ $$G_1=4,\qquad
 Figure [3](#fig:a2q3) is the signal flow graph of a system with a feedforward branch from the input directly to node $x_3$. The branch gains are $G_1=2$, $G_2(s)=6/(s+3)$, $G_3=4$, $G_4=1$, $H_1=1$, $H_2=0.25$ and $H_3=1$.
 
 <figure id="fig:a2q3" data-latex-placement="htbp">
-
+<img src="../svg/assignment-2/fig03.svg" />
 <figcaption><strong>Figure 3.</strong> Question 3: a signal flow graph with two forward paths and three loops.</figcaption>
 </figure>
 
@@ -78,7 +78,7 @@ Figure [3](#fig:a2q3) is the signal flow graph of a system with a feedforward b
 A position servo is modelled as in Figure [4](#fig:a2q4): an adjustable amplifier of gain $K>0$ drives a plant $G_p(s)=4/[s(s+8)]$, and a disturbance $D(s)$ — a load torque — enters at the plant input. The feedback is unity.
 
 <figure id="fig:a2q4" data-latex-placement="htbp">
-
+<img src="../svg/assignment-2/fig04.svg" />
 <figcaption><strong>Figure 4.</strong> Question 4: a unity-feedback servo with an adjustable gain <span class="arithmatex">\(K\)</span> and a disturbance entering at the plant input.</figcaption>
 </figure>
 

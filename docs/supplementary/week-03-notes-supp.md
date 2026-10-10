@@ -47,7 +47,7 @@ $$\begin{array}{c@{\qquad\longleftrightarrow\qquad}c}
 A digital controller sees the plant only at the instants it chooses to look. An analogue-to-digital converter samples the measured output every $T$ seconds, the processor computes a command from those numbers, and a digital-to-analogue converter with a **zero-order hold** turns the command back into a voltage, holding each value constant until the next one is ready.
 
 <figure id="fig:supp-loop" data-latex-placement="htbp">
-
+<img src="../svg/week-03-notes-supp/fig01.svg" />
 <figcaption><strong>Figure 1.</strong> A sampled-data loop. Only the dashed interior is discrete: the plant <span class="arithmatex">\(G(s)\)</span> is exactly the continuous system modelled in Week 2, and the converters are the boundary between the two worlds.</figcaption>
 </figure>
 
