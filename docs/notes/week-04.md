@@ -226,7 +226,7 @@ A position servo consists of an amplifier of gain $G_1=4$ driving a motor with t
 $$G_2(s)=\frac{1}{s(s+2)}
   \qquad\text{(shaft angle per volt)},$$
 
- which is the reduced servomotor model of Week 2. A tachometer on the motor shaft measures shaft *speed* and feeds it back to the amplifier’s input through a junction; since speed is $s$ times position, the tachometer path has transfer function $H_1(s)=s$. The shaft position is then measured by a potentiometer of unit gain and fed back to the outer summing junction. Find $C(s)/R(s)$, and identify $\omega_{n}$ and $\zeta$ of the result.
+ which is the reduced servomotor model of Week 2. A tachometer on the motor shaft measures shaft *speed* and feeds it back to a summing junction at the *motor’s* input, between the amplifier and the motor; since speed is $s$ times position, the tachometer path has transfer function $H_1(s)=s$. The shaft position is then measured by a potentiometer of unit gain and fed back to the outer summing junction. Find $C(s)/R(s)$, and identify $\omega_{n}$ and $\zeta$ of the result.
 
 **Step 1 — collapse the inner loop.** The inner loop is a plain negative-feedback connection of $G_2$ with $H_1$: 
 
